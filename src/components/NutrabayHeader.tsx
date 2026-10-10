@@ -11,6 +11,7 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
     setIsCartOpen,
     pincode,
     pincodeInfo,
+    selectedPostOffice,
     setPincode,
     updatePincode,
     detectCurrentLocation,
@@ -26,7 +27,10 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
   const [isPincodeModal, setIsPincodeModal] = useState(false);
   const [modalPinInput, setModalPinInput] = useState(pincode);
 
-  const displayLocation = pincodeInfo?.district
+  const postName = selectedPostOffice || pincodeInfo?.area;
+  const displayLocation = postName && pincodeInfo?.district
+    ? `${pincode}, ${postName}`
+    : pincodeInfo?.district
     ? `${pincode}, ${pincodeInfo.district}`
     : pincode.startsWith("232")
     ? `${pincode}, Mughalsarai`

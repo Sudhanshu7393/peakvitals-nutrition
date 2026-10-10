@@ -1,3 +1,11 @@
+export interface PostOfficeItem {
+  name: string;
+  branchType?: string;
+  district: string;
+  state: string;
+  block?: string;
+}
+
 export interface PincodeInfo {
   pincode: string;
   valid: boolean;
@@ -5,6 +13,8 @@ export interface PincodeInfo {
   district: string;
   state: string;
   formattedLocation: string;
+  postOffices?: PostOfficeItem[];
+  selectedPostOffice?: string;
   isLocal: boolean;
   deliveryTime: string;
   courierPartner: string;

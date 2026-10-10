@@ -27,6 +27,8 @@ export const CheckoutModal: React.FC = () => {
     setActiveOrder,
     pincode: sharedPincode,
     pincodeInfo,
+    selectedPostOffice,
+    setSelectedPostOffice,
     isPincodeLoading,
     updatePincode,
     detectCurrentLocation,
@@ -81,7 +83,7 @@ export const CheckoutModal: React.FC = () => {
       orderId,
       customerName: name,
       customerPhone: phone,
-      customerAddress: `${address} (Pincode: ${pincode})`,
+      customerAddress: `${address}${landmark ? `, Near ${landmark}` : ""} (Post/Village: ${selectedPostOffice || pincodeInfo?.area || ""}, Pincode: ${pincode})`,
       landmark,
       city,
       pincode,
@@ -113,7 +115,11 @@ export const CheckoutModal: React.FC = () => {
       message += `🆔 *Order ID:* #${orderId}\n`;
       message += `👤 *Customer Name:* ${name}\n`;
       message += `📞 *Phone Number:* ${phone}\n`;
-      message += `🏠 *Delivery Address:* ${address}, ${landmark ? landmark + ", " : ""}${city}\n`;
+      message += `🏠 *Delivery Address:* ${address}${landmark ? `, Near ${landmark}` : ""}\n`;
+      if (selectedPostOffice) {
+        message += `🏢 *Village / Post Office (डाकघर / गाँव):* ${selectedPostOffice}\n`;
+      }
+      message += `📍 *City / District:* ${city}\n`;
       message += `📮 *PIN Code:* ${pincode}\n`;
       message += `━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
       message += `📦 *ITEMS ORDERED:*\n`;
@@ -248,25 +254,57 @@ export const CheckoutModal: React.FC = () => {
               </div>
             </div>
 
-            {/* Live Detected Real Location & All India Delivery Info */}
+            {/* Live Detected Real Location & Village / Post Office Selector */}
             {pincodeInfo && pincodeInfo.valid && (
-              <div className="p-3 rounded-2xl bg-emerald-50/80 border border-emerald-200 text-xs space-y-1">
+              <div className="p-3.5 rounded-2xl bg-orange-50/70 border border-orange-200 text-xs space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-emerald-900 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>
-                      {pincodeInfo.area ? `${pincodeInfo.area}, ` : ""}
-                      <strong>{pincodeInfo.district}</strong>, {pincodeInfo.state}
+                  <label className="text-xs font-black text-gray-900 uppercase tracking-wide flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-orange-600 shrink-0" />
+                    <span>Village / Post Office (गाँव / डाकघर) *</span>
+                  </label>
+                  {pincodeInfo.postOffices && pincodeInfo.postOffices.length > 1 && (
+                    <span className="text-[10px] font-bold text-orange-700 bg-orange-100 px-2 py-0.5 rounded-full">
+                      {pincodeInfo.postOffices.length} Places Found
                     </span>
-                  </span>
-                  <span className="text-[10px] bg-emerald-200 text-emerald-950 font-black px-2 py-0.5 rounded-full uppercase shrink-0">
-                    All India Delivery ✅
-                  </span>
+                  )}
                 </div>
-                <div className="flex flex-wrap items-center gap-2 text-[11px] text-gray-600 pt-0.5">
-                  <span className="font-semibold text-gray-800">{pincodeInfo.deliveryTime}</span>
-                  <span>• Direct WhatsApp QR Order 💬</span>
-                  <span>• Free Delivery Above ₹999</span>
+
+                {/* If multiple Post Offices/Villages exist, show dropdown; otherwise show verified badge */}
+                {pincodeInfo.postOffices && pincodeInfo.postOffices.length > 1 ? (
+                  <div>
+                    <select
+                      value={selectedPostOffice}
+                      onChange={(e) => setSelectedPostOffice(e.target.value)}
+                      className="w-full bg-white border border-orange-300 rounded-xl px-3 py-2 text-xs font-bold text-gray-900 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 cursor-pointer shadow-xs"
+                    >
+                      {pincodeInfo.postOffices.map((po, idx) => (
+                        <option key={`${po.name}-${idx}`} value={po.name}>
+                          {po.name} {po.branchType ? `(${po.branchType})` : ""} — {po.district}
+                        </option>
+                      ))}
+                    </select>
+                    <p className="text-[10px] text-gray-500 mt-1">
+                      Choose your specific local post office or village branch.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between bg-white px-3 py-2 rounded-xl border border-orange-200 font-bold text-gray-800">
+                    <span className="truncate">
+                      📮 Post Office: <strong>{selectedPostOffice || pincodeInfo.area || pincodeInfo.district}</strong>
+                    </span>
+                    <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full shrink-0">
+                      Verified ✅
+                    </span>
+                  </div>
+                )}
+
+                <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] text-gray-700 pt-1 border-t border-orange-200/60">
+                  <span className="font-semibold text-gray-800">
+                    📍 <strong>{pincodeInfo.district}</strong>, {pincodeInfo.state}
+                  </span>
+                  <span className="font-extrabold text-[10px] text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
+                    {pincodeInfo.isLocal ? "⚡ Same-Day Delivery" : "🚚 2-4 Days Express"}
+                  </span>
                 </div>
               </div>
             )}

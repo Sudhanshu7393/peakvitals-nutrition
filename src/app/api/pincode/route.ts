@@ -354,12 +354,24 @@ export async function GET(request: NextRequest) {
     if (postRes.ok) {
       const data = await postRes.json();
       if (Array.isArray(data) && data[0]?.Status === "Success" && data[0]?.PostOffice?.length > 0) {
-        const po = data[0].PostOffice[0];
-        const areaName = po.Name || "";
-        const districtName = po.District || "";
-        const stateName = po.State || "";
+        const poList = data[0].PostOffice.map((po: any) => ({
+          name: po.Name || "",
+          branchType: po.BranchType || "",
+          block: po.Block || "",
+          district: po.District || "",
+          state: po.State || "",
+        }));
 
-        const formatted = `${areaName ? areaName + ", " : ""}${districtName}, ${stateName}`;
+        // Prioritize Sub Post Office or Head Post Office, else first village/branch
+        const primaryPo =
+          poList.find((p: any) => p.branchType?.includes("Sub") || p.branchType?.includes("Head")) ||
+          poList[0];
+
+        const areaName = primaryPo?.name || "";
+        const districtName = primaryPo?.district || data[0].PostOffice[0]?.District || "";
+        const stateName = primaryPo?.state || data[0].PostOffice[0]?.State || "";
+
+        const formatted = `${areaName ? areaName + " (Post), " : ""}${districtName}, ${stateName}`;
 
         return NextResponse.json({
           pincode: cleanPin,
@@ -367,6 +379,8 @@ export async function GET(request: NextRequest) {
           area: areaName,
           district: districtName,
           state: stateName,
+          postOffices: poList,
+          selectedPostOffice: areaName,
           formattedLocation: formatted,
           isLocal,
           deliveryTime: speeds.deliveryTime,
@@ -432,6 +446,15 @@ export async function GET(request: NextRequest) {
       area: match3.district,
       district: match3.district,
       state: match3.state,
+      postOffices: [
+        {
+          name: match3.district,
+          branchType: "Head Post Office",
+          district: match3.district,
+          state: match3.state,
+        },
+      ],
+      selectedPostOffice: match3.district,
       formattedLocation: formatted,
       isLocal: match3.isLocal,
       deliveryTime: speeds.deliveryTime,
@@ -457,6 +480,15 @@ export async function GET(request: NextRequest) {
     area: match2.sampleCity,
     district: match2.sampleCity,
     state: match2.state,
+    postOffices: [
+      {
+        name: match2.sampleCity,
+        branchType: "Post Office",
+        district: match2.sampleCity,
+        state: match2.state,
+      },
+    ],
+    selectedPostOffice: match2.sampleCity,
     formattedLocation: formatted,
     isLocal,
     deliveryTime: speeds.deliveryTime,

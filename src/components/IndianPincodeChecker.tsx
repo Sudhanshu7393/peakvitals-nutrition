@@ -17,6 +17,7 @@ export function IndianPincodeChecker() {
   const {
     pincode,
     pincodeInfo,
+    selectedPostOffice,
     isPincodeLoading,
     updatePincode,
     detectCurrentLocation,
@@ -74,7 +75,9 @@ export function IndianPincodeChecker() {
             >
               <span className="flex items-center gap-1 text-emerald-600 dark:text-[#A3E635] font-black truncate">
                 <MapPin className="w-3 h-3 shrink-0" />
-                <span className="truncate">{pincodeInfo.district}, {pincodeInfo.state}</span>
+                <span className="truncate">
+                  {selectedPostOffice || pincodeInfo.area ? `${selectedPostOffice || pincodeInfo.area}, ` : ""}{pincodeInfo.district}
+                </span>
               </span>
               <span className="text-zinc-400">•</span>
               <span className="font-semibold flex items-center gap-1 shrink-0">

@@ -37,6 +37,8 @@ interface CartContextType {
   // Shared Pincode & Real Location
   pincode: string;
   pincodeInfo: import("@/utils/pincodeService").PincodeInfo | null;
+  selectedPostOffice: string;
+  setSelectedPostOffice: (po: string) => void;
   isPincodeLoading: boolean;
   isDetectingLocation: boolean;
   setPincode: (pin: string) => void;
@@ -68,6 +70,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>("PEAKVITALS5");
   const [pincode, setPincode] = useState("232101");
   const [pincodeInfo, setPincodeInfo] = useState<PincodeInfo | null>(null);
+  const [selectedPostOffice, setSelectedPostOffice] = useState("Mugalsarai");
   const [isPincodeLoading, setIsPincodeLoading] = useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -84,6 +87,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       lookupIndianPincode(pincode).then((info) => {
         if (active) {
           setPincodeInfo(info);
+          if (info.selectedPostOffice) {
+            setSelectedPostOffice(info.selectedPostOffice);
+          } else if (info.area) {
+            setSelectedPostOffice(info.area);
+          }
           setIsPincodeLoading(false);
         }
       });
@@ -100,6 +108,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsPincodeLoading(true);
       const res = await lookupIndianPincode(clean);
       setPincodeInfo(res);
+      if (res.selectedPostOffice) {
+        setSelectedPostOffice(res.selectedPostOffice);
+      } else if (res.area) {
+        setSelectedPostOffice(res.area);
+      }
       setIsPincodeLoading(false);
       return res;
     }
@@ -327,6 +340,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         removeCoupon,
         pincode,
         pincodeInfo,
+        selectedPostOffice,
+        setSelectedPostOffice,
         isPincodeLoading,
         isDetectingLocation,
         setPincode,
