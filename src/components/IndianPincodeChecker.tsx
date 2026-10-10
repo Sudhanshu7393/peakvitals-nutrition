@@ -8,14 +8,26 @@ import {
   Zap,
   Globe2,
   Loader2,
+  Navigation,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 
 export function IndianPincodeChecker() {
-  const { pincode, pincodeInfo, isPincodeLoading, updatePincode } = useCart();
+  const {
+    pincode,
+    pincodeInfo,
+    isPincodeLoading,
+    updatePincode,
+    detectCurrentLocation,
+    isDetectingLocation,
+  } = useCart();
   const { theme } = useTheme();
   const [inputVal, setInputVal] = useState(pincode);
+
+  React.useEffect(() => {
+    if (pincode) setInputVal(pincode);
+  }, [pincode]);
 
   const handleInputChange = (val: string) => {
     const clean = val.replace(/\D/g, "").slice(0, 6);
@@ -100,6 +112,31 @@ export function IndianPincodeChecker() {
               <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-[#A3E635] animate-spin" />
             )}
           </div>
+
+          {/* 1-Tap GPS Auto-Detect Button */}
+          <button
+            type="button"
+            title="Auto-detect my pincode via GPS"
+            disabled={isDetectingLocation}
+            onClick={async () => {
+              const res = await detectCurrentLocation();
+              if (!res || !res.valid) {
+                alert("GPS permission was denied or unavailable. Please type your 6-digit PIN code.");
+              }
+            }}
+            className={`p-1.5 border rounded-xl transition cursor-pointer shrink-0 ${
+              theme === "dark"
+                ? "bg-zinc-950 hover:bg-zinc-800 border-zinc-700 text-[#A3E635]"
+                : "bg-orange-50 hover:bg-orange-100 border-orange-200 text-orange-600"
+            }`}
+          >
+            {isDetectingLocation ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Navigation className="w-4 h-4" />
+            )}
+          </button>
+
           <button
             type="submit"
             disabled={inputVal.length !== 6 || isPincodeLoading}

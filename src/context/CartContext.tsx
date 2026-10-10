@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product, CartItem, CustomerOrder } from "@/types";
 import { SITE_CONFIG } from "@/data/config";
-import { lookupIndianPincode, PincodeInfo } from "@/utils/pincodeService";
+import { lookupIndianPincode, reverseGeocodeCoords, PincodeInfo } from "@/utils/pincodeService";
 
 interface UserProfile {
   name: string;
@@ -38,8 +38,10 @@ interface CartContextType {
   pincode: string;
   pincodeInfo: import("@/utils/pincodeService").PincodeInfo | null;
   isPincodeLoading: boolean;
+  isDetectingLocation: boolean;
   setPincode: (pin: string) => void;
   updatePincode: (pin: string) => Promise<import("@/utils/pincodeService").PincodeInfo>;
+  detectCurrentLocation: () => Promise<import("@/utils/pincodeService").PincodeInfo | null>;
   // Search & Filter
   searchQuery: string;
   setSearchQuery: (q: string) => void;
@@ -67,6 +69,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [pincode, setPincode] = useState("232101");
   const [pincodeInfo, setPincodeInfo] = useState<PincodeInfo | null>(null);
   const [isPincodeLoading, setIsPincodeLoading] = useState(false);
+  const [isDetectingLocation, setIsDetectingLocation] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategoryTab, setSelectedCategoryTab] = useState("all");
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
@@ -114,6 +117,41 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       freeShippingAvailable: false,
       message: "Please enter a 6-digit Pincode",
     };
+  };
+
+  const detectCurrentLocation = async (): Promise<PincodeInfo | null> => {
+    if (typeof window === "undefined" || !navigator.geolocation) {
+      return null;
+    }
+
+    setIsDetectingLocation(true);
+    return new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            const { latitude, longitude } = position.coords;
+            const info = await reverseGeocodeCoords(latitude, longitude);
+            if (info && info.valid && info.pincode) {
+              setPincode(info.pincode);
+              setPincodeInfo(info);
+              setIsDetectingLocation(false);
+              resolve(info);
+              return;
+            }
+          } catch (e) {
+            console.error("GPS Reverse Geocoding Error:", e);
+          }
+          setIsDetectingLocation(false);
+          resolve(null);
+        },
+        (err) => {
+          console.warn("GPS Location access skipped/denied:", err.message);
+          setIsDetectingLocation(false);
+          resolve(null);
+        },
+        { enableHighAccuracy: true, timeout: 7000, maximumAge: 30000 }
+      );
+    });
   };
 
   // Load cart and user from localStorage
@@ -290,8 +328,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         pincode,
         pincodeInfo,
         isPincodeLoading,
+        isDetectingLocation,
         setPincode,
         updatePincode,
+        detectCurrentLocation,
         searchQuery,
         setSearchQuery,
         selectedCategoryTab,

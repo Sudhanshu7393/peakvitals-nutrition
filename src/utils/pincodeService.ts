@@ -16,77 +16,103 @@ export interface PincodeInfo {
 // In-memory cache to avoid redundant API calls
 const cache = new Map<string, PincodeInfo>();
 
-// Offline fallback mapping based on India Post 2-digit PIN prefixes
-const STATE_PREFIX_MAP: Record<string, { state: string; sampleCity: string }> = {
-  "11": { state: "Delhi", sampleCity: "New Delhi" },
-  "12": { state: "Haryana", sampleCity: "Gurgaon / Faridabad" },
-  "13": { state: "Haryana", sampleCity: "Ambala / Panipat" },
-  "14": { state: "Punjab", sampleCity: "Ludhiana / Jalandhar" },
-  "15": { state: "Punjab", sampleCity: "Bathinda" },
-  "16": { state: "Chandigarh", sampleCity: "Chandigarh" },
-  "17": { state: "Himachal Pradesh", sampleCity: "Shimla" },
-  "18": { state: "Jammu & Kashmir", sampleCity: "Jammu" },
-  "19": { state: "Jammu & Kashmir", sampleCity: "Srinagar" },
-  "20": { state: "Uttar Pradesh", sampleCity: "Noida / Aligarh" },
-  "21": { state: "Uttar Pradesh", sampleCity: "Allahabad / Prayagraj" },
-  "22": { state: "Uttar Pradesh", sampleCity: "Varanasi / Lucknow" },
-  "23": { state: "Uttar Pradesh", sampleCity: "Chandauli / Mughalsarai" },
-  "24": { state: "Uttarakhand", sampleCity: "Dehradun / Haridwar" },
-  "25": { state: "Uttar Pradesh", sampleCity: "Meerut / Muzaffarnagar" },
-  "26": { state: "Uttarakhand", sampleCity: "Haldwani / Nainital" },
-  "27": { state: "Uttar Pradesh", sampleCity: "Gorakhpur / Basti" },
-  "28": { state: "Uttar Pradesh", sampleCity: "Agra / Jhansi" },
-  "30": { state: "Rajasthan", sampleCity: "Jaipur" },
-  "31": { state: "Rajasthan", sampleCity: "Udaipur" },
-  "32": { state: "Rajasthan", sampleCity: "Kota" },
-  "33": { state: "Rajasthan", sampleCity: "Bikaner" },
-  "34": { state: "Rajasthan", sampleCity: "Jodhpur" },
-  "36": { state: "Gujarat", sampleCity: "Rajkot" },
-  "37": { state: "Gujarat", sampleCity: "Jamnagar" },
-  "38": { state: "Gujarat", sampleCity: "Ahmedabad" },
-  "39": { state: "Gujarat", sampleCity: "Surat / Vadodara" },
-  "40": { state: "Maharashtra", sampleCity: "Mumbai / Goa" },
-  "41": { state: "Maharashtra", sampleCity: "Pune" },
-  "42": { state: "Maharashtra", sampleCity: "Nashik" },
-  "43": { state: "Maharashtra", sampleCity: "Aurangabad / Chhatrapati Sambhaji Nagar" },
-  "44": { state: "Maharashtra", sampleCity: "Nagpur" },
-  "45": { state: "Madhya Pradesh", sampleCity: "Indore" },
-  "46": { state: "Madhya Pradesh", sampleCity: "Bhopal" },
-  "47": { state: "Madhya Pradesh", sampleCity: "Gwalior" },
-  "48": { state: "Madhya Pradesh", sampleCity: "Jabalpur" },
-  "49": { state: "Chhattisgarh", sampleCity: "Raipur" },
-  "50": { state: "Telangana", sampleCity: "Hyderabad" },
-  "51": { state: "Andhra Pradesh", sampleCity: "Tirupati / Kurnool" },
-  "52": { state: "Andhra Pradesh", sampleCity: "Vijayawada" },
-  "53": { state: "Andhra Pradesh", sampleCity: "Visakhapatnam" },
-  "56": { state: "Karnataka", sampleCity: "Bengaluru" },
-  "57": { state: "Karnataka", sampleCity: "Mangaluru / Mysuru" },
-  "58": { state: "Karnataka", sampleCity: "Hubballi / Belagavi" },
-  "59": { state: "Karnataka", sampleCity: "Belagavi" },
-  "60": { state: "Tamil Nadu", sampleCity: "Chennai" },
-  "61": { state: "Tamil Nadu", sampleCity: "Thanjavur" },
-  "62": { state: "Tamil Nadu", sampleCity: "Madurai" },
-  "63": { state: "Tamil Nadu", sampleCity: "Salem / Vellore" },
-  "64": { state: "Tamil Nadu", sampleCity: "Coimbatore" },
-  "67": { state: "Kerala", sampleCity: "Kozhikode" },
-  "68": { state: "Kerala", sampleCity: "Kochi / Ernakulam" },
-  "69": { state: "Kerala", sampleCity: "Thiruvananthapuram" },
-  "70": { state: "West Bengal", sampleCity: "Kolkata" },
-  "71": { state: "West Bengal", sampleCity: "Howrah / Hooghly" },
-  "72": { state: "West Bengal", sampleCity: "Medinipur" },
-  "73": { state: "West Bengal", sampleCity: "Siliguri / Jalpaiguri" },
-  "74": { state: "West Bengal", sampleCity: "North 24 Parganas" },
-  "75": { state: "Odisha", sampleCity: "Bhubaneswar" },
-  "76": { state: "Odisha", sampleCity: "Cuttack / Berhampur" },
-  "77": { state: "Odisha", sampleCity: "Rourkela / Sambalpur" },
-  "78": { state: "Assam", sampleCity: "Guwahati" },
-  "79": { state: "North East", sampleCity: "Shillong / Imphal / Agartala / Aizawl" },
-  "80": { state: "Bihar", sampleCity: "Patna" },
-  "81": { state: "Bihar", sampleCity: "Bhagalpur / Munger" },
-  "82": { state: "Bihar", sampleCity: "Gaya" },
-  "83": { state: "Jharkhand", sampleCity: "Ranchi / Jamshedpur" },
-  "84": { state: "Bihar", sampleCity: "Muzaffarpur" },
-  "85": { state: "Bihar", sampleCity: "Purnia / Katihar" },
+// Curated 3-digit Indian Sorting Hub fallback mapping
+const POSTAL_3DIGIT_MAP: Record<string, { district: string; state: string; isLocal: boolean }> = {
+  "232": { district: "Chandauli (Mughalsarai)", state: "Uttar Pradesh", isLocal: true },
+  "221": { district: "Varanasi", state: "Uttar Pradesh", isLocal: true },
+  "231": { district: "Mirzapur", state: "Uttar Pradesh", isLocal: false },
+  "233": { district: "Ghazipur", state: "Uttar Pradesh", isLocal: false },
+  "222": { district: "Jaunpur", state: "Uttar Pradesh", isLocal: false },
+  "277": { district: "Ballia", state: "Uttar Pradesh", isLocal: false },
+  "274": { district: "Deoria", state: "Uttar Pradesh", isLocal: false },
+  "275": { district: "Mau", state: "Uttar Pradesh", isLocal: false },
+  "276": { district: "Azamgarh", state: "Uttar Pradesh", isLocal: false },
+  "273": { district: "Gorakhpur", state: "Uttar Pradesh", isLocal: false },
+  "272": { district: "Basti", state: "Uttar Pradesh", isLocal: false },
+  "271": { district: "Gonda", state: "Uttar Pradesh", isLocal: false },
+  "230": { district: "Pratapgarh", state: "Uttar Pradesh", isLocal: false },
+  "211": { district: "Prayagraj", state: "Uttar Pradesh", isLocal: false },
+  "212": { district: "Fatehpur", state: "Uttar Pradesh", isLocal: false },
+  "224": { district: "Ayodhya", state: "Uttar Pradesh", isLocal: false },
+  "225": { district: "Barabanki", state: "Uttar Pradesh", isLocal: false },
+  "226": { district: "Lucknow", state: "Uttar Pradesh", isLocal: false },
+  "227": { district: "Amethi", state: "Uttar Pradesh", isLocal: false },
+  "228": { district: "Sultanpur", state: "Uttar Pradesh", isLocal: false },
+  "229": { district: "Raebareli", state: "Uttar Pradesh", isLocal: false },
+  "208": { district: "Kanpur Nagar", state: "Uttar Pradesh", isLocal: false },
+  "209": { district: "Kanpur Dehat", state: "Uttar Pradesh", isLocal: false },
+  "201": { district: "Noida / Ghaziabad", state: "Uttar Pradesh", isLocal: false },
+  "202": { district: "Aligarh", state: "Uttar Pradesh", isLocal: false },
+  "203": { district: "Bulandshahr", state: "Uttar Pradesh", isLocal: false },
+  "204": { district: "Hathras", state: "Uttar Pradesh", isLocal: false },
+  "205": { district: "Mainpuri", state: "Uttar Pradesh", isLocal: false },
+  "206": { district: "Etawah", state: "Uttar Pradesh", isLocal: false },
+  "207": { district: "Etah", state: "Uttar Pradesh", isLocal: false },
+  "241": { district: "Hardoi", state: "Uttar Pradesh", isLocal: false },
+  "242": { district: "Shahjahanpur", state: "Uttar Pradesh", isLocal: false },
+  "243": { district: "Bareilly", state: "Uttar Pradesh", isLocal: false },
+  "244": { district: "Moradabad", state: "Uttar Pradesh", isLocal: false },
+  "245": { district: "Hapur", state: "Uttar Pradesh", isLocal: false },
+  "246": { district: "Bijnor", state: "Uttar Pradesh", isLocal: false },
+  "247": { district: "Saharanpur", state: "Uttar Pradesh", isLocal: false },
+  "250": { district: "Meerut", state: "Uttar Pradesh", isLocal: false },
+  "251": { district: "Muzaffarnagar", state: "Uttar Pradesh", isLocal: false },
+  "261": { district: "Sitapur", state: "Uttar Pradesh", isLocal: false },
+  "262": { district: "Pilibhit", state: "Uttar Pradesh", isLocal: false },
+  "281": { district: "Mathura", state: "Uttar Pradesh", isLocal: false },
+  "282": { district: "Agra", state: "Uttar Pradesh", isLocal: false },
+  "283": { district: "Firozabad", state: "Uttar Pradesh", isLocal: false },
+  "284": { district: "Jhansi", state: "Uttar Pradesh", isLocal: false },
+  "285": { district: "Jalaun", state: "Uttar Pradesh", isLocal: false },
+
+  "110": { district: "New Delhi", state: "Delhi", isLocal: false },
+  "121": { district: "Faridabad", state: "Haryana", isLocal: false },
+  "122": { district: "Gurugram", state: "Haryana", isLocal: false },
+  "124": { district: "Rohtak", state: "Haryana", isLocal: false },
+  "131": { district: "Sonipat", state: "Haryana", isLocal: false },
+  "132": { district: "Panipat", state: "Haryana", isLocal: false },
+  "133": { district: "Ambala", state: "Haryana", isLocal: false },
+  "160": { district: "Chandigarh", state: "Chandigarh", isLocal: false },
+
+  "248": { district: "Dehradun", state: "Uttarakhand", isLocal: false },
+  "249": { district: "Haridwar", state: "Uttarakhand", isLocal: false },
+  "263": { district: "Nainital", state: "Uttarakhand", isLocal: false },
+
+  "800": { district: "Patna", state: "Bihar", isLocal: false },
+  "801": { district: "Patna Rural", state: "Bihar", isLocal: false },
+  "802": { district: "Bhojpur (Ara)", state: "Bihar", isLocal: false },
+  "803": { district: "Nalanda", state: "Bihar", isLocal: false },
+  "812": { district: "Bhagalpur", state: "Bihar", isLocal: false },
+  "821": { district: "Rohtas (Sasaram)", state: "Bihar", isLocal: false },
+  "823": { district: "Gaya", state: "Bihar", isLocal: false },
+  "841": { district: "Saran (Chapra)", state: "Bihar", isLocal: false },
+  "842": { district: "Muzaffarpur", state: "Bihar", isLocal: false },
+  "848": { district: "Samastipur", state: "Bihar", isLocal: false },
+  "834": { district: "Ranchi", state: "Jharkhand", isLocal: false },
+  "831": { district: "Jamshedpur", state: "Jharkhand", isLocal: false },
+  "826": { district: "Dhanbad", state: "Jharkhand", isLocal: false },
+
+  "302": { district: "Jaipur", state: "Rajasthan", isLocal: false },
+  "313": { district: "Udaipur", state: "Rajasthan", isLocal: false },
+  "324": { district: "Kota", state: "Rajasthan", isLocal: false },
+  "342": { district: "Jodhpur", state: "Rajasthan", isLocal: false },
+
+  "400": { district: "Mumbai", state: "Maharashtra", isLocal: false },
+  "401": { district: "Thane", state: "Maharashtra", isLocal: false },
+  "411": { district: "Pune", state: "Maharashtra", isLocal: false },
+  "440": { district: "Nagpur", state: "Maharashtra", isLocal: false },
+  "380": { district: "Ahmedabad", state: "Gujarat", isLocal: false },
+  "395": { district: "Surat", state: "Gujarat", isLocal: false },
+
+  "452": { district: "Indore", state: "Madhya Pradesh", isLocal: false },
+  "462": { district: "Bhopal", state: "Madhya Pradesh", isLocal: false },
+  "492": { district: "Raipur", state: "Chhattisgarh", isLocal: false },
+
+  "500": { district: "Hyderabad", state: "Telangana", isLocal: false },
+  "560": { district: "Bengaluru", state: "Karnataka", isLocal: false },
+  "600": { district: "Chennai", state: "Tamil Nadu", isLocal: false },
+  "682": { district: "Kochi", state: "Kerala", isLocal: false },
+  "700": { district: "Kolkata", state: "West Bengal", isLocal: false },
 };
 
 export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo> {
@@ -114,17 +140,27 @@ export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo>
     return cache.get(cleanPin)!;
   }
 
-  const isLocal = cleanPin.startsWith("232") || cleanPin.startsWith("221");
-
+  // 1. Call our local Next.js API route first (handles India Post, Zippopotam, and fallbacks server-side)
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000); // 4s timeout
-
-    const res = await fetch(`https://api.postalpincode.in/pincode/${cleanPin}`, {
-      signal: controller.signal,
+    const res = await fetch(`/api/pincode?pincode=${cleanPin}`, {
+      signal: AbortSignal.timeout(4000),
     });
-    clearTimeout(timeoutId);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.valid) {
+        cache.set(cleanPin, data);
+        return data;
+      }
+    }
+  } catch {
+    // API route fetch failed or running outside browser
+  }
 
+  // 2. Direct India Post fetch from client if API route wasn't reached
+  try {
+    const res = await fetch(`https://api.postalpincode.in/pincode/${cleanPin}`, {
+      signal: AbortSignal.timeout(3500),
+    });
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data) && data[0]?.Status === "Success" && data[0]?.PostOffice?.length > 0) {
@@ -132,8 +168,7 @@ export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo>
         const areaName = po.Name || "";
         const districtName = po.District || "";
         const stateName = po.State || "";
-
-        const formatted = `${areaName ? areaName + ", " : ""}${districtName}, ${stateName}`;
+        const isLocal = cleanPin.startsWith("232") || cleanPin.startsWith("221");
 
         const result: PincodeInfo = {
           pincode: cleanPin,
@@ -141,7 +176,7 @@ export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo>
           area: areaName,
           district: districtName,
           state: stateName,
-          formattedLocation: formatted,
+          formattedLocation: `${areaName ? areaName + ", " : ""}${districtName}, ${stateName}`,
           isLocal,
           deliveryTime: isLocal
             ? "⚡ Same-Day / 24-Hr Delivery (Ravi Nagar Store Priority)"
@@ -149,47 +184,65 @@ export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo>
           courierPartner: isLocal
             ? "S.K Nutrition Mughalsarai Local Express"
             : "BlueDart / Delhivery / Xpressbees Air",
-          codAvailable: true,
+          codAvailable: false,
           freeShippingAvailable: true,
-          message: `All India Delivery active! Orders to ${formatted} are dispatched same-day.`,
+          message: `All India Delivery active! Orders to ${districtName} are dispatched same-day.`,
         };
-
         cache.set(cleanPin, result);
         return result;
       }
     }
   } catch {
-    // API timeout or network issue - fallback to prefix directory
+    // Ignore
   }
 
-  // Fallback using PIN prefix
-  const prefix2 = cleanPin.slice(0, 2);
-  const fallbackMeta = STATE_PREFIX_MAP[prefix2] || {
-    state: "India",
-    sampleCity: "All India Delivery Zone",
-  };
+  // 3. Fallback using 3-digit curated mapping
+  const prefix3 = cleanPin.slice(0, 3);
+  const match3 = POSTAL_3DIGIT_MAP[prefix3];
+  const isLocal = cleanPin.startsWith("232") || cleanPin.startsWith("221");
 
-  const formatted = `${fallbackMeta.sampleCity}, ${fallbackMeta.state}`;
+  const district = match3?.district || (cleanPin.startsWith("232") ? "Chandauli (Mughalsarai)" : cleanPin.startsWith("221") ? "Varanasi" : "Delivery Hub");
+  const state = match3?.state || "Uttar Pradesh";
+  const formatted = `${district}, ${state}`;
 
   const fallbackResult: PincodeInfo = {
     pincode: cleanPin,
     valid: true,
-    area: fallbackMeta.sampleCity,
-    district: fallbackMeta.sampleCity,
-    state: fallbackMeta.state,
+    area: district,
+    district,
+    state,
     formattedLocation: formatted,
     isLocal,
     deliveryTime: isLocal
-      ? "⚡ Same-Day / 24-Hr Delivery (Mughalsarai & Chandauli)"
+      ? "⚡ Same-Day / 24-Hr Delivery (Mughalsarai & Varanasi)"
       : "🚚 2 to 4 Days Express Delivery",
     courierPartner: isLocal
       ? "S.K Nutrition Local Fleet"
       : "Express Air Delivery (BlueDart / Delhivery)",
-    codAvailable: true,
+    codAvailable: false,
     freeShippingAvailable: true,
     message: `All India Serviceable! We deliver Peakvitals Pre-Workout to ${formatted}.`,
   };
 
   cache.set(cleanPin, fallbackResult);
   return fallbackResult;
+}
+
+// GPS Location Reverse Geocoding helper
+export async function reverseGeocodeCoords(lat: number, lon: number): Promise<PincodeInfo | null> {
+  try {
+    const res = await fetch(`/api/pincode?lat=${lat}&lon=${lon}`, {
+      signal: AbortSignal.timeout(4500),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.valid && data.pincode) {
+        cache.set(data.pincode, data);
+        return data;
+      }
+    }
+  } catch (err) {
+    console.error("GPS Reverse Geocode Error:", err);
+  }
+  return null;
 }

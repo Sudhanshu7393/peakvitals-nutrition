@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Menu, MapPin, Search, User, ShoppingBag, MessageCircle, ChevronRight, X, ShieldCheck, Truck } from "lucide-react";
+import { Menu, MapPin, Search, User, ShoppingBag, MessageCircle, ChevronRight, X, ShieldCheck, Truck, Navigation, Loader2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { SITE_CONFIG } from "@/data/config";
 
@@ -10,7 +10,11 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
     cartCount,
     setIsCartOpen,
     pincode,
+    pincodeInfo,
     setPincode,
+    updatePincode,
+    detectCurrentLocation,
+    isDetectingLocation,
     searchQuery,
     setSearchQuery,
     setSelectedCategoryTab,
@@ -20,6 +24,15 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
   } = useCart();
 
   const [isPincodeModal, setIsPincodeModal] = useState(false);
+  const [modalPinInput, setModalPinInput] = useState(pincode);
+
+  const displayLocation = pincodeInfo?.district
+    ? `${pincode}, ${pincodeInfo.district}`
+    : pincode.startsWith("232")
+    ? `${pincode}, Mughalsarai`
+    : pincode.startsWith("221")
+    ? `${pincode}, Varanasi`
+    : `${pincode}`;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,8 +81,8 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
               <MapPin className="w-4 h-4 text-orange-500 fill-orange-500/20" />
               <div className="text-left leading-tight">
                 <span className="text-[10px] text-gray-500 block">Deliver to:</span>
-                <span className="font-bold text-gray-900 flex items-center gap-0.5">
-                  {pincode}, Mughalsarai <ChevronRight className="w-3 h-3 text-gray-400" />
+                <span className="font-bold text-gray-900 flex items-center gap-0.5 truncate max-w-[170px]">
+                  {displayLocation} <ChevronRight className="w-3 h-3 text-gray-400 shrink-0" />
                 </span>
               </div>
             </div>
@@ -198,10 +211,10 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
               >
                 <span className="text-[10px] uppercase font-black text-orange-600 block">Deliver to:</span>
                 <p className="text-xs font-bold text-gray-900 flex items-center justify-between mt-0.5">
-                  <span className="flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-orange-500" /> {pincode}, Mughalsarai
+                  <span className="flex items-center gap-1 truncate max-w-[200px]">
+                    <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> {displayLocation}
                   </span>
-                  <span className="text-[10px] text-orange-600 font-bold underline">Change</span>
+                  <span className="text-[10px] text-orange-600 font-bold underline shrink-0">Change</span>
                 </p>
               </div>
 
@@ -326,35 +339,98 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
 
       {/* Pincode Change Modal */}
       {isPincodeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-2xs font-sans">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs font-sans animate-in fade-in duration-200">
           <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-gray-100 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-bold text-base text-gray-900">Check Delivery Pincode</h3>
-              <button onClick={() => setIsPincodeModal(false)} className="text-gray-400 hover:text-gray-700">
+              <div>
+                <h3 className="font-extrabold text-base text-gray-900">Check Delivery Pincode</h3>
+                <p className="text-[11px] text-gray-500">All India Express Shipping Serviceable</p>
+              </div>
+              <button
+                onClick={() => setIsPincodeModal(false)}
+                className="p-1 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <p className="text-xs text-gray-500">
-              Enter your area pincode for same-day delivery in Mughalsarai, Chandauli &amp; Varanasi.
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                defaultValue={pincode}
-                id="pincodeInput"
-                maxLength={6}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm font-bold text-gray-900 outline-none focus:border-orange-500"
-              />
-              <button
-                onClick={() => {
-                  const val = (document.getElementById("pincodeInput") as HTMLInputElement)?.value;
-                  if (val && val.length === 6) setPincode(val);
-                  setIsPincodeModal(false);
-                }}
-                className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-lg transition cursor-pointer"
-              >
-                Apply
-              </button>
+
+            {/* GPS Auto-Detect Button */}
+            <button
+              type="button"
+              disabled={isDetectingLocation}
+              onClick={async () => {
+                const info = await detectCurrentLocation();
+                if (info && info.valid) {
+                  setModalPinInput(info.pincode);
+                  setTimeout(() => setIsPincodeModal(false), 800);
+                } else {
+                  alert("Could not detect location. Please type your 6-digit PIN code.");
+                }
+              }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-700 font-bold text-xs transition cursor-pointer disabled:opacity-60"
+            >
+              {isDetectingLocation ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin text-orange-600" />
+                  <span>Detecting GPS Location...</span>
+                </>
+              ) : (
+                <>
+                  <Navigation className="w-4 h-4 text-orange-600" />
+                  <span>Use Current Location (Auto-Detect)</span>
+                </>
+              )}
+            </button>
+
+            <div className="relative flex items-center justify-center">
+              <div className="border-t border-gray-200 w-full" />
+              <span className="bg-white px-2 text-[10px] uppercase font-bold text-gray-400 absolute">or enter pincode</span>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={modalPinInput}
+                  onChange={(e) => {
+                    const clean = e.target.value.replace(/\D/g, "").slice(0, 6);
+                    setModalPinInput(clean);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && modalPinInput.length === 6) {
+                      updatePincode(modalPinInput);
+                      setIsPincodeModal(false);
+                    }
+                  }}
+                  maxLength={6}
+                  placeholder="e.g. 221005"
+                  className="flex-1 px-3.5 py-2.5 border border-gray-300 rounded-xl text-sm font-black text-gray-900 tracking-wider outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                />
+                <button
+                  type="button"
+                  disabled={modalPinInput.length !== 6}
+                  onClick={() => {
+                    if (modalPinInput.length === 6) {
+                      updatePincode(modalPinInput);
+                      setIsPincodeModal(false);
+                    }
+                  }}
+                  className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 text-white font-black text-xs rounded-xl transition cursor-pointer disabled:cursor-not-allowed shadow-xs"
+                >
+                  Apply
+                </button>
+              </div>
+
+              {pincodeInfo && pincodeInfo.valid && (
+                <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-900 flex items-center justify-between">
+                  <span className="font-bold">
+                    📍 {pincodeInfo.district}, {pincodeInfo.state}
+                  </span>
+                  <span className="font-extrabold text-[10px] text-emerald-700">
+                    {pincodeInfo.isLocal ? "⚡ Same-Day" : "🚚 Express"}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -10,6 +10,8 @@ import {
   Truck,
   MessageCircle,
   MapPin,
+  Navigation,
+  Loader2,
 } from "lucide-react";
 
 export const CheckoutModal: React.FC = () => {
@@ -27,6 +29,8 @@ export const CheckoutModal: React.FC = () => {
     pincodeInfo,
     isPincodeLoading,
     updatePincode,
+    detectCurrentLocation,
+    isDetectingLocation,
     userProfile,
   } = useCart();
 
@@ -187,9 +191,38 @@ export const CheckoutModal: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-800 uppercase tracking-wider block mb-1">
-                  Delivery Pincode *
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="text-xs font-bold text-gray-800 uppercase tracking-wider block">
+                    Delivery Pincode *
+                  </label>
+                  <button
+                    type="button"
+                    disabled={isDetectingLocation}
+                    onClick={async () => {
+                      const res = await detectCurrentLocation();
+                      if (res && res.valid) {
+                        setPincode(res.pincode);
+                        const loc = res.district ? `${res.district}, ${res.state}` : res.formattedLocation;
+                        setCity(loc);
+                      } else {
+                        alert("Could not detect GPS location. Please enter your 6-digit PIN code.");
+                      }
+                    }}
+                    className="text-[11px] font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1 cursor-pointer disabled:opacity-60"
+                  >
+                    {isDetectingLocation ? (
+                      <>
+                        <Loader2 className="w-3 h-3 animate-spin" />
+                        <span>Detecting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Navigation className="w-3 h-3" />
+                        <span>Auto-Detect</span>
+                      </>
+                    )}
+                  </button>
+                </div>
                 <div className="relative">
                   <input
                     type="text"
@@ -203,7 +236,7 @@ export const CheckoutModal: React.FC = () => {
                         updatePincode(val);
                       }
                     }}
-                    placeholder="e.g. 232101"
+                    placeholder="e.g. 221005"
                     className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-black text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
                   />
                   {isPincodeLoading && (
