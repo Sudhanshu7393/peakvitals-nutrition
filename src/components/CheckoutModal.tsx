@@ -38,10 +38,10 @@ export const CheckoutModal: React.FC = () => {
 
   const [name, setName] = useState(userProfile ? userProfile.name : "");
   const [phone, setPhone] = useState(userProfile ? userProfile.phone : "");
-  const [pincode, setPincode] = useState(sharedPincode || "232101");
+  const [pincode, setPincode] = useState(sharedPincode || "");
   const [address, setAddress] = useState("");
   const [landmark, setLandmark] = useState("");
-  const [city, setCity] = useState("Mughalsarai, Uttar Pradesh");
+  const [city, setCity] = useState("");
   const paymentMethod = "whatsapp";
   const [isSubmitting, setIsSubmitting] = useState(false);
 

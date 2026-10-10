@@ -67,10 +67,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [selectedProductForDetail, setSelectedProductForDetail] = useState<Product | null>(null);
   const [activeOrder, setActiveOrder] = useState<CustomerOrder | null>(null);
-  const [appliedCoupon, setAppliedCoupon] = useState<string | null>("PEAKVITALS5");
-  const [pincode, setPincode] = useState("232101");
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [pincode, setPincode] = useState("");
   const [pincodeInfo, setPincodeInfo] = useState<PincodeInfo | null>(null);
-  const [selectedPostOffice, setSelectedPostOffice] = useState("Mugalsarai");
+  const [selectedPostOffice, setSelectedPostOffice] = useState("");
   const [isPincodeLoading, setIsPincodeLoading] = useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -79,7 +79,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isTrackOrderModalOpen, setIsTrackOrderModalOpen] = useState(false);
 
-  // Auto-fetch pincode details whenever pincode changes (or on initial load)
+  // Auto-fetch pincode details only if a 6-digit pincode is entered
   useEffect(() => {
     let active = true;
     if (pincode && pincode.length === 6) {
@@ -95,6 +95,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setIsPincodeLoading(false);
         }
       });
+    } else {
+      setPincodeInfo(null);
+      setSelectedPostOffice("");
+      setIsPincodeLoading(false);
     }
     return () => {
       active = false;
@@ -167,39 +171,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  // Load cart and user from localStorage
+  // Fresh reset on every site visit - no pre-filled or cached state
   useEffect(() => {
     try {
-      const savedCart = localStorage.getItem("sk_nutrition_cart");
-      if (savedCart) setCart(JSON.parse(savedCart));
-
-      const savedPin = localStorage.getItem("sk_nutrition_pin");
-      if (savedPin) setPincode(savedPin);
-
-      const savedUser = localStorage.getItem("sk_nutrition_user");
-      if (savedUser) setUserProfile(JSON.parse(savedUser));
+      localStorage.removeItem("sk_nutrition_cart");
+      localStorage.removeItem("sk_nutrition_pin");
+      localStorage.removeItem("sk_nutrition_user");
     } catch {
       // Ignore
     }
   }, []);
-
-  // Save cart to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem("sk_nutrition_cart", JSON.stringify(cart));
-    } catch {
-      // Ignore
-    }
-  }, [cart]);
-
-  // Save pincode
-  useEffect(() => {
-    try {
-      localStorage.setItem("sk_nutrition_pin", pincode);
-    } catch {
-      // Ignore
-    }
-  }, [pincode]);
 
   const addToCart = (product: Product, flavor: string, weight: string, price: number, quantity: number = 1) => {
     const itemKey = `${product.id}-${flavor}-${weight}`;

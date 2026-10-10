@@ -24,10 +24,10 @@ export function IndianPincodeChecker() {
     isDetectingLocation,
   } = useCart();
   const { theme } = useTheme();
-  const [inputVal, setInputVal] = useState(pincode);
+  const [inputVal, setInputVal] = useState(pincode || "");
 
   React.useEffect(() => {
-    if (pincode) setInputVal(pincode);
+    setInputVal(pincode || "");
   }, [pincode]);
 
   const handleInputChange = (val: string) => {

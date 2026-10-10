@@ -25,18 +25,20 @@ export function NutrabayHeader({ onSearch }: { onSearch?: (q: string) => void })
   } = useCart();
 
   const [isPincodeModal, setIsPincodeModal] = useState(false);
-  const [modalPinInput, setModalPinInput] = useState(pincode);
+  const [modalPinInput, setModalPinInput] = useState(pincode || "");
+
+  React.useEffect(() => {
+    setModalPinInput(pincode || "");
+  }, [pincode, isPincodeModal]);
 
   const postName = selectedPostOffice || pincodeInfo?.area;
-  const displayLocation = postName && pincodeInfo?.district
-    ? `${pincode}, ${postName}`
-    : pincodeInfo?.district
-    ? `${pincode}, ${pincodeInfo.district}`
-    : pincode.startsWith("232")
-    ? `${pincode}, Mughalsarai`
-    : pincode.startsWith("221")
-    ? `${pincode}, Varanasi`
-    : `${pincode}`;
+  const displayLocation = pincode
+    ? (postName && pincodeInfo?.district
+        ? `${pincode}, ${postName}`
+        : pincodeInfo?.district
+        ? `${pincode}, ${pincodeInfo.district}`
+        : pincode)
+    : "Select Pincode";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
