@@ -59,6 +59,14 @@ export function TrackOrderModal() {
     },
   ];
 
+  const cleanQuery = orderQuery.trim().toUpperCase();
+  const cleanDigits = orderQuery.replace(/\D/g, "");
+  const isMatchedActiveOrder = Boolean(
+    activeOrder &&
+      (cleanQuery === activeOrder.orderId.toUpperCase() ||
+        (cleanDigits.length >= 10 && cleanDigits === activeOrder.customerPhone.replace(/\D/g, "")))
+  );
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
       <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 sm:p-7 border border-gray-200 text-gray-900 space-y-5">
@@ -89,7 +97,10 @@ export function TrackOrderModal() {
             <input
               type="text"
               value={orderQuery}
-              onChange={(e) => setOrderQuery(e.target.value.toUpperCase())}
+              onChange={(e) => {
+                setOrderQuery(e.target.value.toUpperCase());
+                setSearched(false);
+              }}
               placeholder="Enter Order ID (SK-xxxxx) or Mobile No."
               className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 text-sm font-bold text-gray-900 uppercase outline-none"
             />
@@ -102,44 +113,59 @@ export function TrackOrderModal() {
           </button>
         </form>
 
-        {searched && orderQuery.trim() && (
+        {searched && cleanQuery && (
           <div className="space-y-4 pt-1">
-            <div className="p-3.5 rounded-2xl bg-orange-50/60 border border-orange-200 flex items-center justify-between text-xs">
-              <div>
-                <span className="text-[10px] text-gray-500 font-bold block uppercase">Order Reference</span>
-                <span className="font-mono font-black text-orange-600 text-sm">{orderQuery}</span>
-              </div>
-              <div className="text-right">
-                <span className="text-[10px] text-gray-500 font-bold block uppercase">Delivery Zone</span>
-                <span className="font-bold text-gray-900">{destinationText}</span>
-              </div>
-            </div>
-
-            {/* Timeline Stepper */}
-            <div className="space-y-4 pl-2 border-l-2 border-orange-200 ml-4 py-1">
-              {steps.map((st, i) => (
-                <div key={i} className="relative pl-6">
-                  <div
-                    className={`absolute -left-[17px] top-0.5 w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                      st.done
-                        ? "bg-emerald-600 text-white shadow-xs"
-                        : "bg-gray-100 text-gray-400 border border-gray-300"
-                    }`}
-                  >
-                    {st.done ? <CheckCircle2 className="w-3.5 h-3.5" /> : i + 1}
-                  </div>
+            {isMatchedActiveOrder ? (
+              <>
+                <div className="p-3.5 rounded-2xl bg-orange-50/60 border border-orange-200 flex items-center justify-between text-xs">
                   <div>
-                    <div className="flex items-center justify-between">
-                      <h4 className={`text-xs font-bold ${st.done ? "text-gray-900" : "text-gray-500"}`}>
-                        {st.title}
-                      </h4>
-                      <span className="text-[10px] text-gray-400 font-semibold">{st.time}</span>
-                    </div>
-                    <p className="text-[11px] text-gray-500 mt-0.5">{st.desc}</p>
+                    <span className="text-[10px] text-gray-500 font-bold block uppercase">Order Reference</span>
+                    <span className="font-mono font-black text-orange-600 text-sm">{activeOrder?.orderId}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] text-gray-500 font-bold block uppercase">Delivery Zone</span>
+                    <span className="font-bold text-gray-900">{destinationText}</span>
                   </div>
                 </div>
-              ))}
-            </div>
+
+                {/* Timeline Stepper for Real Active Session Order */}
+                <div className="space-y-4 pl-2 border-l-2 border-orange-200 ml-4 py-1">
+                  {steps.map((st, i) => (
+                    <div key={i} className="relative pl-6">
+                      <div
+                        className={`absolute -left-[17px] top-0.5 w-6 h-6 rounded-full flex items-center justify-center text-xs ${
+                          st.done
+                            ? "bg-emerald-600 text-white shadow-xs"
+                            : "bg-gray-100 text-gray-400 border border-gray-300"
+                        }`}
+                      >
+                        {st.done ? <CheckCircle2 className="w-3.5 h-3.5" /> : i + 1}
+                      </div>
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <h4 className={`text-xs font-bold ${st.done ? "text-gray-900" : "text-gray-500"}`}>
+                            {st.title}
+                          </h4>
+                          <span className="text-[10px] text-gray-400 font-semibold">{st.time}</span>
+                        </div>
+                        <p className="text-[11px] text-gray-500 mt-0.5">{st.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 space-y-2 text-xs">
+                <div className="flex items-center gap-2 text-amber-800 font-black uppercase">
+                  <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>Direct WhatsApp Dispatch Verification</span>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  No recent checkout found in this browser session for{" "}
+                  <span className="font-mono font-black text-gray-900">{cleanQuery}</span>. Since all S.K Nutrition orders are processed &amp; dispatched directly via our Official WhatsApp Desk, click below to get your real-time courier AWB / delivery status on WhatsApp.
+                </p>
+              </div>
+            )}
 
             {/* Direct Live WhatsApp Tracking Link */}
             <div className="pt-1">
@@ -149,7 +175,7 @@ export function TrackOrderModal() {
                   `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
                   `Hello S.K Nutrition Team! 👋\n\n` +
                   `Please share the live courier tracking link / dispatch status for my order:\n` +
-                  `🆔 *Order ID / Mobile:* ${orderQuery}\n` +
+                  `🆔 *Order ID / Mobile:* ${cleanQuery}\n` +
                   `📍 *Destination:* ${destinationText}\n\n` +
                   `Thank you!`
                 )}`}
@@ -158,7 +184,7 @@ export function TrackOrderModal() {
                 className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-sm cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Get Live Tracking Link on WhatsApp</span>
+                <span>Check Live Status on WhatsApp (+91 91187 32066)</span>
               </a>
             </div>
           </div>

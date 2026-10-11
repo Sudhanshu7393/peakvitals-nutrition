@@ -15,7 +15,6 @@ import { FuelFooter } from "@/components/FuelFooter";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CheckoutModal } from "@/components/CheckoutModal";
 import { OrderSuccessModal } from "@/components/OrderSuccessModal";
-import { LoginModal } from "@/components/LoginModal";
 import { TrackOrderModal } from "@/components/TrackOrderModal";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
@@ -97,7 +96,6 @@ export default function HomePage() {
       <CartDrawer />
       <CheckoutModal />
       <OrderSuccessModal />
-      <LoginModal />
       <TrackOrderModal />
       <ProductDetailModal
         product={quickViewProduct}

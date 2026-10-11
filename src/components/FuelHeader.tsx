@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, User, ShoppingBag, Menu, X, ChevronDown, MessageCircle, Truck, Sun, Moon } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, ChevronDown, MessageCircle, Truck, Sun, Moon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 import { SITE_CONFIG } from "@/data/config";
@@ -13,8 +13,6 @@ export function FuelHeader() {
     searchQuery,
     setSearchQuery,
     setSelectedCategoryTab,
-    userProfile,
-    setIsLoginModalOpen,
     setIsTrackOrderModalOpen,
   } = useCart();
 
@@ -172,20 +170,6 @@ export function FuelHeader() {
               )}
             </button>
 
-            {/* User Profile / Login */}
-            <button
-              onClick={() => setIsLoginModalOpen(true)}
-              className={`p-1.5 flex items-center gap-1 transition cursor-pointer ${theme === "dark" ? "text-zinc-300 hover:text-white" : "text-zinc-700 hover:text-black"}`}
-              aria-label="User account"
-            >
-              <User className="w-5 h-5" />
-              {userProfile && (
-                <span className="hidden md:inline text-xs font-bold text-[#A3E635]">
-                  {userProfile.name.split(" ")[0]}
-                </span>
-              )}
-            </button>
-
             {/* Cart with Lime Green Badge */}
             <button
               onClick={() => setIsCartOpen(true)}
@@ -286,21 +270,14 @@ export function FuelHeader() {
                 >
                   🚚 Track My Order (SK-ID)
                 </button>
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsLoginModalOpen(true);
-                  }}
-                  className="w-full text-left py-2 text-white hover:text-[#A3E635]"
-                >
-                  👤 {userProfile ? `Profile: ${userProfile.name}` : "Sign In / Register"}
-                </button>
                 <a
-                  href="#store-location"
+                  href="https://www.google.com/maps/search/?api=1&query=Ravi+Nagar+Mughalsarai+Chandauli+232101"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block py-2 text-white hover:text-[#A3E635]"
                 >
-                  📍 Store: Ravi Nagar, Mughalsarai
+                  📍 Store: Ravi Nagar, Mughalsarai (Map)
                 </a>
               </div>
               {/* Mobile Theme Switcher */}
