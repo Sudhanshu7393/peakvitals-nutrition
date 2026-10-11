@@ -2,49 +2,41 @@
 
 import React, { useState } from "react";
 import { useCart } from "@/context/CartContext";
-import { X, Smartphone, CheckCircle2, User, ArrowRight, ShieldCheck } from "lucide-react";
+import { SITE_CONFIG } from "@/data/config";
+import { X, Smartphone, User, ArrowRight, ShieldCheck, MessageCircle } from "lucide-react";
 
 export function LoginModal() {
   const { isLoginModalOpen, setIsLoginModalOpen, userProfile, setUserProfile } = useCart();
-  const [step, setStep] = useState<"phone" | "otp">("phone");
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
-  const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
 
   if (!isLoginModalOpen) return null;
 
-  const handleSendOtp = (e: React.FormEvent) => {
+  const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const cleanPhone = phone.replace(/\D/g, "");
-    if (cleanPhone.length !== 10) {
+    if (!name.trim()) {
+      setError("Please enter your full name");
+      return;
+    }
+    if (cleanPhone.length !== 10 || !/^[6-9]\d{9}$/.test(cleanPhone)) {
       setError("Please enter a valid 10-digit Indian mobile number");
       return;
     }
     setError("");
-    setStep("otp");
-  };
-
-  const handleVerifyOtp = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (otp.length < 4) {
-      setError("Please enter the 4-digit OTP (e.g. 1234)");
-      return;
-    }
-
     const profile = {
-      name: name.trim() || `Customer (${phone.slice(-4)})`,
-      phone,
+      name: name.trim(),
+      phone: cleanPhone,
     };
     setUserProfile(profile);
-    localStorage.setItem("sk_nutrition_user", JSON.stringify(profile));
     setIsLoginModalOpen(false);
-    setStep("phone");
   };
 
   const handleLogout = () => {
     setUserProfile(null);
-    localStorage.removeItem("sk_nutrition_user");
+    setName("");
+    setPhone("");
     setIsLoginModalOpen(false);
   };
 
@@ -60,7 +52,7 @@ export function LoginModal() {
         </button>
 
         {userProfile ? (
-          /* Already Logged In View */
+          /* Logged In View */
           <div className="text-center space-y-4 py-2">
             <div className="w-14 h-14 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mx-auto">
               <User className="w-7 h-7" />
@@ -69,27 +61,40 @@ export function LoginModal() {
               <h3 className="font-black text-lg text-gray-900">Welcome, {userProfile.name}!</h3>
               <p className="text-xs text-gray-500 mt-0.5">+91 {userProfile.phone}</p>
               <span className="inline-block mt-2 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200">
-                Verified Peakvitals Member
+                Active Customer Profile ✅
               </span>
             </div>
+
+            <a
+              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
+                `Hello S.K Nutrition! 👋\n\nMy Name: *${userProfile.name}*\nMobile: *+91 ${userProfile.phone}*\n\nI want to check latest offers and stock on Peakvitals Pre-Workout!`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase flex items-center justify-center gap-2 transition"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Chat on WhatsApp Support</span>
+            </a>
+
             <button
               onClick={handleLogout}
               className="w-full py-2.5 rounded-xl border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs uppercase transition cursor-pointer"
             >
-              Sign Out / Switch Account
+              Sign Out / Clear Details
             </button>
           </div>
-        ) : step === "phone" ? (
-          /* Phone Input Step */
-          <form onSubmit={handleSendOtp} className="space-y-4">
+        ) : (
+          /* Direct Customer Sign In */
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
             <div>
               <div className="flex items-center gap-2 text-orange-600 text-[11px] font-black uppercase tracking-wider">
                 <Smartphone className="w-3.5 h-3.5" />
-                <span>Quick Mobile Login</span>
+                <span>Fast Customer Sign-In</span>
               </div>
-              <h3 className="text-xl font-black text-gray-900 mt-1">Sign In / Register</h3>
+              <h3 className="text-xl font-black text-gray-900 mt-1">Customer Details</h3>
               <p className="text-xs text-gray-500 mt-0.5">
-                Enter your mobile number to track orders and save Mughalsarai delivery addresses.
+                Enter your details for faster 1-click WhatsApp checkout &amp; order updates.
               </p>
             </div>
 
@@ -97,20 +102,21 @@ export function LoginModal() {
 
             <div>
               <label className="text-[11px] font-bold text-gray-700 uppercase tracking-wider block mb-1">
-                Your Full Name (Optional)
+                Your Full Name *
               </label>
               <input
                 type="text"
+                required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Rahul Sharma"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 text-sm outline-none transition"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 text-sm font-semibold text-gray-900 outline-none transition"
               />
             </div>
 
             <div>
               <label className="text-[11px] font-bold text-gray-700 uppercase tracking-wider block mb-1">
-                10-Digit Mobile Number *
+                10-Digit WhatsApp / Mobile Number *
               </label>
               <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 focus-within:bg-white focus-within:border-orange-500 overflow-hidden">
                 <span className="px-3 text-sm font-bold text-gray-500 border-r border-gray-200">
@@ -132,60 +138,14 @@ export function LoginModal() {
               type="submit"
               className="w-full py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-black text-xs uppercase tracking-wider transition shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Get OTP</span>
+              <span>Save &amp; Continue</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <div className="flex items-center justify-center gap-1.5 text-[10px] text-gray-500 pt-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>We never spam. Instant OTP verification.</span>
+              <span>100% Secure • Direct WhatsApp Order Updates</span>
             </div>
-          </form>
-        ) : (
-          /* OTP Verification Step */
-          <form onSubmit={handleVerifyOtp} className="space-y-4">
-            <div>
-              <span className="text-[10px] font-black uppercase text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                OTP Sent
-              </span>
-              <h3 className="text-xl font-black text-gray-900 mt-2">Enter 4-Digit Code</h3>
-              <p className="text-xs text-gray-500 mt-0.5">
-                Sent to <strong className="text-gray-900">+91 {phone}</strong>
-              </p>
-            </div>
-
-            {error && <p className="text-xs text-red-600 font-bold">{error}</p>}
-
-            <div>
-              <input
-                type="text"
-                autoFocus
-                maxLength={4}
-                value={otp}
-                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                placeholder="Enter 1234"
-                className="w-full text-center text-2xl font-black tracking-widest px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 outline-none"
-              />
-              <p className="text-[11px] text-gray-400 text-center mt-1.5">
-                (Enter demo OTP: <strong className="text-orange-600">1234</strong>)
-              </p>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-black text-xs uppercase tracking-wider transition shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Verify &amp; Continue</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setStep("phone")}
-              className="w-full text-xs text-gray-500 hover:text-gray-900 font-medium py-1"
-            >
-              Change Mobile Number
-            </button>
           </form>
         )}
       </div>

@@ -3,12 +3,19 @@
 import React, { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { SITE_CONFIG } from "@/data/config";
-import { X, Search, PackageCheck, Truck, MapPin, CheckCircle2, Clock, MessageCircle } from "lucide-react";
+import { X, Search, Truck, CheckCircle2, Clock, MessageCircle } from "lucide-react";
 
 export function TrackOrderModal() {
-  const { isTrackOrderModalOpen, setIsTrackOrderModalOpen, activeOrder } = useCart();
+  const { isTrackOrderModalOpen, setIsTrackOrderModalOpen, activeOrder, pincodeInfo, selectedPostOffice } = useCart();
   const [orderQuery, setOrderQuery] = useState(activeOrder ? activeOrder.orderId : "");
   const [searched, setSearched] = useState(Boolean(activeOrder));
+
+  React.useEffect(() => {
+    if (activeOrder) {
+      setOrderQuery(activeOrder.orderId);
+      setSearched(true);
+    }
+  }, [activeOrder]);
 
   if (!isTrackOrderModalOpen) return null;
 
@@ -19,11 +26,37 @@ export function TrackOrderModal() {
     }
   };
 
+  const destinationText = activeOrder?.city
+    ? `${activeOrder.city}${activeOrder.pincode ? ` (${activeOrder.pincode})` : ""}`
+    : pincodeInfo && pincodeInfo.valid
+    ? `${selectedPostOffice || pincodeInfo.area ? (selectedPostOffice || pincodeInfo.area) + ", " : ""}${pincodeInfo.district}`
+    : "All India Express Courier";
+
   const steps = [
-    { title: "Order Confirmed", desc: "Received at S.K Nutrition Mughalsarai", done: true, time: "Just Now" },
-    { title: "Packed & Batch Verified", desc: "Original Peakvitals seal verified", done: true, time: "In Progress" },
-    { title: "Out for Local Delivery", desc: "Dispatched from Ravi Nagar Hub", done: false, time: "Today 4-6 PM" },
-    { title: "Delivered to Doorstep", desc: "Pay cash or UPI to rider", done: false, time: "Estimated" },
+    {
+      title: "Order Received",
+      desc: "Order details sent to S.K Nutrition Official WhatsApp Desk",
+      done: true,
+      time: "Verified",
+    },
+    {
+      title: "Quality & Batch Seal Checked",
+      desc: "100% Genuine Peakvitals Nutrition factory seal verified",
+      done: true,
+      time: "Ready",
+    },
+    {
+      title: "Courier Dispatch & AWB Assigned",
+      desc: "Dispatched via Express Courier / S.K Local Fleet",
+      done: false,
+      time: "Fast Dispatch",
+    },
+    {
+      title: "Doorstep Delivery",
+      desc: "Safe & secure delivery to your registered PIN code",
+      done: false,
+      time: "Estimated",
+    },
   ];
 
   return (
@@ -41,11 +74,11 @@ export function TrackOrderModal() {
         <div>
           <div className="flex items-center gap-2 text-orange-600 text-[11px] font-black uppercase tracking-wider">
             <Truck className="w-3.5 h-3.5" />
-            <span>Mughalsarai &amp; Chandauli Live Tracking</span>
+            <span>All India Live Order Tracking</span>
           </div>
           <h3 className="text-xl font-black text-gray-900 mt-1">Track Your Order</h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            Enter your S.K Order ID (e.g. SK-12345) to see real-time dispatch status.
+            Enter your S.K Order ID (e.g. SK-12345) or 10-digit Mobile Number for live courier status.
           </p>
         </div>
 
@@ -57,8 +90,8 @@ export function TrackOrderModal() {
               type="text"
               value={orderQuery}
               onChange={(e) => setOrderQuery(e.target.value.toUpperCase())}
-              placeholder="e.g. SK-49210"
-              className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 text-sm font-bold uppercase outline-none"
+              placeholder="Enter Order ID (SK-xxxxx) or Mobile No."
+              className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 text-sm font-bold text-gray-900 uppercase outline-none"
             />
           </div>
           <button
@@ -69,16 +102,16 @@ export function TrackOrderModal() {
           </button>
         </form>
 
-        {searched && (
+        {searched && orderQuery.trim() && (
           <div className="space-y-4 pt-1">
             <div className="p-3.5 rounded-2xl bg-orange-50/60 border border-orange-200 flex items-center justify-between text-xs">
               <div>
-                <span className="text-[10px] text-gray-500 font-bold block uppercase">Tracking ID</span>
-                <span className="font-mono font-black text-orange-600 text-sm">{orderQuery || "SK-28491"}</span>
+                <span className="text-[10px] text-gray-500 font-bold block uppercase">Order Reference</span>
+                <span className="font-mono font-black text-orange-600 text-sm">{orderQuery}</span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] text-gray-500 font-bold block uppercase">Destination</span>
-                <span className="font-bold text-gray-900">Mughalsarai / Chandauli</span>
+                <span className="text-[10px] text-gray-500 font-bold block uppercase">Delivery Zone</span>
+                <span className="font-bold text-gray-900">{destinationText}</span>
               </div>
             </div>
 
@@ -108,21 +141,24 @@ export function TrackOrderModal() {
               ))}
             </div>
 
-            {/* Helpline contact */}
-            <div className="pt-2 flex items-center justify-between text-xs text-gray-600 bg-gray-50 p-3 rounded-xl border border-gray-200">
-              <span className="flex items-center gap-1.5 font-medium">
-                <Clock className="w-3.5 h-3.5 text-orange-500" />
-                Rider assigned shortly
-              </span>
+            {/* Direct Live WhatsApp Tracking Link */}
+            <div className="pt-1">
               <a
                 href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                  `Hello S.K Nutrition Support! 👋\n\nI want to check live delivery tracking for my order:\n🆔 *Order ID:* #${orderQuery}\n\nPlease share the courier tracking update. Thank you!`
+                  `📦 *LIVE ORDER TRACKING REQUEST - ${SITE_CONFIG.name}*\n` +
+                  `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+                  `Hello S.K Nutrition Team! 👋\n\n` +
+                  `Please share the live courier tracking link / dispatch status for my order:\n` +
+                  `🆔 *Order ID / Mobile:* ${orderQuery}\n` +
+                  `📍 *Destination:* ${destinationText}\n\n` +
+                  `Thank you!`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-700 font-bold flex items-center gap-1 hover:underline cursor-pointer"
+                className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-sm cursor-pointer"
               >
-                <MessageCircle className="w-3.5 h-3.5" /> WhatsApp Support
+                <MessageCircle className="w-4 h-4" />
+                <span>Get Live Tracking Link on WhatsApp</span>
               </a>
             </div>
           </div>

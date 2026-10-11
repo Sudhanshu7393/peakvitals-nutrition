@@ -36,6 +36,7 @@ export const CartDrawer: React.FC = () => {
     generateWhatsAppOrderUrl,
     pincode,
     pincodeInfo,
+    selectedPostOffice,
   } = useCart();
 
   const [couponInput, setCouponInput] = useState("");
@@ -253,8 +254,10 @@ export const CartDrawer: React.FC = () => {
                     <p className="text-[10px] text-gray-500 font-bold uppercase">Delivering To:</p>
                     <p className="font-bold text-gray-900 truncate text-[11px]">
                       {pincodeInfo && pincodeInfo.valid
-                        ? pincodeInfo.formattedLocation
-                        : `PIN: ${pincode} (All India)`}
+                        ? `${selectedPostOffice || pincodeInfo.area ? (selectedPostOffice || pincodeInfo.area) + " (Post), " : ""}${pincodeInfo.district}, ${pincodeInfo.state}`
+                        : pincode
+                        ? `PIN: ${pincode} (All India)`
+                        : "Enter PIN at Checkout (All India Express)"}
                     </p>
                   </div>
                 </div>

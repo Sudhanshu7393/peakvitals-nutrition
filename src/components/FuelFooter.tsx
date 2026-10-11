@@ -35,14 +35,22 @@ export function FuelFooter() {
             </p>
 
             <div className="space-y-1.5 text-zinc-400 pt-1">
-              <p className="flex items-start gap-2">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Ravi+Nagar+Mughalsarai+Chandauli+232101"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 hover:text-[#A3E635] transition"
+              >
                 <MapPin className="w-3.5 h-3.5 text-[#A3E635] shrink-0 mt-0.5" />
                 <span>{SITE_CONFIG.address} (Landmark: {SITE_CONFIG.landmark})</span>
-              </p>
-              <p className="flex items-center gap-2">
+              </a>
+              <a
+                href="tel:+919118732066"
+                className="flex items-center gap-2 hover:text-emerald-400 transition"
+              >
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>Call/WhatsApp: {SITE_CONFIG.phone}</span>
-              </p>
+              </a>
               <p className="flex items-center gap-2">
                 <Clock className="w-3.5 h-3.5 text-[#EA580C] shrink-0" />
                 <span>Hours: {SITE_CONFIG.hours}</span>
@@ -169,8 +177,14 @@ export function FuelFooter() {
                 </a>
               </li>
               <li>
-                <a href="#store-location" className="hover:text-[#A3E635] transition">
-                  Store Directions
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Ravi+Nagar+Mughalsarai+Chandauli+232101"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#A3E635] transition flex items-center gap-1.5"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#A3E635]" />
+                  <span>Store Directions (Google Maps)</span>
                 </a>
               </li>
               <li>

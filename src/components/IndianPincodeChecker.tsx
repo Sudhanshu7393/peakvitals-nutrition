@@ -18,6 +18,7 @@ export function IndianPincodeChecker() {
     pincode,
     pincodeInfo,
     selectedPostOffice,
+    setSelectedPostOffice,
     isPincodeLoading,
     updatePincode,
     detectCurrentLocation,
@@ -54,8 +55,8 @@ export function IndianPincodeChecker() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 text-xs">
-        {/* Left: Quick Label + Live Detected Location */}
-        <div className="flex flex-wrap items-center gap-1.5 sm:gap-3">
+        {/* Left: Quick Label + Live Detected Location + Village/Post Selector */}
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5">
           <div
             className={`flex items-center gap-1 font-bold uppercase tracking-wider text-[10px] sm:text-[11px] ${
               theme === "dark" ? "text-zinc-400" : "text-zinc-600"
@@ -66,28 +67,49 @@ export function IndianPincodeChecker() {
           </div>
 
           {pincodeInfo && pincodeInfo.valid ? (
-            <div
-              className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full border text-[10px] sm:text-[11px] max-w-full overflow-hidden ${
-                theme === "dark"
-                  ? "bg-zinc-950 border-zinc-700/80 text-zinc-300"
-                  : "bg-zinc-50 border-zinc-300 text-zinc-800 shadow-xs"
-              }`}
-            >
-              <span className="flex items-center gap-1 text-emerald-600 dark:text-[#A3E635] font-black truncate">
-                <MapPin className="w-3 h-3 shrink-0" />
-                <span className="truncate">
-                  {selectedPostOffice || pincodeInfo.area ? `${selectedPostOffice || pincodeInfo.area}, ` : ""}{pincodeInfo.district}
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <div
+                className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full border text-[10px] sm:text-[11px] max-w-full overflow-hidden ${
+                  theme === "dark"
+                    ? "bg-zinc-950 border-zinc-700/80 text-zinc-300"
+                    : "bg-zinc-50 border-zinc-300 text-zinc-800 shadow-xs"
+                }`}
+              >
+                <span className="flex items-center gap-1 text-emerald-600 dark:text-[#A3E635] font-black truncate">
+                  <MapPin className="w-3 h-3 shrink-0" />
+                  <span className="truncate">
+                    {selectedPostOffice || pincodeInfo.area ? `${selectedPostOffice || pincodeInfo.area} (Post), ` : ""}
+                    {pincodeInfo.district}, {pincodeInfo.state}
+                  </span>
                 </span>
-              </span>
-              <span className="text-zinc-400">•</span>
-              <span className="font-semibold flex items-center gap-1 shrink-0">
-                {pincodeInfo.isLocal ? (
-                  <Zap className="w-3 h-3 text-[#A3E635]" />
-                ) : (
-                  <Truck className="w-3 h-3 text-orange-500" />
-                )}
-                <span>{pincodeInfo.isLocal ? "Same-Day" : "2-4 Days"}</span>
-              </span>
+                <span className="text-zinc-400">•</span>
+                <span className="font-semibold flex items-center gap-1 shrink-0">
+                  {pincodeInfo.isLocal ? (
+                    <Zap className="w-3 h-3 text-[#A3E635]" />
+                  ) : (
+                    <Truck className="w-3 h-3 text-orange-500" />
+                  )}
+                  <span>{pincodeInfo.isLocal ? "Same-Day" : "2-4 Days"}</span>
+                </span>
+              </div>
+
+              {pincodeInfo.postOffices && pincodeInfo.postOffices.length > 1 && (
+                <select
+                  value={selectedPostOffice}
+                  onChange={(e) => setSelectedPostOffice(e.target.value)}
+                  className={`px-2.5 py-1 rounded-full border text-[10px] sm:text-[11px] font-bold cursor-pointer outline-none ${
+                    theme === "dark"
+                      ? "bg-zinc-950 border-zinc-700 text-[#A3E635]"
+                      : "bg-orange-50 border-orange-300 text-orange-800"
+                  }`}
+                >
+                  {pincodeInfo.postOffices.map((po, idx) => (
+                    <option key={`${po.name}-${idx}`} value={po.name} className="bg-white text-black">
+                      📮 Gaon / Post: {po.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           ) : (
             <span className={`text-[11px] ${theme === "dark" ? "text-zinc-400 font-medium" : "text-zinc-500 font-medium"}`}>
