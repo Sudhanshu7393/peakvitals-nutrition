@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, ShoppingBag, Menu, X, ChevronDown, MessageCircle, Truck, Sun, Moon } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, ChevronDown, MessageCircle, Truck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { useTheme } from "@/context/ThemeContext";
 import { SITE_CONFIG } from "@/data/config";
 import { PeakvitalsLogo } from "@/components/PeakvitalsLogo";
 
@@ -16,8 +15,6 @@ export function FuelHeader() {
     setSelectedCategoryTab,
     setIsTrackOrderModalOpen,
   } = useCart();
-
-  const { theme, toggleTheme } = useTheme();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -37,26 +34,26 @@ export function FuelHeader() {
         <span className="md:hidden text-[10px] font-bold tracking-wide truncate">🇮🇳 PEAKVITALS OFFICIAL • ALL INDIA EXPRESS DELIVERY</span>
       </div>
 
-      {/* 2. Main Navigation Bar */}
-      <div className={`transition-colors duration-300 ${theme === "dark" ? "bg-black text-white border-b border-zinc-800/80" : "bg-white text-zinc-950 border-b border-zinc-200 shadow-xs"} px-4 sm:px-8 py-3.5`}>
+      {/* 2. Main Navigation Bar (Fixed Dark Matte Black to match Peakvitals Jar) */}
+      <div className="bg-[#0A0B0E] text-white border-b border-zinc-800/90 px-4 sm:px-8 py-3.5 shadow-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Left: Mobile Menu & Logo */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className={`lg:hidden p-1.5 transition ${theme === "dark" ? "text-zinc-300 hover:text-white" : "text-zinc-700 hover:text-black"}`}
+              className="lg:hidden p-1.5 text-zinc-300 hover:text-white transition"
               aria-label="Toggle menu"
             >
               <Menu className="w-6 h-6" />
             </button>
 
             <a href="/" className="flex items-center" aria-label="Peakvitals Nutrition Home">
-              <PeakvitalsLogo theme={theme} size="md" />
+              <PeakvitalsLogo forceDark size="md" />
             </a>
           </div>
 
           {/* Center: Desktop Navigation Links */}
-          <nav className={`hidden lg:flex items-center gap-7 text-xs font-black uppercase tracking-wider ${theme === "dark" ? "text-zinc-300" : "text-zinc-700"}`}>
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-black uppercase tracking-wider text-zinc-300">
             <button
               onClick={() => handleNavClick("all")}
               className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
@@ -90,12 +87,12 @@ export function FuelHeader() {
             </a>
           </nav>
 
-          {/* Right: Search, WhatsApp, Theme Switcher & Cart */}
+          {/* Right: Search, WhatsApp & Cart */}
           <div className="flex items-center gap-2.5 sm:gap-4">
             {/* Search Toggle / Input */}
             <div className="relative">
               {isSearchOpen ? (
-                <div className={`flex items-center rounded-full px-3 py-1 border ${theme === "dark" ? "bg-zinc-900 border-zinc-700 text-white" : "bg-zinc-100 border-zinc-300 text-zinc-900"}`}>
+                <div className="flex items-center rounded-full px-3 py-1 border bg-zinc-900 border-zinc-700 text-white">
                   <Search className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
                   <input
                     type="text"
@@ -110,7 +107,7 @@ export function FuelHeader() {
                       setIsSearchOpen(false);
                       setSearchQuery("");
                     }}
-                    className="text-zinc-400 hover:text-black dark:hover:text-white"
+                    className="text-zinc-400 hover:text-white"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -118,7 +115,7 @@ export function FuelHeader() {
               ) : (
                 <button
                   onClick={() => setIsSearchOpen(true)}
-                  className={`p-1.5 transition ${theme === "dark" ? "text-zinc-300 hover:text-white" : "text-zinc-700 hover:text-black"}`}
+                  className="p-1.5 text-zinc-300 hover:text-white transition"
                   aria-label="Search"
                 >
                   <Search className="w-5 h-5" />
@@ -133,35 +130,17 @@ export function FuelHeader() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-emerald-500 hover:text-emerald-400 transition cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 transition cursor-pointer"
               title="Order on WhatsApp"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-500 fill-emerald-500/20" />
+              <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-500/20" />
               <span>9118732066</span>
             </a>
-
-            {/* Theme Mode Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-center ${
-                theme === "dark"
-                  ? "bg-zinc-900 border-zinc-700 hover:border-[#A3E635] text-amber-400 hover:text-amber-300 shadow-sm"
-                  : "bg-zinc-100 border-zinc-300 hover:border-zinc-500 text-indigo-600 hover:text-indigo-700 shadow-sm"
-              }`}
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            >
-              {theme === "dark" ? (
-                <Sun className="w-4 h-4 hover:rotate-45 transition-transform" />
-              ) : (
-                <Moon className="w-4 h-4 hover:-rotate-12 transition-transform" />
-              )}
-            </button>
 
             {/* Cart with Lime Green Badge */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className={`relative p-1.5 transition cursor-pointer group ${theme === "dark" ? "text-zinc-300 hover:text-white" : "text-zinc-700 hover:text-black"}`}
+              className="relative p-1.5 text-zinc-300 hover:text-white transition cursor-pointer group"
               aria-label="Shopping Cart"
             >
               <ShoppingBag className="w-5 h-5 group-hover:scale-105 transition-transform" />
@@ -242,26 +221,6 @@ export function FuelHeader() {
                 >
                   📍 Dispatch Hub: Ravi Nagar, Mughalsarai (Map)
                 </a>
-              </div>
-              {/* Mobile Theme Switcher */}
-              <div className="pt-3 border-t border-zinc-800 flex items-center justify-between text-xs font-bold text-zinc-300">
-                <span>Theme Mode:</span>
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-800 border border-zinc-700 text-white cursor-pointer"
-                >
-                  {theme === "dark" ? (
-                    <>
-                      <Sun className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Dark Theme</span>
-                    </>
-                  ) : (
-                    <>
-                      <Moon className="w-3.5 h-3.5 text-indigo-400" />
-                      <span>Light Theme</span>
-                    </>
-                  )}
-                </button>
               </div>
             </div>
 

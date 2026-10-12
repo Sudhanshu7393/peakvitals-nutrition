@@ -194,14 +194,8 @@ export function FuelProductGrid({
                         </div>
                       </div>
 
-                      {/* 3D Showcase Pedestal for the Dabba */}
-                      <div
-                        className={`relative w-full h-36 sm:h-64 my-2.5 sm:my-4 rounded-xl sm:rounded-2xl border flex items-center justify-center overflow-hidden transition-colors ${
-                          theme === "dark"
-                            ? "bg-gradient-to-b from-zinc-950/90 via-zinc-900/60 to-black border-zinc-800/80 group-hover:border-[#A3E635]/50"
-                            : "bg-gradient-to-b from-zinc-100/90 via-zinc-50 to-zinc-200/50 border-zinc-200 group-hover:border-[#A3E635]/80"
-                        }`}
-                      >
+                      {/* 3D Dark Studio Showcase Pedestal for the Black Peakvitals Dabba */}
+                      <div className="relative w-full h-36 sm:h-64 my-2.5 sm:my-4 rounded-xl sm:rounded-2xl border bg-gradient-to-b from-zinc-900 via-zinc-950 to-black border-zinc-800 group-hover:border-[#A3E635] flex items-center justify-center overflow-hidden transition-colors shadow-inner">
                         {/* Flavor-specific radial spotlight */}
                         <div
                           className="absolute inset-0 transition-transform duration-500 group-hover:scale-125 pointer-events-none"
@@ -213,18 +207,14 @@ export function FuelProductGrid({
                         />
 
                         {/* 3D Contact Floor Shadow */}
-                        <div className="absolute bottom-2 sm:bottom-3 w-3/4 h-2.5 sm:h-3.5 rounded-full blur-sm bg-black/20 dark:bg-black/75 pointer-events-none" />
+                        <div className="absolute bottom-2 sm:bottom-3 w-3/4 h-2.5 sm:h-3.5 rounded-full blur-sm bg-black/80 pointer-events-none" />
 
                         {/* Realistic Transparent Packshot */}
                         <Image
                           src={prod.image}
                           alt={prod.name}
                           fill
-                          className={`object-contain p-2 sm:p-3 group-hover:scale-105 transition-all duration-300 ${
-                            theme === "dark"
-                              ? "filter drop-shadow-[0_15px_20px_rgba(0,0,0,0.95)]"
-                              : "filter drop-shadow-[0_12px_16px_rgba(0,0,0,0.2)]"
-                          }`}
+                          className="object-contain p-2 sm:p-3 group-hover:scale-105 transition-all duration-300 filter drop-shadow-[0_15px_20px_rgba(0,0,0,0.95)]"
                         />
                       </div>
 

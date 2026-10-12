@@ -13,56 +13,25 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<ThemeMode>("light");
-  const [mounted, setMounted] = useState(false);
+  const [theme] = useState<ThemeMode>("light");
 
   useEffect(() => {
-    setMounted(true);
     try {
-      const saved = localStorage.getItem("sk_theme_v2") as ThemeMode | null;
-      if (saved === "light" || saved === "dark") {
-        setThemeState(saved);
-        applyTheme(saved);
-      } else {
-        setThemeState("light");
-        applyTheme("light");
-      }
-    } catch {
-      setThemeState("light");
-      applyTheme("light");
+      localStorage.removeItem("sk_theme_v2");
+    } catch {}
+    if (typeof document !== "undefined") {
+      const root = document.documentElement;
+      root.classList.remove("dark");
+      root.classList.add("light");
+      root.setAttribute("data-theme", "light");
     }
   }, []);
 
-  const applyTheme = (t: ThemeMode) => {
-    if (typeof document !== "undefined") {
-      const root = document.documentElement;
-      if (t === "light") {
-        root.classList.remove("dark");
-        root.classList.add("light");
-        root.setAttribute("data-theme", "light");
-      } else {
-        root.classList.remove("light");
-        root.classList.add("dark");
-        root.setAttribute("data-theme", "dark");
-      }
-    }
-  };
-
-  const setTheme = (newTheme: ThemeMode) => {
-    setThemeState(newTheme);
-    applyTheme(newTheme);
-    try {
-      localStorage.setItem("sk_theme_v2", newTheme);
-    } catch {}
-  };
-
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-  };
+  const setTheme = () => {};
+  const toggleTheme = () => {};
 
   return (
-    <ThemeContext.Provider value={{ theme: mounted ? theme : "light", toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

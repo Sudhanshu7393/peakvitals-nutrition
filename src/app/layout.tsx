@@ -87,16 +87,10 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var saved = localStorage.getItem('sk_theme_v2');
-                  var theme = (saved === 'dark') ? 'dark' : 'light';
-                  document.documentElement.setAttribute('data-theme', theme);
-                  if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                    document.documentElement.classList.remove('light');
-                  } else {
-                    document.documentElement.classList.add('light');
-                    document.documentElement.classList.remove('dark');
-                  }
+                  localStorage.removeItem('sk_theme_v2');
+                  document.documentElement.setAttribute('data-theme', 'light');
+                  document.documentElement.classList.add('light');
+                  document.documentElement.classList.remove('dark');
                 } catch(e) {}
               })();
             `,

@@ -6,7 +6,7 @@ import { Plus, Minus } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 export function FuelFaqSection() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
   const { theme } = useTheme();
 
   const faqs = [
