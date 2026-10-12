@@ -2,8 +2,9 @@
 
 import React from "react";
 import { SITE_CONFIG } from "@/data/config";
-import { MapPin, Phone, MessageCircle, Clock, ShieldCheck, Truck } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Clock, Truck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { PeakvitalsLogo } from "@/components/PeakvitalsLogo";
 
 export function FuelFooter() {
   const { setSelectedCategoryTab, setIsTrackOrderModalOpen } = useCart();
@@ -21,10 +22,8 @@ export function FuelFooter() {
           {/* Col 1: Brand Info */}
           <div className="col-span-2 space-y-3 sm:space-y-4">
             <div>
-              <span className="text-xl sm:text-2xl font-black italic tracking-tighter uppercase leading-none block">
-                PEAK<span className="text-[#A3E635]">VITALS</span>
-              </span>
-              <span className="text-[9px] font-bold tracking-widest text-zinc-400 uppercase mt-0.5 block">
+              <PeakvitalsLogo forceDark size="lg" />
+              <span className="text-[9px] font-bold tracking-widest text-zinc-400 uppercase mt-2 block">
                 Be The Boss of Your Workout • Official Brand Store
               </span>
             </div>

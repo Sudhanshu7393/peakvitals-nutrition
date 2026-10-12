@@ -5,6 +5,7 @@ import { Search, ShoppingBag, Menu, X, ChevronDown, MessageCircle, Truck, Sun, M
 import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 import { SITE_CONFIG } from "@/data/config";
+import { PeakvitalsLogo } from "@/components/PeakvitalsLogo";
 
 export function FuelHeader() {
   const {
@@ -49,13 +50,8 @@ export function FuelHeader() {
               <Menu className="w-6 h-6" />
             </button>
 
-            <a href="/" className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-black italic tracking-tighter uppercase leading-none">
-                PEAK<span className="text-[#A3E635]">VITALS</span>
-              </span>
-              <span className={`text-[8px] font-bold tracking-widest uppercase mt-0.5 ${theme === "dark" ? "text-zinc-400" : "text-zinc-500"}`}>
-                Be The Boss of Your Workout • Official Store
-              </span>
+            <a href="/" className="flex items-center" aria-label="Peakvitals Nutrition Home">
+              <PeakvitalsLogo theme={theme} size="md" />
             </a>
           </div>
 
@@ -192,12 +188,7 @@ export function FuelHeader() {
           />
           <div className="relative w-4/5 max-w-xs bg-zinc-950 text-white h-full shadow-2xl flex flex-col z-10 p-5 space-y-5 border-r border-zinc-800">
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
-              <div>
-                <span className="text-lg font-black italic tracking-tighter uppercase text-white">
-                  PEAK<span className="text-[#A3E635]">VITALS</span>
-                </span>
-                <p className="text-[10px] text-zinc-400">Official Pre-Workout Brand Store</p>
-              </div>
+              <PeakvitalsLogo forceDark size="sm" />
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-1 rounded-full bg-zinc-900 text-zinc-400 hover:text-white"
