@@ -303,7 +303,7 @@ export const CheckoutModal: React.FC = () => {
                     📍 <strong>{pincodeInfo.district}</strong>, {pincodeInfo.state}
                   </span>
                   <span className="font-extrabold text-[10px] text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
-                    {pincodeInfo.isLocal ? "⚡ Same-Day Delivery" : "🚚 2-4 Days Express"}
+                    🚚 2-4 Days Express Dispatch
                   </span>
                 </div>
               </div>
@@ -346,7 +346,7 @@ export const CheckoutModal: React.FC = () => {
                   type="text"
                   value={landmark}
                   onChange={(e) => setLandmark(e.target.value)}
-                  placeholder="e.g. Near Railway Station / Gym"
+                  placeholder="e.g. Near Main Market / Gym"
                   className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
                 />
               </div>
@@ -363,7 +363,7 @@ export const CheckoutModal: React.FC = () => {
                     Direct WhatsApp Order &amp; UPI QR Deal
                   </p>
                   <p className="text-gray-600 mt-1 leading-relaxed">
-                    Yeh order seedha hamare WhatsApp (<strong className="text-gray-800">9118732066</strong>) par jayega. Wahan hum aapko official UPI QR code bhejenge aur custom deal finalize karke fast courier dispatch karenge.
+                    Yeh order seedha hamare WhatsApp (<strong className="text-gray-800">7651918284</strong>) par jayega. Wahan hum aapko official UPI QR code bhejenge aur fast courier dispatch karenge.
                   </p>
                 </div>
               </div>
@@ -410,7 +410,7 @@ export const CheckoutModal: React.FC = () => {
 
           <div className="flex items-center justify-center gap-2 text-[11px] text-gray-500">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Store: {SITE_CONFIG.address} | Call/WhatsApp: {SITE_CONFIG.phone}</span>
+            <span>Email: {SITE_CONFIG.email} | Call/WhatsApp: {SITE_CONFIG.phone}</span>
           </div>
         </div>
       </div>

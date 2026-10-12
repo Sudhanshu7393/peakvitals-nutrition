@@ -285,7 +285,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         message += `👤 *Name:* ${customerDetails.name}\n`;
         message += `📞 *Phone:* ${customerDetails.phone}\n`;
         message += `🏠 *Address:* ${customerDetails.address}, ${customerDetails.city}\n`;
-        message += `📮 *PIN Code:* ${pincode || "232101"}\n`;
+        message += `📮 *PIN Code:* ${pincode || "Not Entered"}\n`;
         message += `━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
       }
       message += `\n📱 Please share your official UPI QR code here so I can pay and confirm dispatch. Thank you!`;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { SITE_CONFIG } from "@/data/config";
-import { MapPin, Phone, MessageCircle, Clock, Truck } from "lucide-react";
+import { Mail, Phone, MessageCircle, Clock, Truck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { PeakvitalsLogo } from "@/components/PeakvitalsLogo";
 
@@ -35,24 +35,22 @@ export function FuelFooter() {
 
             <div className="space-y-1.5 text-zinc-400 pt-1">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Ravi+Nagar+Mughalsarai+Chandauli+232101"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-2 hover:text-[#A3E635] transition"
-              >
-                <MapPin className="w-3.5 h-3.5 text-[#A3E635] shrink-0 mt-0.5" />
-                <span>Dispatch Hub: {SITE_CONFIG.address}</span>
-              </a>
-              <a
-                href="tel:+919118732066"
+                href="tel:+917651918284"
                 className="flex items-center gap-2 hover:text-emerald-400 transition"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>Call/WhatsApp: {SITE_CONFIG.phone}</span>
               </a>
+              <a
+                href={`mailto:${SITE_CONFIG.email}`}
+                className="flex items-center gap-2 hover:text-[#38BDF8] transition"
+              >
+                <Mail className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
+                <span>Email: {SITE_CONFIG.email}</span>
+              </a>
               <p className="flex items-center gap-2">
                 <Clock className="w-3.5 h-3.5 text-[#EA580C] shrink-0" />
-                <span>Hours: {SITE_CONFIG.hours}</span>
+                <span>Support Hours: {SITE_CONFIG.hours}</span>
               </p>
             </div>
           </div>
@@ -156,18 +154,16 @@ export function FuelFooter() {
                   className="hover:text-[#A3E635] transition flex items-center gap-1.5 cursor-pointer"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>WhatsApp Support</span>
+                  <span>WhatsApp: 7651918284</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Ravi+Nagar+Mughalsarai+Chandauli+232101"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#A3E635] transition flex items-center gap-1.5"
+                  href={`mailto:${SITE_CONFIG.email}`}
+                  className="hover:text-[#38BDF8] transition flex items-center gap-1.5 break-all"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#A3E635]" />
-                  <span>Dispatch Location (Google Maps)</span>
+                  <Mail className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
+                  <span>{SITE_CONFIG.email}</span>
                 </a>
               </li>
               <li>

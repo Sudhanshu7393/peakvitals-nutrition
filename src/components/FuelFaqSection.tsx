@@ -20,7 +20,7 @@ export function FuelFaqSection() {
     },
     {
       q: "Do you deliver all across India? How long does delivery take?",
-      a: "Yes! We deliver Peakvitals Pre-Workout across all 28,000+ PIN codes in India. Local orders in Mughalsarai (PIN 232101), Ravi Nagar, and Chandauli arrive within same-day / 24 hours. All other Indian cities and states arrive within 2 to 4 days via Express Air Courier with tracking updates.",
+      a: "Yes! We deliver Peakvitals Pre-Workout across all 28,000+ PIN codes in India. All orders are dispatched via Express Air Courier with live tracking updates and arrive within 2 to 4 business days.",
     },
     {
       q: "What key ingredients are in Peakvitals Pre-Workout?",
@@ -28,7 +28,7 @@ export function FuelFaqSection() {
     },
     {
       q: "How does ordering and payment work?",
-      a: "All orders are handled directly through our Official WhatsApp Desk (9118732066). Once you choose your flavour (Green Apple or Tangy Orange) and provide your delivery details, our team shares our official UPI QR code and dispatches your order immediately.",
+      a: "All orders are handled directly through our Official WhatsApp Desk (7651918284) or via email at Peakvitalsnutrition@gmail.com. Once you choose your flavour (Green Apple or Tangy Orange) and provide your delivery details, our team shares our official UPI QR code and dispatches your order immediately.",
     },
     {
       q: "How should I take Peakvitals for maximum results?",

@@ -264,7 +264,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
 
             <div className="text-[11px] text-gray-500 pt-1 flex items-center gap-1.5">
               <Truck className="w-3.5 h-3.5 text-orange-500" />
-              <span>Available for immediate pickup or same-day dispatch at Ravi Nagar Mughalsarai.</span>
+              <span>Available for immediate All India Express Courier dispatch.</span>
             </div>
           </div>
         </div>

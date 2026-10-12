@@ -8,8 +8,8 @@ export function IndianTrustBar() {
   const perks = [
     {
       icon: Truck,
-      title: "Same-Day Delivery",
-      desc: "Free in Mughalsarai & Chandauli",
+      title: "Express Air Delivery",
+      desc: "All India 2-4 Days Dispatch",
       color: "text-orange-500",
       bg: "bg-orange-50",
     },
@@ -30,7 +30,7 @@ export function IndianTrustBar() {
     {
       icon: PhoneCall,
       title: "WhatsApp Helpline",
-      desc: "9118732066 Mughalsarai Store",
+      desc: "7651918284 Official Desk",
       color: "text-purple-600",
       bg: "bg-purple-50",
     },

@@ -57,14 +57,14 @@ export function FuelWhySection() {
               We don&apos;t just sell supplements. We fuel the driven. Every scoop of Peakvitals Pre-Workout delivers uncompromised active grams for pure gym dominance.
             </p>
             <a
-              href="#store-location"
+              href="#featured-products"
               className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all ${
                 theme === "dark"
                   ? "border-zinc-700 hover:border-[#A3E635] text-zinc-200 hover:text-[#A3E635]"
                   : "border-zinc-300 hover:border-emerald-600 text-zinc-700 hover:text-emerald-700 shadow-xs"
               }`}
             >
-              <span>VISIT OUR STORE</span>
+              <span>SHOP PRE-WORKOUT</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>

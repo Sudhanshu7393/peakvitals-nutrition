@@ -187,16 +187,12 @@ export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo>
           district: districtName,
           state: stateName,
           formattedLocation: `${areaName ? areaName + ", " : ""}${districtName}, ${stateName}`,
-          isLocal,
-          deliveryTime: isLocal
-            ? "⚡ Same-Day / 24-Hr Delivery (Ravi Nagar Store Priority)"
-            : "🚚 2 to 4 Days (All India Express Air Courier)",
-          courierPartner: isLocal
-            ? "S.K Nutrition Mughalsarai Local Express"
-            : "BlueDart / Delhivery / Xpressbees Air",
+          isLocal: false,
+          deliveryTime: "🚚 2 to 4 Days (All India Express Air Courier)",
+          courierPartner: "BlueDart / Delhivery / Xpressbees Air",
           codAvailable: false,
           freeShippingAvailable: true,
-          message: `All India Delivery active! Orders to ${districtName} are dispatched same-day.`,
+          message: `All India Delivery active! Orders to ${districtName} are dispatched via Express Courier.`,
         };
         cache.set(cleanPin, result);
         return result;
@@ -209,10 +205,9 @@ export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo>
   // 3. Fallback using 3-digit curated mapping
   const prefix3 = cleanPin.slice(0, 3);
   const match3 = POSTAL_3DIGIT_MAP[prefix3];
-  const isLocal = cleanPin.startsWith("232") || cleanPin.startsWith("221");
 
-  const district = match3?.district || (cleanPin.startsWith("232") ? "Chandauli (Mughalsarai)" : cleanPin.startsWith("221") ? "Varanasi" : "Delivery Hub");
-  const state = match3?.state || "Uttar Pradesh";
+  const district = match3?.district || "Delivery Hub";
+  const state = match3?.state || "India";
   const formatted = `${district}, ${state}`;
 
   const fallbackResult: PincodeInfo = {
@@ -222,13 +217,9 @@ export async function lookupIndianPincode(pincode: string): Promise<PincodeInfo>
     district,
     state,
     formattedLocation: formatted,
-    isLocal,
-    deliveryTime: isLocal
-      ? "⚡ Same-Day / 24-Hr Delivery (Mughalsarai & Varanasi)"
-      : "🚚 2 to 4 Days Express Delivery",
-    courierPartner: isLocal
-      ? "S.K Nutrition Local Fleet"
-      : "Express Air Delivery (BlueDart / Delhivery)",
+    isLocal: false,
+    deliveryTime: "🚚 2 to 4 Days Express Delivery",
+    courierPartner: "Express Air Delivery (BlueDart / Delhivery)",
     codAvailable: false,
     freeShippingAvailable: true,
     message: `All India Serviceable! We deliver Peakvitals Pre-Workout to ${formatted}.`,

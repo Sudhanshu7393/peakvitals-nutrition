@@ -112,12 +112,12 @@ export const StudioProductGrid: React.FC<StudioProductGridProps> = ({
         {/* View All / Order on WhatsApp button at bottom */}
         <div className="text-center pt-4">
           <a
-            href="https://wa.me/919118732066?text=Hi%20SK%20Nutrition,%20I%20want%20to%20know%20more%20about%20your%20pre-workout%20supplements"
+            href="https://wa.me/917651918284?text=Hi%20Peakvitals%20Nutrition,%20I%20want%20to%20order%20Peakvitals%20Pre-Workout"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-widest px-8 py-3 rounded shadow-md transition-all active:scale-95"
           >
-            ORDER VIA WHATSAPP (9118732066)
+            ORDER VIA WHATSAPP (7651918284)
           </a>
         </div>
       </div>

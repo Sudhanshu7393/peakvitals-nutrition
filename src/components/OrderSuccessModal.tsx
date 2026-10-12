@@ -97,9 +97,9 @@ export const OrderSuccessModal: React.FC = () => {
 
           <div className="pt-2 flex items-center justify-between text-emerald-700 border-t border-gray-200 text-[11px] font-semibold">
             <span className="flex items-center gap-1">
-              <Truck className="w-3.5 h-3.5 text-emerald-600" /> Fast Local Dispatch
+              <Truck className="w-3.5 h-3.5 text-emerald-600" /> Fast Express Dispatch
             </span>
-            <span>Same-Day in Mughalsarai &amp; Chandauli</span>
+            <span>All India Air Courier (2-4 Days)</span>
           </div>
         </div>
 

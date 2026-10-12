@@ -84,12 +84,8 @@ export function IndianPincodeChecker() {
                 </span>
                 <span className="text-zinc-400">•</span>
                 <span className="font-semibold flex items-center gap-1 shrink-0">
-                  {pincodeInfo.isLocal ? (
-                    <Zap className="w-3 h-3 text-[#A3E635]" />
-                  ) : (
-                    <Truck className="w-3 h-3 text-orange-500" />
-                  )}
-                  <span>{pincodeInfo.isLocal ? "Same-Day" : "2-4 Days"}</span>
+                  <Truck className="w-3 h-3 text-orange-500" />
+                  <span>2-4 Days Express</span>
                 </span>
               </div>
 

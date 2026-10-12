@@ -210,14 +210,10 @@ const STATE_2DIGIT_MAP: Record<string, { state: string; sampleCity: string }> = 
   "84": { state: "Bihar", sampleCity: "Muzaffarpur" },
 };
 
-function formatDeliverySpeed(isLocal: boolean) {
+function formatDeliverySpeed(_isLocal: boolean) {
   return {
-    deliveryTime: isLocal
-      ? "⚡ Same-Day / 24-Hr Delivery (Ravi Nagar Store Priority)"
-      : "🚚 2 to 4 Days (All India Express Air Courier)",
-    courierPartner: isLocal
-      ? "S.K Nutrition Mughalsarai Local Express"
-      : "BlueDart / Delhivery / Xpressbees Air",
+    deliveryTime: "🚚 2 to 4 Days (All India Express Air Courier)",
+    courierPartner: "BlueDart / Delhivery / Xpressbees Air",
   };
 }
 
@@ -234,7 +230,7 @@ export async function GET(request: NextRequest) {
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`,
         {
           headers: {
-            "User-Agent": "SKNutritionStore/2.0 (supplements-order@sknutrition.in)",
+            "User-Agent": "PeakvitalsNutrition/2.0 (Peakvitalsnutrition@gmail.com)",
             "Accept-Language": "en",
           },
           signal: AbortSignal.timeout(3500),

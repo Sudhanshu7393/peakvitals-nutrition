@@ -5,16 +5,16 @@ export const SITE_CONFIG = {
   tagline: "Be The Boss of Your Workout — Official Peakvitals Brand Store",
   subTagline: "Official Direct-to-Athlete Store • High-Stim Pre-Workout",
   
-  // Contact & Location Details
-  address: "Ravi Nagar, Mughalsarai, Chandauli, Uttar Pradesh - 232101",
-  landmark: "Near Main Market, Ravi Nagar",
-  city: "Mughalsarai, Chandauli",
-  state: "Uttar Pradesh",
+  // Contact Details
+  address: "",
+  landmark: "",
+  city: "",
+  state: "",
   
-  // Real Phone & WhatsApp details provided by store owner
-  phone: "+91 91187 32066",
-  whatsappNumber: "919118732066", 
-  email: "contact@peakvitals.in",
+  // Official Phone, WhatsApp & Email
+  phone: "+91 76519 18284",
+  whatsappNumber: "917651918284", 
+  email: "Peakvitalsnutrition@gmail.com",
   
   hours: "Mon - Sun: 9:00 AM - 10:00 PM",
   freeDeliveryThreshold: 999,
@@ -26,18 +26,18 @@ export const SITE_CONFIG = {
       icon: "ShieldCheck",
     },
     {
-      title: "Fast Local Delivery",
-      desc: "Same-day lightning delivery across Mughalsarai, Chandauli & Varanasi outskirts.",
+      title: "All India Express Delivery",
+      desc: "Fast express air courier dispatch across all 28,000+ PIN codes in India.",
       icon: "Truck",
     },
     {
-      title: "Best Price Guarantee",
-      desc: "Guaranteed wholesale & competitive retail pricing with heavy seasonal discounts.",
+      title: "Direct Official Pricing",
+      desc: "Official direct-to-athlete brand pricing with zero middleman markups.",
       icon: "BadgePercent",
     },
     {
-      title: "Free Diet & Stack Guidance",
-      desc: "Talk to our supplement experts to pick the right protein and pre-workout for your goal.",
+      title: "Expert Workout Guidance",
+      desc: "Talk to our supplement specialists on WhatsApp or Email for dosage guidance.",
       icon: "Sparkles",
     },
   ],

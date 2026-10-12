@@ -34,36 +34,36 @@ export function FuelHeader() {
         <span className="md:hidden text-[10px] font-bold tracking-wide truncate">🇮🇳 PEAKVITALS OFFICIAL • ALL INDIA EXPRESS DELIVERY</span>
       </div>
 
-      {/* 2. Main Navigation Bar (Fixed Dark Matte Black to match Peakvitals Jar) */}
-      <div className="bg-[#0A0B0E] text-white border-b border-zinc-800/90 px-4 sm:px-8 py-3.5 shadow-md">
+      {/* 2. Main Navigation Bar (Crisp White Header showcasing the Original Blue Peakvitals Logo) */}
+      <div className="bg-white text-zinc-950 border-b border-zinc-200 px-4 sm:px-8 py-3 shadow-xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Left: Mobile Menu & Logo */}
+          {/* Left: Mobile Menu & Original Logo */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden p-1.5 text-zinc-300 hover:text-white transition"
+              className="lg:hidden p-1.5 text-zinc-700 hover:text-black transition"
               aria-label="Toggle menu"
             >
               <Menu className="w-6 h-6" />
             </button>
 
             <a href="/" className="flex items-center" aria-label="Peakvitals Nutrition Home">
-              <PeakvitalsLogo forceDark size="md" />
+              <PeakvitalsLogo size="md" />
             </a>
           </div>
 
           {/* Center: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-black uppercase tracking-wider text-zinc-300">
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-black uppercase tracking-wider text-zinc-700">
             <button
               onClick={() => handleNavClick("all")}
-              className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
+              className="hover:text-[#006AA6] transition-colors cursor-pointer flex items-center gap-0.5"
             >
               <span>Shop All</span>
               <ChevronDown className="w-3 h-3 text-zinc-500" />
             </button>
             <button
               onClick={() => handleNavClick("green-apple")}
-              className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
+              className="hover:text-[#65A30D] transition-colors cursor-pointer flex items-center gap-0.5"
             >
               <span>Green Apple</span>
             </button>
@@ -75,13 +75,13 @@ export function FuelHeader() {
             </button>
             <button
               onClick={() => setIsTrackOrderModalOpen(true)}
-              className="hover:text-[#A3E635] transition-colors cursor-pointer"
+              className="hover:text-[#006AA6] transition-colors cursor-pointer"
             >
               Track Order
             </button>
             <a
               href="#featured-products"
-              className="hover:text-[#A3E635] transition-colors"
+              className="hover:text-[#006AA6] transition-colors"
             >
               Products
             </a>
@@ -92,8 +92,8 @@ export function FuelHeader() {
             {/* Search Toggle / Input */}
             <div className="relative">
               {isSearchOpen ? (
-                <div className="flex items-center rounded-full px-3 py-1 border bg-zinc-900 border-zinc-700 text-white">
-                  <Search className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                <div className="flex items-center rounded-full px-3 py-1 border bg-zinc-100 border-zinc-300 text-zinc-900">
+                  <Search className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
                   <input
                     type="text"
                     autoFocus
@@ -107,7 +107,7 @@ export function FuelHeader() {
                       setIsSearchOpen(false);
                       setSearchQuery("");
                     }}
-                    className="text-zinc-400 hover:text-white"
+                    className="text-zinc-500 hover:text-black"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -115,7 +115,7 @@ export function FuelHeader() {
               ) : (
                 <button
                   onClick={() => setIsSearchOpen(true)}
-                  className="p-1.5 text-zinc-300 hover:text-white transition"
+                  className="p-1.5 text-zinc-700 hover:text-black transition"
                   aria-label="Search"
                 >
                   <Search className="w-5 h-5" />
@@ -130,17 +130,17 @@ export function FuelHeader() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 transition cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 hover:text-emerald-700 transition cursor-pointer"
               title="Order on WhatsApp"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-500/20" />
-              <span>9118732066</span>
+              <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-500/20" />
+              <span>7651918284</span>
             </a>
 
             {/* Cart with Lime Green Badge */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-1.5 text-zinc-300 hover:text-white transition cursor-pointer group"
+              className="relative p-1.5 text-zinc-800 hover:text-black transition cursor-pointer group"
               aria-label="Shopping Cart"
             >
               <ShoppingBag className="w-5 h-5 group-hover:scale-105 transition-transform" />
@@ -213,13 +213,11 @@ export function FuelHeader() {
                   🚚 Track My Order (PV-ID)
                 </button>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Ravi+Nagar+Mughalsarai+Chandauli+232101"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`mailto:${SITE_CONFIG.email}`}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 text-white hover:text-[#A3E635]"
+                  className="block py-2 text-white hover:text-[#A3E635] truncate"
                 >
-                  📍 Dispatch Hub: Ravi Nagar, Mughalsarai (Map)
+                  ✉️ {SITE_CONFIG.email}
                 </a>
               </div>
             </div>
@@ -234,7 +232,7 @@ export function FuelHeader() {
                 className="w-full py-2.5 rounded-xl bg-[#A3E635] text-black font-black text-xs uppercase flex items-center justify-center gap-2 shadow-md cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp Helpline: 9118732066</span>
+                <span>WhatsApp Helpline: 7651918284</span>
               </a>
             </div>
           </div>
