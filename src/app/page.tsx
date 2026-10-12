@@ -4,9 +4,7 @@ import React, { useState } from "react";
 import { FuelHeader } from "@/components/FuelHeader";
 import { FuelHero } from "@/components/FuelHero";
 import { IndianPincodeChecker } from "@/components/IndianPincodeChecker";
-import { FuelCategoryCards } from "@/components/FuelCategoryCards";
 import { FuelProductGrid } from "@/components/FuelProductGrid";
-import { FuelBundleSection } from "@/components/FuelBundleSection";
 import { FuelWhySection } from "@/components/FuelWhySection";
 import { FuelFaqSection } from "@/components/FuelFaqSection";
 import { FuelFooter } from "@/components/FuelFooter";
@@ -62,34 +60,28 @@ export default function HomePage() {
 
   return (
     <div className={`min-h-screen flex flex-col font-sans selection:bg-[#A3E635] selection:text-black transition-colors duration-300 ${theme === "dark" ? "bg-black text-white" : "bg-[#F8FAFC] text-zinc-900"}`}>
-      {/* 1. Header (Black Nav + Search + WhatsApp + Cart) */}
+      {/* 1. Header */}
       <FuelHeader />
 
-      {/* 2. Hero Section: DISCIPLINE. NUTRITION. DOMINATION. */}
+      {/* 2. Hero Section */}
       <FuelHero onShopNow={handleHeroShopNow} />
 
-      {/* 3. Sleek Single-Line All-India Pincode Bar */}
+      {/* 3. All-India Pincode Bar */}
       <IndianPincodeChecker />
 
-      {/* 4. Flavour Category Showcase */}
-      <FuelCategoryCards />
-
-      {/* 5. Featured Products Grid (3D Glowing Cards + Neon Buttons) */}
+      {/* 4. Official Products Grid (Green Apple & Tangy Orange) */}
       <FuelProductGrid
         onSelectProduct={handleSelectPeakvitalsProduct}
         onAddToCart={handleAddToCart}
       />
 
-      {/* 6. Twin Pack Bundle Offer (Stack & Save + Free Shaker) */}
-      <FuelBundleSection />
-
-      {/* 7. Why Peakvitals Athletic Value Pillars */}
+      {/* 5. Why Peakvitals Athletic Value Pillars */}
       <FuelWhySection />
 
-      {/* 8. Frequently Asked Questions */}
+      {/* 6. Frequently Asked Questions */}
       <FuelFaqSection />
 
-      {/* 9. Clean Dark Footer (Store Address, Mughalsarai, WhatsApp Order, Helpline) */}
+      {/* 7. Clean Dark Footer */}
       <FuelFooter />
 
       {/* Interactive Modals */}

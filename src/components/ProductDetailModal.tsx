@@ -127,31 +127,15 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                 {product.name}
               </h2>
               <p className="text-xs text-gray-500 mt-1">{product.tagline}</p>
-
-              {/* Rating */}
-              <div className="flex items-center gap-2 mt-2">
-                <div className="flex items-center text-amber-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
-                  <span className="font-bold ml-1 text-sm text-gray-900">{product.rating}</span>
-                </div>
-                <span className="text-xs text-gray-400">({product.reviewsCount} customer reviews)</span>
-              </div>
             </div>
 
             {/* Price Box */}
             <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 flex items-baseline justify-between">
               <div>
-                <span className="text-[11px] text-gray-500 block">Offer Price</span>
+                <span className="text-[11px] text-gray-500 block">Price</span>
                 <div className="flex items-baseline gap-2">
                   <span className="text-2xl font-black text-gray-900">₹{calculatedPrice}</span>
-                  {calculatedOriginalPrice > calculatedPrice && (
-                    <span className="text-sm text-gray-400 line-through">₹{calculatedOriginalPrice}</span>
-                  )}
-                  {discountAmount > 0 && (
-                    <span className="text-xs font-bold text-emerald-600">Save ₹{discountAmount}</span>
-                  )}
+                  <span className="text-xs font-bold text-gray-500">/ 250g (35 Servings)</span>
                 </div>
               </div>
               <div className="text-right">

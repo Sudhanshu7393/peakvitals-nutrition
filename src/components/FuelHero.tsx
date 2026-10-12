@@ -64,9 +64,9 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
               }`}
             />
 
-            {/* Bestseller Badge */}
-            <div className="absolute top-1 right-2 z-20 px-2 py-0.5 rounded-full bg-[#EA580C] text-white font-black text-[9px] uppercase tracking-wider shadow-md">
-              ⚡ #1 Bestseller
+            {/* Official Flavours Badge */}
+            <div className="absolute top-1 right-2 z-20 px-2.5 py-0.5 rounded-full bg-[#84CC16] text-black font-black text-[9px] uppercase tracking-wider shadow-md">
+              35 Servings • 250g
             </div>
           </div>
 
@@ -95,11 +95,8 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
               <span className={`text-base font-black ${theme === "dark" ? "text-[#A3E635]" : "text-emerald-600"}`}>
                 ₹1,299
               </span>
-              <span className={`text-[10px] line-through ${theme === "dark" ? "text-zinc-500" : "text-zinc-400"}`}>
-                ₹1,999
-              </span>
-              <span className="text-[8px] font-black uppercase text-emerald-500 bg-emerald-500/15 px-1 py-0.5 rounded border border-emerald-500/30">
-                35% OFF
+              <span className={`text-[10px] font-bold ${theme === "dark" ? "text-zinc-400" : "text-zinc-600"}`}>
+                / 250g Tub
               </span>
             </div>
 
@@ -212,11 +209,8 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
                 <span className={`text-lg font-black ${theme === "dark" ? "text-[#A3E635]" : "text-emerald-600"}`}>
                   ₹1,299
                 </span>
-                <span className={`text-xs line-through ${theme === "dark" ? "text-zinc-500" : "text-zinc-400"}`}>
-                  MRP ₹1,999
-                </span>
-                <span className="text-[10px] font-black uppercase text-emerald-500 bg-emerald-500/15 px-2 py-0.5 rounded border border-emerald-500/30">
-                  Save 35%
+                <span className={`text-xs font-bold ${theme === "dark" ? "text-zinc-400" : "text-zinc-600"}`}>
+                  • 250g (35 Servings)
                 </span>
               </div>
             </div>
@@ -288,9 +282,9 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
                 </div>
               </div>
 
-              {/* Top Bestseller Badge with 3D Shine */}
-              <div className="absolute top-2 right-4 z-20 px-3 py-1 rounded-full bg-[#EA580C] text-white font-black text-[10px] uppercase tracking-wider shadow-lg shadow-orange-950/40">
-                ⚡ #1 Bestseller
+              {/* Top Servings Badge */}
+              <div className="absolute top-2 right-4 z-20 px-3 py-1 rounded-full bg-[#84CC16] text-black font-black text-[10px] uppercase tracking-wider shadow-lg">
+                35 Servings • 250g
               </div>
             </div>
           </div>

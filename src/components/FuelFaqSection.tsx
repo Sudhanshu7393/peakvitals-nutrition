@@ -16,7 +16,7 @@ export function FuelFaqSection() {
     },
     {
       q: "Which flavours are currently available?",
-      a: "Peakvitals Pre-Workout is currently available in two bestselling flavours: Crisp Green Apple and Tangy Orange, as well as our Value Twin Pack (Green Apple + Tangy Orange + Free Shaker) and Triple Power Stack.",
+      a: "Peakvitals Pre-Workout (250g / 35 Servings) is currently available in two flavours: Green Apple Flavour and Tangy Orange Flavour.",
     },
     {
       q: "Do you deliver all across India? How long does delivery take?",

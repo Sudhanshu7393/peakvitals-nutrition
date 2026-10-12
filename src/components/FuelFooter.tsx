@@ -60,7 +60,7 @@ export function FuelFooter() {
           {/* Col 2: Shop Flavours */}
           <div className="space-y-3">
             <h4 className="font-black uppercase tracking-wider text-white text-[11px]">
-              Shop Flavours
+              Available Flavours
             </h4>
             <ul className="space-y-2 text-zinc-400">
               <li>
@@ -81,18 +81,10 @@ export function FuelFooter() {
               </li>
               <li>
                 <button
-                  onClick={() => handleNavClick("combo")}
-                  className="hover:text-[#A3E635] transition cursor-pointer text-[#A3E635]"
-                >
-                  Twin Pack (Green Apple + Orange)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick("combo")}
+                  onClick={() => handleNavClick("all")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  Triple Power Stack (3 Tubs)
+                  View All Pre-Workouts
                 </button>
               </li>
             </ul>
@@ -101,15 +93,15 @@ export function FuelFooter() {
           {/* Col 3: Workout Goals */}
           <div className="space-y-3">
             <h4 className="font-black uppercase tracking-wider text-white text-[11px]">
-              Workout Goals
+              Key Benefits
             </h4>
             <ul className="space-y-2 text-zinc-400">
               <li>
                 <button
-                  onClick={() => handleNavClick("green-apple")}
+                  onClick={() => handleNavClick("all")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  Extreme Energy &amp; Focus
+                  195mg Natural Caffeine
                 </button>
               </li>
               <li>
@@ -117,23 +109,23 @@ export function FuelFooter() {
                   onClick={() => handleNavClick("all")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  Nitric Oxide Muscle Pump
+                  1.5g L-Citrulline Malate
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => handleNavClick("orange")}
+                  onClick={() => handleNavClick("all")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  Lactic Acid Buffer &amp; Stamina
+                  2g Arginine AAKG
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => handleNavClick("combo")}
+                  onClick={() => handleNavClick("all")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  Bulk Gym Value Savings
+                  2g Beta-Alanine
                 </button>
               </li>
             </ul>

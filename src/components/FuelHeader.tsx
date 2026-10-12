@@ -77,12 +77,6 @@ export function FuelHeader() {
               <span>Tangy Orange</span>
             </button>
             <button
-              onClick={() => handleNavClick("combo")}
-              className="hover:text-[#A3E635] transition-colors cursor-pointer text-[#A3E635]"
-            >
-              Bundles
-            </button>
-            <button
               onClick={() => setIsTrackOrderModalOpen(true)}
               className="hover:text-[#A3E635] transition-colors cursor-pointer"
             >
@@ -216,7 +210,7 @@ export function FuelHeader() {
                 className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
               >
                 <span>Green Apple Flavour</span>
-                <span className="text-zinc-500 text-xs">Flagship</span>
+                <span className="text-zinc-500 text-xs">250g</span>
               </button>
               <button
                 onClick={() => {
@@ -226,17 +220,7 @@ export function FuelHeader() {
                 className="w-full text-left py-2 hover:text-[#EA580C] flex justify-between"
               >
                 <span>Tangy Orange Flavour</span>
-                <span className="text-zinc-500 text-xs">Citrus Rush</span>
-              </button>
-              <button
-                onClick={() => {
-                  handleNavClick("combo");
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full text-left py-2 text-[#A3E635] flex justify-between bg-zinc-900/60 p-2 rounded-xl"
-              >
-                <span>Twin &amp; Triple Bundles</span>
-                <span>Free Shaker</span>
+                <span className="text-zinc-500 text-xs">250g</span>
               </button>
 
               <div className="pt-4 border-t border-zinc-800 space-y-2 text-xs font-bold normal-case text-zinc-400">

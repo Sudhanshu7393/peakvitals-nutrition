@@ -149,10 +149,10 @@ export function FuelProductGrid({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5">
-            {filtered.map((prod, idx) => {
+          <div className="grid grid-cols-2 gap-3 sm:gap-8 max-w-4xl mx-auto">
+            {filtered.map((prod) => {
               const isAdded = addedId === prod.id;
-              const isBestSeller = idx === 0 || idx === 2 || idx === 4;
+              const isGreenApple = prod.id.includes("green");
 
               return (
                 <div
@@ -165,7 +165,7 @@ export function FuelProductGrid({
                   }`}
                 >
                   <div
-                    className={`rounded-[14px] sm:rounded-[22px] p-2.5 sm:p-4 flex flex-col justify-between h-full relative overflow-hidden ${
+                    className={`rounded-[14px] sm:rounded-[22px] p-3 sm:p-6 flex flex-col justify-between h-full relative overflow-hidden ${
                       theme === "dark"
                         ? "bg-gradient-to-b from-zinc-900 via-zinc-950 to-black"
                         : "bg-white shadow-xs"
@@ -174,15 +174,15 @@ export function FuelProductGrid({
                     <div>
                       {/* Top Badges */}
                       <div className="flex items-center justify-between min-h-[20px]">
-                        {isBestSeller ? (
-                          <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-wider text-white bg-[#EA580C] px-2 py-0.5 rounded-full shadow-xs">
-                            ⚡ BEST SELLER
-                          </span>
-                        ) : (
-                          <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-wider text-black bg-[#A3E635] px-2 py-0.5 rounded-full shadow-xs">
-                            ★ HIGH STIM
-                          </span>
-                        )}
+                        <span
+                          className={`text-[8px] sm:text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-xs ${
+                            isGreenApple
+                              ? "bg-[#A3E635] text-black"
+                              : "bg-[#EA580C] text-white"
+                          }`}
+                        >
+                          {isGreenApple ? "GREEN APPLE" : "TANGY ORANGE"}
+                        </span>
 
                         {/* Veg Green Dot */}
                         <div
@@ -196,7 +196,7 @@ export function FuelProductGrid({
 
                       {/* 3D Showcase Pedestal for the Dabba */}
                       <div
-                        className={`relative w-full h-32 sm:h-52 my-2 sm:my-3 rounded-xl sm:rounded-2xl border flex items-center justify-center overflow-hidden transition-colors ${
+                        className={`relative w-full h-36 sm:h-64 my-2.5 sm:my-4 rounded-xl sm:rounded-2xl border flex items-center justify-center overflow-hidden transition-colors ${
                           theme === "dark"
                             ? "bg-gradient-to-b from-zinc-950/90 via-zinc-900/60 to-black border-zinc-800/80 group-hover:border-[#A3E635]/50"
                             : "bg-gradient-to-b from-zinc-100/90 via-zinc-50 to-zinc-200/50 border-zinc-200 group-hover:border-[#A3E635]/80"
@@ -213,14 +213,14 @@ export function FuelProductGrid({
                         />
 
                         {/* 3D Contact Floor Shadow */}
-                        <div className="absolute bottom-1.5 sm:bottom-2.5 w-3/4 h-2 sm:h-3 rounded-full blur-sm bg-black/20 dark:bg-black/75 pointer-events-none" />
+                        <div className="absolute bottom-2 sm:bottom-3 w-3/4 h-2.5 sm:h-3.5 rounded-full blur-sm bg-black/20 dark:bg-black/75 pointer-events-none" />
 
                         {/* Realistic Transparent Packshot */}
                         <Image
                           src={prod.image}
                           alt={prod.name}
                           fill
-                          className={`object-contain p-1.5 sm:p-2 group-hover:scale-105 transition-all duration-300 ${
+                          className={`object-contain p-2 sm:p-3 group-hover:scale-105 transition-all duration-300 ${
                             theme === "dark"
                               ? "filter drop-shadow-[0_15px_20px_rgba(0,0,0,0.95)]"
                               : "filter drop-shadow-[0_12px_16px_rgba(0,0,0,0.2)]"
@@ -230,7 +230,7 @@ export function FuelProductGrid({
 
                       {/* Product Name */}
                       <h3
-                        className={`font-black text-[11px] sm:text-sm uppercase leading-snug line-clamp-2 transition-colors ${
+                        className={`font-black text-xs sm:text-base uppercase leading-snug line-clamp-2 transition-colors ${
                           theme === "dark"
                             ? "text-white group-hover:text-[#A3E635]"
                             : "text-zinc-900 group-hover:text-emerald-600"
@@ -239,56 +239,46 @@ export function FuelProductGrid({
                         {prod.name}
                       </h3>
                       <p
-                        className={`text-[10px] sm:text-[11px] mt-0.5 font-medium truncate ${
-                          theme === "dark" ? "text-zinc-400" : "text-zinc-500"
+                        className={`text-[10px] sm:text-xs mt-1 font-semibold truncate ${
+                          theme === "dark" ? "text-zinc-400" : "text-zinc-600"
                         }`}
                       >
-                        {prod.flavor} • {prod.weight}
+                        {prod.flavor} • {prod.servings} ({prod.weight})
                       </p>
 
-                      {/* Star Rating */}
-                      <div className="flex items-center gap-1 mt-1 sm:mt-2">
-                        <div className="flex text-amber-400">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-amber-400 text-amber-400" />
-                          ))}
-                        </div>
-                        <span
-                          className={`text-[9px] sm:text-[10px] font-bold ${
-                            theme === "dark" ? "text-zinc-400" : "text-zinc-500"
-                          }`}
-                        >
-                          (980+)
-                        </span>
-                      </div>
+                      {/* Real Active Ingredients Summary */}
+                      <p
+                        className={`text-[9px] sm:text-[11px] mt-1 font-medium truncate ${
+                          theme === "dark" ? "text-zinc-500" : "text-zinc-500"
+                        }`}
+                      >
+                        1.5g Citrulline • 2g Arginine • 195mg Caffeine • 2g Beta-Alanine
+                      </p>
 
-                      {/* Pricing */}
-                      <div className="mt-1.5 sm:mt-2.5 flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
+                      {/* Clean Official Price (No Fake Strike-through or Fake % Off) */}
+                      <div className="mt-2 sm:mt-3 flex items-baseline gap-2">
                         <span
-                          className={`text-sm sm:text-lg font-black ${
+                          className={`text-base sm:text-xl font-black ${
                             theme === "dark" ? "text-[#A3E635]" : "text-emerald-600"
                           }`}
                         >
                           {prod.price}
                         </span>
                         <span
-                          className={`text-[10px] sm:text-xs line-through ${
-                            theme === "dark" ? "text-zinc-500" : "text-zinc-400"
+                          className={`text-[10px] sm:text-xs font-bold ${
+                            theme === "dark" ? "text-zinc-400" : "text-zinc-500"
                           }`}
                         >
-                          {prod.originalPrice}
-                        </span>
-                        <span className="text-[8px] sm:text-[9px] font-black uppercase text-[#EA580C] bg-[#EA580C]/15 px-1 py-0.5 rounded border border-[#EA580C]/30">
-                          35% OFF
+                          • {prod.weight} Tub
                         </span>
                       </div>
                     </div>
 
                     {/* Signature Neon Lime Green "ADD TO CART" Button */}
-                    <div className="mt-2.5 sm:mt-4 pt-1">
+                    <div className="mt-3 sm:mt-4 pt-1">
                       <button
                         onClick={(e) => handleAdd(e, prod)}
-                        className={`w-full py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer active:scale-95 shadow-xs ${
+                        className={`w-full py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 shadow-xs ${
                           isAdded
                             ? theme === "dark"
                               ? "bg-white text-black"
@@ -303,7 +293,7 @@ export function FuelProductGrid({
                           </>
                         ) : (
                           <>
-                            <ShoppingCart className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                            <ShoppingCart className="w-3.5 h-3.5" />
                             <span>ADD TO CART</span>
                           </>
                         )}
