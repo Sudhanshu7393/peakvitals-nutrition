@@ -22,16 +22,16 @@ export function FuelFooter() {
           <div className="col-span-2 space-y-3 sm:space-y-4">
             <div>
               <span className="text-xl sm:text-2xl font-black italic tracking-tighter uppercase leading-none block">
-                S.K <span className="text-[#A3E635]">NUTRITION</span>
+                PEAK<span className="text-[#A3E635]">VITALS</span>
               </span>
               <span className="text-[9px] font-bold tracking-widest text-zinc-400 uppercase mt-0.5 block">
-                Stronger. Everyday. • Authorised Peakvitals Partner
+                Be The Boss of Your Workout • Official Brand Store
               </span>
             </div>
 
             <p className="text-zinc-400 leading-relaxed text-xs max-w-sm">
-              Mughalsarai &amp; Chandauli&apos;s premier performance store exclusively for{" "}
-              <strong className="text-white">Peakvitals Nutrition Pre-Workout</strong>. High-stimulant, clinically dosed active grams with direct factory supply.
+              Official direct-to-athlete store for{" "}
+              <strong className="text-white">Peakvitals Nutrition Pre-Workout</strong>. Available in refreshing <strong className="text-[#A3E635]">Green Apple</strong> &amp; <strong className="text-[#EA580C]">Tangy Orange</strong> flavours with clinically dosed active grams.
             </p>
 
             <div className="space-y-1.5 text-zinc-400 pt-1">
@@ -42,7 +42,7 @@ export function FuelFooter() {
                 className="flex items-start gap-2 hover:text-[#A3E635] transition"
               >
                 <MapPin className="w-3.5 h-3.5 text-[#A3E635] shrink-0 mt-0.5" />
-                <span>{SITE_CONFIG.address} (Landmark: {SITE_CONFIG.landmark})</span>
+                <span>Dispatch Hub: {SITE_CONFIG.address}</span>
               </a>
               <a
                 href="tel:+919118732066"
@@ -66,34 +66,18 @@ export function FuelFooter() {
             <ul className="space-y-2 text-zinc-400">
               <li>
                 <button
-                  onClick={() => handleNavClick("high-stim")}
+                  onClick={() => handleNavClick("green-apple")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  Green Apple (Original)
+                  Green Apple Flavour (250g)
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => handleNavClick("high-stim")}
-                  className="hover:text-[#A3E635] transition cursor-pointer"
+                  onClick={() => handleNavClick("orange")}
+                  className="hover:text-[#EA580C] transition cursor-pointer"
                 >
-                  Blue Raspberry Blast
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick("pump")}
-                  className="hover:text-[#A3E635] transition cursor-pointer"
-                >
-                  Watermelon Punch
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick("endurance")}
-                  className="hover:text-[#A3E635] transition cursor-pointer"
-                >
-                  Tangy Orange Citrus
+                  Tangy Orange Flavour (250g)
                 </button>
               </li>
               <li>
@@ -101,7 +85,15 @@ export function FuelFooter() {
                   onClick={() => handleNavClick("combo")}
                   className="hover:text-[#A3E635] transition cursor-pointer text-[#A3E635]"
                 >
-                  Twin &amp; Triple Bundles
+                  Twin Pack (Green Apple + Orange)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNavClick("combo")}
+                  className="hover:text-[#A3E635] transition cursor-pointer"
+                >
+                  Triple Power Stack (3 Tubs)
                 </button>
               </li>
             </ul>
@@ -115,7 +107,7 @@ export function FuelFooter() {
             <ul className="space-y-2 text-zinc-400">
               <li>
                 <button
-                  onClick={() => handleNavClick("high-stim")}
+                  onClick={() => handleNavClick("green-apple")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
                   Extreme Energy &amp; Focus
@@ -123,7 +115,7 @@ export function FuelFooter() {
               </li>
               <li>
                 <button
-                  onClick={() => handleNavClick("pump")}
+                  onClick={() => handleNavClick("all")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
                   Nitric Oxide Muscle Pump
@@ -131,7 +123,7 @@ export function FuelFooter() {
               </li>
               <li>
                 <button
-                  onClick={() => handleNavClick("endurance")}
+                  onClick={() => handleNavClick("orange")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
                   Lactic Acid Buffer &amp; Stamina
@@ -160,13 +152,13 @@ export function FuelFooter() {
                   className="hover:text-[#A3E635] transition cursor-pointer flex items-center gap-1.5"
                 >
                   <Truck className="w-3.5 h-3.5 text-[#A3E635]" />
-                  <span>Track My Order (SK-ID)</span>
+                  <span>Track My Order (PV-ID)</span>
                 </button>
               </li>
               <li>
                 <a
                   href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                    "Hello S.K Nutrition Support Team! 👋\n\nI need assistance regarding Peakvitals Pre-Workout flavours, batch verification, or delivery to my PIN code.\n\nPlease guide me!"
+                    "Hello Peakvitals Nutrition Team! 👋\n\nI need assistance regarding Peakvitals Pre-Workout (Green Apple / Tangy Orange), batch verification, or delivery to my PIN code.\n\nPlease guide me!"
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -184,11 +176,11 @@ export function FuelFooter() {
                   className="hover:text-[#A3E635] transition flex items-center gap-1.5"
                 >
                   <MapPin className="w-3.5 h-3.5 text-[#A3E635]" />
-                  <span>Store Directions (Google Maps)</span>
+                  <span>Dispatch Location (Google Maps)</span>
                 </a>
               </li>
               <li>
-                <span className="text-zinc-500">Same-Day Mughalsarai Dispatch</span>
+                <span className="text-zinc-500">All India Express Dispatch</span>
               </li>
               <li>
                 <span className="text-zinc-500">Direct WhatsApp Order &amp; QR Deal</span>
@@ -199,7 +191,7 @@ export function FuelFooter() {
 
         {/* Payment Badges & Bottom Strip */}
         <div className="pt-6 sm:pt-10 mt-6 sm:mt-10 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-zinc-500 text-[11px] text-center sm:text-left">
-          <p>© {new Date().getFullYear()} S.K NUTRITION. All Rights Reserved. Exclusively Peakvitals Pre-Workout.</p>
+          <p>© {new Date().getFullYear()} PEAKVITALS NUTRITION. All Rights Reserved. Official Brand Store.</p>
 
           <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-zinc-400 font-bold">
             <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-emerald-400">

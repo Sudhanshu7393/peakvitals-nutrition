@@ -77,7 +77,7 @@ export const CheckoutModal: React.FC = () => {
     setIsSubmitting(true);
 
     const randomSuffix = Math.floor(10000 + Math.random() * 90000);
-    const orderId = `SK-${randomSuffix}`;
+    const orderId = `PV-${randomSuffix}`;
 
     const newOrder: CustomerOrder = {
       orderId,
@@ -110,7 +110,7 @@ export const CheckoutModal: React.FC = () => {
       setIsCheckoutOpen(false);
 
       let message = `🛒 *NEW ORDER - ${SITE_CONFIG.name}*\n`;
-      message += `📍 *Ravi Nagar, Mughalsarai (Authorised Peakvitals Partner)*\n`;
+      message += `📍 *Official Peakvitals Brand Store*\n`;
       message += `━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
       message += `🆔 *Order ID:* #${orderId}\n`;
       message += `👤 *Customer Name:* ${name}\n`;
@@ -156,7 +156,7 @@ export const CheckoutModal: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 text-orange-600 text-xs font-black uppercase tracking-wider">
               <Truck className="w-4 h-4" />
-              <span>Fast Mughalsarai & Chandauli Dispatch</span>
+              <span>Peakvitals Direct Brand Dispatch</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-gray-900 mt-1">
               Checkout & Delivery Details

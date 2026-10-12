@@ -14,17 +14,16 @@ export const WhatsAppFloatingButton: React.FC = () => {
     }
 
     const message =
-      `🛒 *ORDER INQUIRY - S.K NUTRITION*\n` +
-      `📍 *Ravi Nagar, Mughalsarai (Authorised Peakvitals Partner)*\n` +
+      `🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n` +
+      `📍 *Official Brand Dispatch Hub*\n` +
       `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-      `Hello S.K Nutrition! 👋\n\n` +
+      `Hello Peakvitals Team! 👋\n\n` +
       `I want to order *Peakvitals Nutrition Pre-Workout*:\n\n` +
-      `🔥 *Flavours & Pricing:*\n` +
+      `🔥 *Available Flavours & Pricing:*\n` +
       `1️⃣ Green Apple Flavour (250g) — ₹1,299\n` +
-      `2️⃣ Blue Raspberry Flavour (250g) — ₹1,299\n` +
-      `3️⃣ Watermelon Pump (250g) — ₹1,299\n` +
-      `4️⃣ Tangy Orange (250g) — ₹1,299\n` +
-      `5️⃣ Twin Pack Bundle (+ Free S.K Shaker Bottle) — ₹2,399\n\n` +
+      `2️⃣ Tangy Orange Flavour (250g) — ₹1,299\n` +
+      `3️⃣ Twin Pack Combo (Green Apple + Orange + Free Shaker) — ₹2,399\n` +
+      `4️⃣ Triple Power Stack (3x 250g) — ₹3,499\n\n` +
       `🚚 *Delivery:* All India Express Dispatch\n` +
       `📍 *My City / PIN Code:* [Enter City/PIN]\n\n` +
       `Please confirm stock & share your UPI QR code for order confirmation. Thank you!`;

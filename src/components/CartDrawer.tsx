@@ -109,14 +109,14 @@ export const CartDrawer: React.FC = () => {
             ) : freeGiftShortfall > 0 ? (
               <div className="flex items-center justify-between text-orange-700 font-bold">
                 <span className="flex items-center gap-1.5">
-                  <Gift className="w-4 h-4" /> Add ₹{freeGiftShortfall} more for FREE S.K Shaker!
+                  <Gift className="w-4 h-4" /> Add ₹{freeGiftShortfall} more for FREE Peakvitals Shaker!
                 </span>
                 <span className="text-[10px] bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full">Reward</span>
               </div>
             ) : (
               <div className="flex items-center gap-2 text-emerald-700 font-bold">
                 <Truck className="w-4 h-4" />
-                <span>You unlocked FREE Delivery &amp; S.K Shaker Bottle! 🎉</span>
+                <span>You unlocked FREE Delivery &amp; Peakvitals Shaker Bottle! 🎉</span>
               </div>
             )}
           </div>

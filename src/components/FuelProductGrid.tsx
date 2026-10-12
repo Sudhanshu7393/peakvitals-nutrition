@@ -39,9 +39,8 @@ export function FuelProductGrid({
     }
 
     // Category tab
-    if (selectedCategoryTab === "high-stim" && !p.id.includes("blue") && !p.id.includes("green")) return false;
-    if (selectedCategoryTab === "pump" && !p.id.includes("watermelon")) return false;
-    if (selectedCategoryTab === "endurance" && !p.id.includes("orange")) return false;
+    if ((selectedCategoryTab === "green-apple" || selectedCategoryTab === "high-stim") && !p.id.includes("green")) return false;
+    if ((selectedCategoryTab === "orange" || selectedCategoryTab === "endurance" || selectedCategoryTab === "pump") && !p.id.includes("orange")) return false;
     if (selectedCategoryTab === "combo" && !p.id.includes("pack") && !p.id.includes("stack")) return false;
 
     return true;
@@ -49,8 +48,6 @@ export function FuelProductGrid({
 
   const getFlavorGlow = (id: string) => {
     if (id.includes("green")) return "rgba(163, 230, 53, 0.28)";
-    if (id.includes("blue")) return "rgba(56, 189, 248, 0.32)";
-    if (id.includes("watermelon")) return "rgba(244, 63, 94, 0.30)";
     if (id.includes("orange")) return "rgba(249, 115, 22, 0.32)";
     return "rgba(163, 230, 53, 0.25)";
   };
@@ -85,7 +82,7 @@ export function FuelProductGrid({
                 theme === "dark" ? "text-white" : "text-zinc-900"
               }`}
             >
-              FEATURED <span className="text-[#EA580C]">PRODUCTS</span>
+              PEAKVITALS <span className="text-[#EA580C]">LINEUP</span>
             </h2>
           </div>
 
@@ -131,7 +128,7 @@ export function FuelProductGrid({
           </div>
         )}
 
-        {/* 5-Card Product Grid with 3D Shining Borders */}
+        {/* 4-Card Product Grid with 3D Shining Borders */}
         {filtered.length === 0 ? (
           <div
             className={`py-12 text-center rounded-3xl border space-y-3 p-6 ${
@@ -152,7 +149,7 @@ export function FuelProductGrid({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5">
             {filtered.map((prod, idx) => {
               const isAdded = addedId === prod.id;
               const isBestSeller = idx === 0 || idx === 2 || idx === 4;

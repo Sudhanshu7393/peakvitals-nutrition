@@ -26,7 +26,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
           {/* Top Pill */}
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-black uppercase tracking-wider bg-[#EA580C]/10 border-[#EA580C]/30 text-[#EA580C]">
             <Zap className="w-3 h-3 text-[#EA580C]" />
-            <span>Authorised Peakvitals Partner • Mughalsarai</span>
+            <span>Peakvitals Official Brand Store • Direct Supply</span>
           </div>
 
           {/* Compact Punchy Headline */}
@@ -40,7 +40,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
           </div>
 
           <p className={`text-[11px] sm:text-xs font-medium max-w-xs leading-relaxed ${theme === "dark" ? "text-zinc-400" : "text-zinc-600"}`}>
-            High-stimulant pre-workout for skin-splitting pumps &amp; zero crash.
+            Available in <strong className="text-[#A3E635]">Green Apple</strong> &amp; <strong className="text-[#EA580C]">Tangy Orange</strong> for skin-splitting pumps &amp; zero crash.
           </p>
 
           {/* PRE-WORKOUT DABBA (PACKSHOT) - VISIBLE DIRECTLY ON FIRST SCREEN! */}
@@ -160,7 +160,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
             {/* Subtitle */}
             <div className="space-y-1">
               <p className={`text-base lg:text-xl font-black uppercase tracking-wider ${theme === "dark" ? "text-zinc-100" : "text-zinc-900"}`}>
-                PREMIUM SUPPLEMENTS. REAL RESULTS.
+                PEAKVITALS OFFICIAL BRAND STORE • GREEN APPLE &amp; TANGY ORANGE
               </p>
               <p className={`text-sm font-medium max-w-lg leading-relaxed ${theme === "dark" ? "text-zinc-400" : "text-zinc-600"}`}>
                 Clinically dosed Peakvitals Nutrition Pre-Workout. Formulated for aggressive focus, explosive nitric oxide muscle pumps, and zero post-workout crash.

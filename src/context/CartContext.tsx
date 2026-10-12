@@ -254,13 +254,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const generateWhatsAppOrderUrl = (customerDetails?: { name: string; phone: string; address: string; city: string }) => {
     let message = `🛒 *NEW ORDER - ${SITE_CONFIG.name}*\n`;
-    message += `📍 *Ravi Nagar, Mughalsarai (Authorised Peakvitals Partner)*\n`;
+    message += `📍 *Official Peakvitals Brand Store*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
     
     if (cart.length === 0) {
-      message += `Hello S.K Nutrition! 👋\n\n`;
+      message += `Hello Peakvitals Team! 👋\n\n`;
       message += `I want to order *Peakvitals Nutrition Pre-Workout*.\n\n`;
-      message += `🔥 *Flavours Available:* Green Apple | Blue Razz | Watermelon | Tangy Orange | Twin Pack Bundle\n`;
+      message += `🔥 *Flavours Available:* Green Apple | Tangy Orange | Twin Pack Combo | Triple Power Stack\n`;
       message += `💳 *Payment & Deal:* Direct WhatsApp Order (Please send UPI QR code)\n\n`;
       message += `Please confirm stock availability and fastest delivery time. Thank you!`;
     } else {

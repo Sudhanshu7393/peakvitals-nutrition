@@ -35,7 +35,7 @@ export function TrackOrderModal() {
   const steps = [
     {
       title: "Order Received",
-      desc: "Order details sent to S.K Nutrition Official WhatsApp Desk",
+      desc: "Order details sent to Peakvitals Official WhatsApp Desk",
       done: true,
       time: "Verified",
     },
@@ -47,7 +47,7 @@ export function TrackOrderModal() {
     },
     {
       title: "Courier Dispatch & AWB Assigned",
-      desc: "Dispatched via Express Courier / S.K Local Fleet",
+      desc: "Dispatched via Express Courier / Official Local Fleet",
       done: false,
       time: "Fast Dispatch",
     },
@@ -86,7 +86,7 @@ export function TrackOrderModal() {
           </div>
           <h3 className="text-xl font-black text-gray-900 mt-1">Track Your Order</h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            Enter your S.K Order ID (e.g. SK-12345) or 10-digit Mobile Number for live courier status.
+            Enter your Peakvitals Order ID (e.g. PV-12345) or 10-digit Mobile Number for live courier status.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export function TrackOrderModal() {
                 setOrderQuery(e.target.value.toUpperCase());
                 setSearched(false);
               }}
-              placeholder="Enter Order ID (SK-xxxxx) or Mobile No."
+              placeholder="Enter Order ID (PV-xxxxx) or Mobile No."
               className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orange-500 text-sm font-bold text-gray-900 uppercase outline-none"
             />
           </div>
@@ -162,7 +162,7 @@ export function TrackOrderModal() {
                 </div>
                 <p className="text-gray-700 leading-relaxed">
                   No recent checkout found in this browser session for{" "}
-                  <span className="font-mono font-black text-gray-900">{cleanQuery}</span>. Since all S.K Nutrition orders are processed &amp; dispatched directly via our Official WhatsApp Desk, click below to get your real-time courier AWB / delivery status on WhatsApp.
+                  <span className="font-mono font-black text-gray-900">{cleanQuery}</span>. Since all Peakvitals Nutrition orders are processed &amp; dispatched directly via our Official WhatsApp Desk, click below to get your real-time courier AWB / delivery status on WhatsApp.
                 </p>
               </div>
             )}
@@ -173,7 +173,7 @@ export function TrackOrderModal() {
                 href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
                   `📦 *LIVE ORDER TRACKING REQUEST - ${SITE_CONFIG.name}*\n` +
                   `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                  `Hello S.K Nutrition Team! 👋\n\n` +
+                  `Hello Peakvitals Team! 👋\n\n` +
                   `Please share the live courier tracking link / dispatch status for my order:\n` +
                   `🆔 *Order ID / Mobile:* ${cleanQuery}\n` +
                   `📍 *Destination:* ${destinationText}\n\n` +

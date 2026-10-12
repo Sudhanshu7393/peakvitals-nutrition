@@ -32,8 +32,8 @@ export function FuelHeader() {
       {/* 1. Top Announcement Bar */}
       <div className="bg-black text-[#A3E635] text-[10px] sm:text-[11px] font-bold py-1 sm:py-1.5 px-3 text-center border-b border-zinc-900 flex items-center justify-center gap-1.5 tracking-wider uppercase overflow-hidden">
         <Truck className="w-3 h-3 text-[#A3E635] shrink-0" />
-        <span className="hidden md:inline">🇮🇳 ALL INDIA EXPRESS DELIVERY • DIRECT WHATSAPP ORDER &amp; UPI QR DEAL • 100% GENUINE PEAKVITALS DIRECT</span>
-        <span className="md:hidden text-[10px] font-bold tracking-wide truncate">🇮🇳 ALL INDIA DELIVERY • WHATSAPP ORDER &amp; UPI QR</span>
+        <span className="hidden md:inline">🇮🇳 PEAKVITALS OFFICIAL BRAND STORE • ALL INDIA EXPRESS DELIVERY • DIRECT WHATSAPP ORDER &amp; UPI QR DEAL</span>
+        <span className="md:hidden text-[10px] font-bold tracking-wide truncate">🇮🇳 PEAKVITALS OFFICIAL • ALL INDIA EXPRESS DELIVERY</span>
       </div>
 
       {/* 2. Main Navigation Bar */}
@@ -51,10 +51,10 @@ export function FuelHeader() {
 
             <a href="/" className="flex flex-col">
               <span className="text-xl sm:text-2xl font-black italic tracking-tighter uppercase leading-none">
-                S.K <span className="text-[#A3E635]">NUTRITION</span>
+                PEAK<span className="text-[#A3E635]">VITALS</span>
               </span>
               <span className={`text-[8px] font-bold tracking-widest uppercase mt-0.5 ${theme === "dark" ? "text-zinc-400" : "text-zinc-500"}`}>
-                Stronger. Everyday. • Peakvitals Store
+                Be The Boss of Your Workout • Official Store
               </span>
             </a>
           </div>
@@ -65,22 +65,20 @@ export function FuelHeader() {
               onClick={() => handleNavClick("all")}
               className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
             >
-              <span>Shop</span>
+              <span>Shop All</span>
               <ChevronDown className="w-3 h-3 text-zinc-500" />
             </button>
             <button
-              onClick={() => handleNavClick("high-stim")}
+              onClick={() => handleNavClick("green-apple")}
               className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
             >
-              <span>Flavours</span>
-              <ChevronDown className="w-3 h-3 text-zinc-500" />
+              <span>Green Apple</span>
             </button>
             <button
-              onClick={() => handleNavClick("pump")}
-              className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
+              onClick={() => handleNavClick("orange")}
+              className="hover:text-[#EA580C] transition-colors cursor-pointer flex items-center gap-0.5"
             >
-              <span>Goals</span>
-              <ChevronDown className="w-3 h-3 text-zinc-500" />
+              <span>Tangy Orange</span>
             </button>
             <button
               onClick={() => handleNavClick("combo")}
@@ -102,7 +100,7 @@ export function FuelHeader() {
             </a>
           </nav>
 
-          {/* Right: Search, WhatsApp, Theme Switcher, Login & Cart */}
+          {/* Right: Search, WhatsApp, Theme Switcher & Cart */}
           <div className="flex items-center gap-2.5 sm:gap-4">
             {/* Search Toggle / Input */}
             <div className="relative">
@@ -114,7 +112,7 @@ export function FuelHeader() {
                     autoFocus
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search flavours..."
+                    placeholder="Green Apple, Orange..."
                     className="w-28 sm:w-44 bg-transparent border-none text-xs outline-none pl-2 pr-1"
                   />
                   <button
@@ -141,7 +139,7 @@ export function FuelHeader() {
             {/* WhatsApp Link */}
             <a
               href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                "🛒 *ORDER INQUIRY - S.K NUTRITION*\n📍 *Ravi Nagar, Mughalsarai*\n━━━━━━━━━━━━━━━━━━━━━\nHello S.K Nutrition! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,299 with All India Express Delivery & Fast WhatsApp QR Deal).\n\nPlease share available flavours & your UPI QR code!"
+                "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,299 — Available in Green Apple & Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -196,9 +194,9 @@ export function FuelHeader() {
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <div>
                 <span className="text-lg font-black italic tracking-tighter uppercase text-white">
-                  S.K <span className="text-[#A3E635]">NUTRITION</span>
+                  PEAK<span className="text-[#A3E635]">VITALS</span>
                 </span>
-                <p className="text-[10px] text-zinc-400">Peakvitals Pre-Workout Official Store</p>
+                <p className="text-[10px] text-zinc-400">Official Pre-Workout Brand Store</p>
               </div>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -221,33 +219,23 @@ export function FuelHeader() {
               </button>
               <button
                 onClick={() => {
-                  handleNavClick("high-stim");
+                  handleNavClick("green-apple");
                   setIsMobileMenuOpen(false);
                 }}
                 className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
               >
-                <span>Green Apple / Blue Razz</span>
-                <span className="text-zinc-500 text-xs">High Stim</span>
+                <span>Green Apple Flavour</span>
+                <span className="text-zinc-500 text-xs">Flagship</span>
               </button>
               <button
                 onClick={() => {
-                  handleNavClick("pump");
+                  handleNavClick("orange");
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
+                className="w-full text-left py-2 hover:text-[#EA580C] flex justify-between"
               >
-                <span>Watermelon Punch</span>
-                <span className="text-zinc-500 text-xs">Muscle Pump</span>
-              </button>
-              <button
-                onClick={() => {
-                  handleNavClick("endurance");
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
-              >
-                <span>Tangy Orange</span>
-                <span className="text-zinc-500 text-xs">Beta Alanine</span>
+                <span>Tangy Orange Flavour</span>
+                <span className="text-zinc-500 text-xs">Citrus Rush</span>
               </button>
               <button
                 onClick={() => {
@@ -268,7 +256,7 @@ export function FuelHeader() {
                   }}
                   className="w-full text-left py-2 text-white hover:text-[#A3E635]"
                 >
-                  🚚 Track My Order (SK-ID)
+                  🚚 Track My Order (PV-ID)
                 </button>
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=Ravi+Nagar+Mughalsarai+Chandauli+232101"
@@ -277,7 +265,7 @@ export function FuelHeader() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block py-2 text-white hover:text-[#A3E635]"
                 >
-                  📍 Store: Ravi Nagar, Mughalsarai (Map)
+                  📍 Dispatch Hub: Ravi Nagar, Mughalsarai (Map)
                 </a>
               </div>
               {/* Mobile Theme Switcher */}
@@ -305,7 +293,7 @@ export function FuelHeader() {
             <div className="pt-3 border-t border-zinc-800">
               <a
                 href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                  "🛒 *ORDER INQUIRY - S.K NUTRITION*\n📍 *Ravi Nagar, Mughalsarai*\n━━━━━━━━━━━━━━━━━━━━━\nHello S.K Nutrition! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,299 with All India Express Delivery & Fast WhatsApp QR Deal).\n\nPlease share available flavours & your UPI QR code!"
+                  "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,299 — Green Apple / Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

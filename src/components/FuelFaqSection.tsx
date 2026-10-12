@@ -12,7 +12,11 @@ export function FuelFaqSection() {
   const faqs = [
     {
       q: "Are Peakvitals Pre-Workout supplements 100% genuine?",
-      a: "Yes, 100%. S.K Nutrition is an authorised direct partner of Peakvitals Nutrition. Every tub features an official batch hologram, scratch-verification QR code, and FSSAI certification.",
+      a: "Yes, 100%. You are ordering directly from the official Peakvitals Nutrition brand store. Every tub features an official batch hologram, scratch-verification QR code, and FSSAI certification.",
+    },
+    {
+      q: "Which flavours are currently available?",
+      a: "Peakvitals Pre-Workout is currently available in two bestselling flavours: Crisp Green Apple and Tangy Orange, as well as our Value Twin Pack (Green Apple + Tangy Orange + Free Shaker) and Triple Power Stack.",
     },
     {
       q: "Do you deliver all across India? How long does delivery take?",
@@ -24,15 +28,11 @@ export function FuelFaqSection() {
     },
     {
       q: "How does ordering and payment work?",
-      a: "All orders are handled directly through WhatsApp (9118732066). Once you choose your supplements and provide your delivery details, our team shares our official UPI QR code or confirms the best deal with you directly before immediate dispatch.",
+      a: "All orders are handled directly through our Official WhatsApp Desk (9118732066). Once you choose your flavour (Green Apple or Tangy Orange) and provide your delivery details, our team shares our official UPI QR code and dispatches your order immediately.",
     },
     {
       q: "How should I take Peakvitals for maximum results?",
       a: "Mix 1 rounded scoop (approx. 7g) with 200-250ml of chilled water 20-30 minutes before your workout. For beginners, start with half a scoop to assess caffeine tolerance.",
-    },
-    {
-      q: "Can I visit your physical store in Ravi Nagar Mughalsarai?",
-      a: "Absolutely! Walk into our retail outlet at Ravi Nagar, Mughalsarai (near Railway Colony, Chandauli District). Inspect holograms in person and take your favourite pre-workout flavour home on the spot.",
     },
   ];
 

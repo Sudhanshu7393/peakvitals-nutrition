@@ -12,7 +12,7 @@ export function FuelCategoryCards() {
 
   const cards = [
     {
-      id: "high-stim",
+      id: "green-apple",
       search: "green apple",
       title: "GREEN APPLE",
       desc: "Original. High Stim. Focus.",
@@ -20,36 +20,28 @@ export function FuelCategoryCards() {
       tag: "FLAGSHIP",
     },
     {
-      id: "high-stim",
-      search: "blue raspberry",
-      title: "BLUE RAZZ",
-      desc: "Electric Energy. Zero Crash.",
-      img: "/images/peakvitals_trans/blue_raspberry.png",
-      tag: "POPULAR",
-    },
-    {
-      id: "pump",
-      search: "watermelon",
-      title: "WATERMELON",
-      desc: "Skin-Tearing Pump. Nitric Oxide.",
-      img: "/images/peakvitals_trans/watermelon.png",
-      tag: "MAX PUMP",
-    },
-    {
-      id: "endurance",
+      id: "orange",
       search: "orange",
       title: "TANGY ORANGE",
-      desc: "Endurance. 2g Beta-Alanine.",
+      desc: "Citrus Rush. 2g Beta-Alanine.",
       img: "/images/peakvitals_trans/tangy_orange.png",
-      tag: "STAMINA",
+      tag: "BESTSELLER",
     },
     {
       id: "combo",
       search: "twin pack",
-      title: "BUNDLES & STACKS",
-      desc: "Twin Pack + Free Shaker Bottle.",
+      title: "TWIN PACK COMBO",
+      desc: "Green Apple + Orange + Shaker.",
       img: "/images/peakvitals_trans/twin_pack.png",
       tag: "SAVE 40%",
+    },
+    {
+      id: "combo",
+      search: "triple",
+      title: "TRIPLE POWER STACK",
+      desc: "3 Tubs (105 Servings) Pack.",
+      img: "/images/peakvitals_trans/triple_stack.png",
+      tag: "MAX VALUE",
     },
   ];
 
@@ -74,7 +66,7 @@ export function FuelCategoryCards() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
           {cards.map((c, i) => (
             <div
               key={i}

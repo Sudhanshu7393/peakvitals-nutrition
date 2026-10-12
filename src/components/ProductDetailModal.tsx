@@ -56,9 +56,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
 
   const whatsAppDirectUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
     `🛒 *DIRECT ORDER - ${SITE_CONFIG.name}*\n` +
-    `📍 *Ravi Nagar, Mughalsarai (Authorised Peakvitals Partner)*\n` +
+    `📍 *Official Peakvitals Brand Store*\n` +
     `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-    `Hello S.K Nutrition! 👋\n\n` +
+    `Hello Peakvitals Team! 👋\n\n` +
     `I want to order this product:\n` +
     `🔥 *Item:* ${product.name}\n` +
     `🍃 *Flavour:* ${selectedFlavor}\n` +
@@ -108,7 +108,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                   100% Lab-Tested &amp; Authentic
                 </h4>
                 <p className="text-[11px] text-gray-600 mt-0.5">
-                  Direct factory supply by {SITE_CONFIG.name} at Ravi Nagar Mughalsarai. Includes batch verification code.
+                  Direct factory supply by {SITE_CONFIG.name}. Includes batch verification code.
                 </p>
                 <p className="text-[10px] text-emerald-700 font-mono mt-1 font-bold">
                   Sample Batch: {product.batchNumberSample}

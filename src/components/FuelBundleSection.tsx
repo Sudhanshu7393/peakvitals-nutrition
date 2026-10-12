@@ -12,7 +12,7 @@ export function FuelBundleSection() {
   const { theme } = useTheme();
 
   const handleOrderBundle = () => {
-    const twinPack = PEAKVITALS_PREWORKOUTS.find((p) => p.id === "peakvitals-twin-pack") || PEAKVITALS_PREWORKOUTS[4];
+    const twinPack = PEAKVITALS_PREWORKOUTS.find((p) => p.id === "peakvitals-twin-pack") || PEAKVITALS_PREWORKOUTS[2];
     const fullProd = peakvitalsToProduct(twinPack);
     addToCart(fullProd, twinPack.flavor, twinPack.weight, twinPack.numericPrice, 1);
   };
@@ -92,7 +92,7 @@ export function FuelBundleSection() {
                   theme === "dark" ? "text-zinc-400" : "text-zinc-600"
                 }`}
               >
-                Get 2x 250g Peakvitals Pre-Workout tubs (70 heavy workout servings) plus an authentic heavy-duty S.K Shaker bottle free!
+                Get 2x 250g Peakvitals Pre-Workout tubs (Green Apple + Tangy Orange, 70 heavy workout servings) plus an authentic heavy-duty Peakvitals Shaker bottle free!
               </p>
             </div>
 
@@ -137,11 +137,11 @@ export function FuelBundleSection() {
               </li>
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-[#A3E635] shrink-0 stroke-[3]" />
-                <span>Free Pro S.K Gym Shaker</span>
+                <span>Free Pro Peakvitals Gym Shaker</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-[#A3E635] shrink-0 stroke-[3]" />
-                <span>Green Apple + Blue Razz</span>
+                <span>Green Apple + Tangy Orange</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-[#A3E635] shrink-0 stroke-[3]" />

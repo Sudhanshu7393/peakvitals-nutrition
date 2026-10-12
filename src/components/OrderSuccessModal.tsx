@@ -18,9 +18,9 @@ export const OrderSuccessModal: React.FC = () => {
 
   const whatsAppConfirmUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
     `📦 *ORDER TRACKING & DISPATCH CONFIRMATION*\n` +
-    `📍 *${SITE_CONFIG.name} - Ravi Nagar, Mughalsarai*\n` +
+    `📍 *${SITE_CONFIG.name} - Official Brand Store*\n` +
     `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-    `Hello S.K Nutrition! 👋\n\n` +
+    `Hello Peakvitals Team! 👋\n\n` +
     `I just placed an order on your website:\n` +
     `🆔 *Order ID:* #${activeOrder.orderId}\n` +
     `👤 *Name:* ${activeOrder.customerName}\n` +
@@ -46,7 +46,7 @@ export const OrderSuccessModal: React.FC = () => {
             Thank You, {activeOrder.customerName}!
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Your Peakvitals Pre-Workout order has been received at our Ravi Nagar Mughalsarai store.
+            Your Peakvitals Pre-Workout order has been received at our Official Dispatch Desk.
           </p>
         </div>
 

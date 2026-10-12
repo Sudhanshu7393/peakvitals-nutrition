@@ -1,9 +1,9 @@
 export const SITE_CONFIG = {
-  name: "S.K NUTRITION",
-  shortName: "SK Nutrition",
+  name: "PEAKVITALS NUTRITION",
+  shortName: "Peakvitals",
   featuredBrand: "Peakvitals Nutrition",
-  tagline: "Authentic Sports Nutrition & Bodybuilding Supplements",
-  subTagline: "Authorised Distributor of Peakvitals Nutrition & Premium Supplement Brands",
+  tagline: "Be The Boss of Your Workout — Official Peakvitals Brand Store",
+  subTagline: "Official Direct-to-Athlete Store • High-Stim Pre-Workout",
   
   // Contact & Location Details
   address: "Ravi Nagar, Mughalsarai, Chandauli, Uttar Pradesh - 232101",
@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
   // Real Phone & WhatsApp details provided by store owner
   phone: "+91 91187 32066",
   whatsappNumber: "919118732066", 
-  email: "contact@sknutrition.in",
+  email: "contact@peakvitals.in",
   
   hours: "Mon - Sun: 9:00 AM - 10:00 PM",
   freeDeliveryThreshold: 999,
