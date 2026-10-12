@@ -126,7 +126,7 @@ export function FuelHeader() {
             {/* WhatsApp Link */}
             <a
               href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,299 — Available in Green Apple & Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
+                "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,999 — Available in Green Apple & Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -179,7 +179,7 @@ export function FuelHeader() {
                 className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
               >
                 <span>All Pre-Workouts</span>
-                <span className="text-[#A3E635] text-xs">₹1,299</span>
+                <span className="text-[#A3E635] text-xs">₹1,999</span>
               </button>
               <button
                 onClick={() => {
@@ -225,7 +225,7 @@ export function FuelHeader() {
             <div className="pt-3 border-t border-zinc-800">
               <a
                 href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                  "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,299 — Green Apple / Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
+                  "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,999 — Green Apple / Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

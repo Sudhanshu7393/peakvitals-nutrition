@@ -53,7 +53,7 @@ export default function HomePage() {
       el.scrollIntoView({ behavior: "smooth" });
     } else {
       const defaultProd = peakvitalsToProduct(PEAKVITALS_PREWORKOUTS[0]);
-      addToCart(defaultProd, "Green Apple Flavour", "250g", 1299, 1);
+      addToCart(defaultProd, "Green Apple Flavour", "250g", 1999, 1);
       setIsCartOpen(true);
     }
   };
