@@ -98,10 +98,10 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
           {/* 4 Micro Trust Badges */}
           <div className="grid grid-cols-2 gap-1.5 w-full max-w-sm pt-0.5">
             {[
-              { icon: Leaf, label: "Clean Ingredients" },
-              { icon: FlaskConical, label: "Lab Tested" },
-              { icon: ShieldAlert, label: "Banned Substance Free" },
-              { icon: Award, label: "100% Genuine Direct" },
+              { icon: Leaf, label: "USA Imported Ingredients" },
+              { icon: FlaskConical, label: "Lab Tested • 13 Actives" },
+              { icon: ShieldAlert, label: "ISO 9001 & GMP Certified" },
+              { icon: Award, label: "FSSAI: 12723999000427" },
             ].map((b, idx) => {
               const Icon = b.icon;
               return (
@@ -142,17 +142,17 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
                 PEAKVITALS OFFICIAL BRAND STORE • GREEN APPLE &amp; TANGY ORANGE
               </p>
               <p className="text-sm font-medium max-w-lg leading-relaxed text-zinc-300">
-                Clinically dosed Peakvitals Nutrition Pre-Workout. Formulated for aggressive focus, explosive nitric oxide muscle pumps, and zero post-workout crash.
+                Formulated with 13 clinical active ingredients per 7g scoop — 1.5g L-Citrulline Malate, 2g Arginine AKG, 2g Beta-Alanine, 195mg Natural Caffeine &amp; 200mg Theanine for instant pump, explosive energy, and zero crash.
               </p>
             </div>
 
             {/* 4 Feature Badges */}
             <div className="grid grid-cols-4 gap-2 pt-0.5">
               {[
-                { icon: Leaf, label: "Clean Ingredients" },
-                { icon: FlaskConical, label: "Lab Tested" },
-                { icon: ShieldAlert, label: "Banned Substance Free" },
-                { icon: Award, label: "100% Genuine Direct" },
+                { icon: Leaf, label: "USA Imported Actives" },
+                { icon: FlaskConical, label: "Lab Tested • 13 Actives" },
+                { icon: ShieldAlert, label: "ISO 9001 & GMP" },
+                { icon: Award, label: "FSSAI Certified" },
               ].map((badge, idx) => {
                 const Icon = badge.icon;
                 return (

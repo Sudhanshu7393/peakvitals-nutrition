@@ -5,6 +5,7 @@ import { FuelHeader } from "@/components/FuelHeader";
 import { FuelHero } from "@/components/FuelHero";
 import { IndianPincodeChecker } from "@/components/IndianPincodeChecker";
 import { FuelProductGrid } from "@/components/FuelProductGrid";
+import { FuelNutritionSection } from "@/components/FuelNutritionSection";
 import { FuelWhySection } from "@/components/FuelWhySection";
 import { FuelFaqSection } from "@/components/FuelFaqSection";
 import { FuelFooter } from "@/components/FuelFooter";
@@ -75,13 +76,16 @@ export default function HomePage() {
         onAddToCart={handleAddToCart}
       />
 
-      {/* 5. Why Peakvitals Athletic Value Pillars */}
+      {/* 5. Official Box Label: 13-Ingredient Nutrition Facts, Suggested Use & 5-Side Photo Verification */}
+      <FuelNutritionSection />
+
+      {/* 6. Why Peakvitals Athletic Value Pillars */}
       <FuelWhySection />
 
-      {/* 6. Frequently Asked Questions */}
+      {/* 7. Frequently Asked Questions */}
       <FuelFaqSection />
 
-      {/* 7. Clean Dark Footer */}
+      {/* 8. Clean Dark Footer */}
       <FuelFooter />
 
       {/* Interactive Modals */}

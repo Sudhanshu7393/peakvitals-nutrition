@@ -11,23 +11,23 @@ export function FuelWhySection() {
   const pillars = [
     {
       icon: Zap,
-      title: "MAX PERFORMANCE",
-      desc: "High-stim clinically dosed active grams that power your heaviest sets and mental focus.",
+      title: "EXPLOSIVE ENERGY & FOCUS",
+      desc: "195mg Natural Caffeine + 200mg Theanine + 150mg N-Acetyl L-Tyrosine + 100mg Choline for laser focus & zero crash.",
     },
     {
       icon: Dumbbell,
-      title: "VASCULAR MUSCLE PUMP",
-      desc: "1.5g L-Citrulline Malate + 2g Arginine AAKG for skin-splitting roadmap vascularity.",
+      title: "UNREAL MUSCLE PUMP",
+      desc: "1.5g L-Citrulline Malate + 2g Arginine AKG + 110mg Betaine Anhydrous for maximum blood flow, strength & vascularity.",
     },
     {
       icon: Clock,
-      title: "ZERO CRASH ENERGY",
-      desc: "195mg smooth natural caffeine delivers sustained adrenaline without jitters or post-gym crash.",
+      title: "PEAK ENDURANCE (TTE)",
+      desc: "2g Beta-Alanine + 140mg Taurine + Vitamins B1 & B6 to increase Time To Exhaustion (TTE) and athletic output.",
     },
     {
       icon: ShieldCheck,
-      title: "100% GENUINE & FSSAI",
-      desc: "Direct factory partnership from Peakvitals Nutrition with batch certificate holograms.",
+      title: "USA IMPORTED & CERTIFIED",
+      desc: "Marketed by Peakvitals Pvt. Ltd. • FSSAI Lic. No. 12723999000427 • ISO 9001, GMP & FDA Registered facility.",
     },
   ];
 

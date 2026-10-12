@@ -233,7 +233,7 @@ export function FuelProductGrid({
                           theme === "dark" ? "text-zinc-400" : "text-zinc-600"
                         }`}
                       >
-                        {prod.flavor} • {prod.servings} ({prod.weight})
+                        {prod.flavor} • {prod.servings} ({prod.weight} / 7g Scoop)
                       </p>
 
                       {/* Real Active Ingredients Summary */}
@@ -242,24 +242,29 @@ export function FuelProductGrid({
                           theme === "dark" ? "text-zinc-500" : "text-zinc-500"
                         }`}
                       >
-                        1.5g Citrulline • 2g Arginine • 195mg Caffeine • 2g Beta-Alanine
+                        1.5g Citrulline • 2g Arginine AKG • 195mg Caffeine • 2g Beta-Alanine + 9 Actives
                       </p>
 
                       {/* Clean Official Price (No Fake Strike-through or Fake % Off) */}
-                      <div className="mt-2 sm:mt-3 flex items-baseline gap-2">
-                        <span
-                          className={`text-base sm:text-xl font-black ${
-                            theme === "dark" ? "text-[#A3E635]" : "text-emerald-600"
-                          }`}
-                        >
-                          {prod.price}
-                        </span>
-                        <span
-                          className={`text-[10px] sm:text-xs font-bold ${
-                            theme === "dark" ? "text-zinc-400" : "text-zinc-500"
-                          }`}
-                        >
-                          • {prod.weight} Tub
+                      <div className="mt-2 sm:mt-3 flex items-baseline justify-between gap-2">
+                        <div className="flex items-baseline gap-1.5">
+                          <span
+                            className={`text-base sm:text-xl font-black ${
+                              theme === "dark" ? "text-[#A3E635]" : "text-emerald-600"
+                            }`}
+                          >
+                            {prod.price}
+                          </span>
+                          <span
+                            className={`text-[10px] sm:text-xs font-bold ${
+                              theme === "dark" ? "text-zinc-400" : "text-zinc-500"
+                            }`}
+                          >
+                            • {prod.weight} Tub
+                          </span>
+                        </div>
+                        <span className="hidden sm:inline-block text-[10px] font-bold text-[#EA580C]">
+                          Click to View 5 Box Sides →
                         </span>
                       </div>
                     </div>

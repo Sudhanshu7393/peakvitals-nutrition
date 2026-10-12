@@ -111,20 +111,20 @@ export function FuelFooter() {
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavClick("all")}
+                <a
+                  href="#nutrition-facts"
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  2g Arginine AAKG
-                </button>
+                  2g Arginine AKG + 110mg Betaine
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavClick("all")}
+                <a
+                  href="#nutrition-facts"
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  2g Beta-Alanine
-                </button>
+                  2g Beta-Alanine + 200mg Theanine
+                </a>
               </li>
             </ul>
           </div>
@@ -132,7 +132,7 @@ export function FuelFooter() {
           {/* Col 4: Support & Delivery */}
           <div className="space-y-3">
             <h4 className="font-black uppercase tracking-wider text-white text-[11px]">
-              Customer Care
+              Customer Care &amp; Licensing
             </h4>
             <ul className="space-y-2 text-zinc-400">
               <li>
@@ -166,11 +166,11 @@ export function FuelFooter() {
                   <span>{SITE_CONFIG.email}</span>
                 </a>
               </li>
-              <li>
-                <span className="text-zinc-500">All India Express Dispatch</span>
+              <li className="pt-1 text-[11px] font-bold text-zinc-300">
+                Marketed By: Peakvitals Pvt. Ltd.
               </li>
-              <li>
-                <span className="text-zinc-500">Direct WhatsApp Order &amp; QR Deal</span>
+              <li className="text-[11px] font-mono font-bold text-[#A3E635]">
+                FSSAI Lic. No.: 12723999000427
               </li>
             </ul>
           </div>
@@ -178,22 +178,25 @@ export function FuelFooter() {
 
         {/* Payment Badges & Bottom Strip */}
         <div className="pt-6 sm:pt-10 mt-6 sm:mt-10 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-zinc-500 text-[11px] text-center sm:text-left">
-          <p>© {new Date().getFullYear()} PEAKVITALS NUTRITION. All Rights Reserved. Official Brand Store.</p>
+          <p>© {new Date().getFullYear()} PEAKVITALS PVT. LTD. All Rights Reserved. Official Brand Store.</p>
 
           <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-zinc-400 font-bold">
-            <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-emerald-400">
-              💬 Direct WhatsApp Order
+            <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-[#A3E635]">
+              🛡️ FSSAI: 12723999000427
             </span>
-            <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px]">
-              📱 UPI QR on WhatsApp
+            <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-300">
+              🇺🇸 USA Imported Actives
+            </span>
+            <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-300">
+              ✅ ISO 9001 &amp; GMP
             </span>
             <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-emerald-400">
-              [🟢] 100% Vegetarian
+              🟢 100% Vegetarian
             </span>
           </div>
 
           <p className="text-[10px] text-zinc-400">
-            Made for the Driven. Built for Results.
+            Be The Boss Of Your Workout.
           </p>
         </div>
       </div>

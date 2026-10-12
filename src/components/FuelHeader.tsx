@@ -73,18 +73,18 @@ export function FuelHeader() {
             >
               <span>Tangy Orange</span>
             </button>
+            <a
+              href="#nutrition-facts"
+              className="hover:text-[#A3E635] transition-colors"
+            >
+              Nutrition Facts
+            </a>
             <button
               onClick={() => setIsTrackOrderModalOpen(true)}
               className="hover:text-[#A3E635] transition-colors cursor-pointer"
             >
               Track Order
             </button>
-            <a
-              href="#featured-products"
-              className="hover:text-[#A3E635] transition-colors"
-            >
-              Products
-            </a>
           </nav>
 
           {/* Right: Search, WhatsApp & Cart */}

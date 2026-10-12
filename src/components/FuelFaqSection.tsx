@@ -11,28 +11,28 @@ export function FuelFaqSection() {
 
   const faqs = [
     {
-      q: "Are Peakvitals Pre-Workout supplements 100% genuine?",
-      a: "Yes, 100%. You are ordering directly from the official Peakvitals Nutrition brand store. Every tub features an official batch hologram, scratch-verification QR code, and FSSAI certification.",
+      q: "Are Peakvitals Pre-Workout supplements 100% genuine & certified?",
+      a: "Yes, 100%. Peakvitals Pre-Workout is marketed by Peakvitals Pvt. Ltd. (FSSAI Lic. No.: 12723999000427) and manufactured in an ISO 9001, GMP Certified & FDA Registered facility using Lab-Tested Ingredients Imported from the USA (Current Batch: PVPW/02/26).",
     },
     {
-      q: "Which flavours are currently available?",
-      a: "Peakvitals Pre-Workout (250g / 35 Servings) is currently available in two flavours: Green Apple Flavour and Tangy Orange Flavour.",
+      q: "What are the complete 13 active ingredients per 7g serving?",
+      a: "Each 7g scoop (8 Kcal) delivers 13 active ingredients: Beta-Alanine (2g), Arginine AKG (2g), L-Citrulline Malate (1.5g), Tryptophan (200mg), Theanine (200mg), Natural Caffeine (195mg), N-Acetyl L-Tyrosine (150mg), Taurine (140mg), Betaine Anhydrous (110mg), Choline Bitartrate (100mg), Piperine (5mg), Vitamin B6 (1500 mcg - 75% RDA), and Vitamin B1 (1050 mcg - 61.76% RDA).",
+    },
+    {
+      q: "How should I take Peakvitals Pre-Workout for maximum results?",
+      a: "As printed on the box under Suggested Use: Take 1 scoop (7g approx) of Peakvitals Pre-Workout with 400ml of cold water, shake or blend until completely mixed, and drink 15–30 minutes before your workout.",
+    },
+    {
+      q: "Which flavours are available and what is the official box MRP?",
+      a: "Peakvitals Pre-Workout (Net Weight: 250g / 35 Servings) is available in two refreshing 100% Vegetarian flavours: Green Apple Flavour and Tangy Orange Flavour. The official box MRP is ₹1,999/- (Incl. of all taxes, U.S.P. ₹7.99/gram) with an 18-month shelf life from manufacture.",
     },
     {
       q: "Do you deliver all across India? How long does delivery take?",
       a: "Yes! We deliver Peakvitals Pre-Workout across all 28,000+ PIN codes in India. All orders are dispatched via Express Air Courier with live tracking updates and arrive within 2 to 4 business days.",
     },
     {
-      q: "What key ingredients are in Peakvitals Pre-Workout?",
-      a: "Each 250g tub provides 35 clinical servings: 1.5g L-Citrulline Malate, 2.0g Arginine AAKG (for nitric oxide vascular pump), 195mg Natural Caffeine (for extreme mental focus), and 2.0g Beta-Alanine (for endurance).",
-    },
-    {
       q: "How does ordering and payment work?",
       a: "All orders are handled directly through our Official WhatsApp Desk (7651918284) or via email at Peakvitalsnutrition@gmail.com. Once you choose your flavour (Green Apple or Tangy Orange) and provide your delivery details, our team shares our official UPI QR code and dispatches your order immediately.",
-    },
-    {
-      q: "How should I take Peakvitals for maximum results?",
-      a: "Mix 1 rounded scoop (approx. 7g) with 200-250ml of chilled water 20-30 minutes before your workout. For beginners, start with half a scoop to assess caffeine tolerance.",
     },
   ];
 
