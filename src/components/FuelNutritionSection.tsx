@@ -332,12 +332,13 @@ export function FuelNutritionSection() {
                     {currentPhoto.caption}
                   </h4>
                   <p className="text-xs text-zinc-400 leading-relaxed">
-                    100% real unedited photo of the physical{" "}
+                    Official 360° studio 3D view of all 5 sides of the{" "}
                     <strong className="text-white">
                       Peakvitals Nutrition Pre-Workout (250g)
                     </strong>{" "}
-                    jar so you can verify every single ingredient, FSSAI license
-                    number, and batch detail before ordering.
+                    jar — verify every active ingredient, FSSAI license number (
+                    <span className="text-[#A3E635] font-mono">12723999000427</span>
+                    ), and batch detail before ordering.
                   </p>
                   <div className="pt-1 flex items-center gap-2 text-[11px] font-bold text-emerald-400">
                     <ShieldCheck className="w-4 h-4 shrink-0" />
