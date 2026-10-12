@@ -35,7 +35,7 @@ export const PEAKVITALS_PREWORKOUTS: PeakvitalsProduct[] = [
     originalPrice: "₹1,999",
     numericOriginalPrice: 1999,
     inStock: true,
-    image: "/images/peakvitals_trans/green_apple.png",
+    image: "/images/peakvitals_trans/green_apple_v2.png",
     tagline: "Be The Boss of Your Workout - Crisp Green Apple Flavour",
     highlights: {
       caffeine: "195mg Natural Caffeine",
@@ -55,7 +55,7 @@ export const PEAKVITALS_PREWORKOUTS: PeakvitalsProduct[] = [
     originalPrice: "₹1,999",
     numericOriginalPrice: 1999,
     inStock: true,
-    image: "/images/peakvitals_trans/tangy_orange.png",
+    image: "/images/peakvitals_trans/tangy_orange_v2.png",
     tagline: "Be The Boss of Your Workout - Tangy Orange Flavour",
     highlights: {
       caffeine: "195mg Natural Caffeine",

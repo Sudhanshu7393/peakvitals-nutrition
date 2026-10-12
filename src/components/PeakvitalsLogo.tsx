@@ -17,12 +17,8 @@ interface PeakvitalsLogoProps {
  * - Right: "PE" + Geometric Triangle "A" + "KVITALS" + "NUTRITION"
  */
 export function PeakvitalsLogo({
-  forceDark = false,
   size = "md",
-  theme = "light",
 }: PeakvitalsLogoProps) {
-  const isDarkBg = forceDark || theme === "dark";
-
   const heightClasses =
     size === "sm"
       ? "h-8 sm:h-9"
@@ -33,7 +29,7 @@ export function PeakvitalsLogo({
   return (
     <div className="inline-flex items-center select-none group">
       <img
-        src={isDarkBg ? "/images/peakvitals-logo-dark.png" : "/images/peakvitals-logo.png"}
+        src="/images/peakvitals-logo-green-v3.png"
         alt="PEAKVITALS NUTRITION Official Logo"
         className={`${heightClasses} w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]`}
       />

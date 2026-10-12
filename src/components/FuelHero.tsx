@@ -51,7 +51,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
 
             {/* Packshot Image */}
             <Image
-              src="/images/peakvitals_trans/green_apple.png"
+              src="/images/peakvitals_trans/green_apple_v2.png"
               alt="Peakvitals Pre-Workout"
               fill
               priority
@@ -202,7 +202,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
               <div className="absolute bottom-12 w-56 h-3 rounded-full blur-xs pointer-events-none bg-black/90" />
 
               <Image
-                src="/images/peakvitals_trans/green_apple.png"
+                src="/images/peakvitals_trans/green_apple_v2.png"
                 alt="Peakvitals Pre-Workout"
                 fill
                 priority
