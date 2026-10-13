@@ -6,7 +6,6 @@ import { FuelHero } from "@/components/FuelHero";
 import { IndianPincodeChecker } from "@/components/IndianPincodeChecker";
 import { FuelProductGrid } from "@/components/FuelProductGrid";
 import { FuelNutritionSection } from "@/components/FuelNutritionSection";
-import { FuelWhySection } from "@/components/FuelWhySection";
 import { FuelFaqSection } from "@/components/FuelFaqSection";
 import { FuelFooter } from "@/components/FuelFooter";
 
@@ -76,16 +75,13 @@ export default function HomePage() {
         onAddToCart={handleAddToCart}
       />
 
-      {/* 5. Official Box Label: 13-Ingredient Nutrition Facts, Suggested Use & 5-Side Photo Verification */}
+      {/* 5. Clean Tabbed Formula & 360° Box Section */}
       <FuelNutritionSection />
 
-      {/* 6. Why Peakvitals Athletic Value Pillars */}
-      <FuelWhySection />
-
-      {/* 7. Frequently Asked Questions */}
+      {/* 6. Frequently Asked Questions */}
       <FuelFaqSection />
 
-      {/* 8. Clean Dark Footer */}
+      {/* 7. Clean Dark Footer */}
       <FuelFooter />
 
       {/* Interactive Modals */}

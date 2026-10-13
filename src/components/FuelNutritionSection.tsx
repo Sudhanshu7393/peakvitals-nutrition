@@ -12,75 +12,107 @@ import {
   Timer,
   CheckCircle2,
   Eye,
-  Award,
   Sparkles,
-  AlertTriangle,
+  FileText,
+  Layers,
 } from "lucide-react";
 
+type ActiveTab = "nutrition" | "box360" | "benefits";
+
 export function FuelNutritionSection() {
+  const [activeTab, setActiveTab] = useState<ActiveTab>("nutrition");
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const currentPhoto = PEAKVITALS_BOX_INFO.boxSidePhotos[activePhotoIdx];
 
   return (
     <section
       id="nutrition-facts"
-      className="py-12 sm:py-20 bg-[#0A0B0E] text-white border-b border-zinc-800/80 font-sans relative overflow-hidden"
+      className="py-12 sm:py-16 bg-[#0A0B0E] text-white border-b border-zinc-800/80 font-sans relative overflow-hidden"
     >
-      {/* Subtle Ambient Lime & Orange Glow */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#A3E635]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#EA580C]/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle Ambient Glow */}
+      <div className="absolute top-0 left-1/3 w-[420px] h-[420px] bg-[#A3E635]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 sm:space-y-14">
-        {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[#A3E635] text-[10px] sm:text-xs font-black uppercase tracking-widest">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">
+        {/* Clean Minimal Heading + 3 Sleek Tabs */}
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[#A3E635] text-[10px] sm:text-xs font-black uppercase tracking-widest">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>100% Transparent Label • Zero Proprietary Blends</span>
+            <span>100% Transparent Formula • FSSAI: 12723999000427</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black italic uppercase tracking-tight leading-none">
-            INSIDE EVERY <span className="text-[#A3E635]">7G SCOOP</span>{" "}
-            <span className="text-[#EA580C]">FORMULA</span>
+
+          <h2 className="text-2xl sm:text-4xl font-black italic uppercase tracking-tight leading-none">
+            INSIDE EVERY <span className="text-[#A3E635]">7G SCOOP</span>
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-            {PEAKVITALS_BOX_INFO.boxDescription}
-          </p>
+
+          {/* Segmented Tab Switcher (Keeps the page super clean & uncluttered) */}
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+            <button
+              onClick={() => setActiveTab("nutrition")}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer ${
+                activeTab === "nutrition"
+                  ? "bg-[#A3E635] text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Nutrition Facts</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("box360")}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer ${
+                activeTab === "box360"
+                  ? "bg-[#A3E635] text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>360° Box Label (5 Sides)</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("benefits")}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer ${
+                activeTab === "benefits"
+                  ? "bg-[#A3E635] text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>How To Use & Benefits</span>
+            </button>
+          </div>
         </div>
 
-        {/* Main 2-Column Layout: Left = Exact Nutrition Facts Table, Right = Benefits + Suggested Use + Box Inspector */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          {/* LEFT COLUMN (5 Cols): Official Box Nutrition Facts Panel */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="bg-white text-zinc-950 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl border-4 border-zinc-200">
-              {/* Nutrition Facts Header */}
-              <div className="border-b-4 border-zinc-950 pb-2">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-950 leading-none">
+        {/* TAB 1: CLEAN NUTRITION FACTS + QUICK HIGHLIGHTS */}
+        {activeTab === "nutrition" && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            {/* Left (6 Cols): Crisp Nutrition Facts Card */}
+            <div className="lg:col-span-6 bg-white text-zinc-950 rounded-2xl p-5 shadow-xl border-2 border-zinc-200">
+              <div className="flex items-center justify-between border-b-2 border-zinc-950 pb-2.5">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight leading-none">
                     NUTRITION FACTS
                   </h3>
-                  <span className="px-2 py-0.5 rounded bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider">
-                    100% Veg
-                  </span>
+                  <p className="text-xs font-bold text-zinc-700 mt-1">
+                    Serving Size: <strong className="text-black">7g</strong> •{" "}
+                    Servings: <strong className="text-black">35 (250g)</strong>
+                  </p>
                 </div>
-                <p className="text-xs sm:text-sm font-bold text-zinc-800 mt-1.5">
-                  Serving Size: <span className="font-black">7g</span>
-                </p>
-                <p className="text-xs sm:text-sm font-bold text-zinc-800">
-                  Servings Per Container:{" "}
-                  <span className="font-black">35 (Approx)</span>
-                </p>
+                <span className="px-2.5 py-1 rounded-md bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider">
+                  100% Veg
+                </span>
               </div>
 
-              {/* Table Column Headers */}
-              <div className="grid grid-cols-12 py-1.5 border-b-2 border-zinc-950 text-[11px] sm:text-xs font-black uppercase tracking-wider text-zinc-900">
-                <div className="col-span-7">Nutrient / Active Ingredient</div>
-                <div className="col-span-3 text-right">Per Serving</div>
+              <div className="grid grid-cols-12 py-1.5 border-b border-zinc-900 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-zinc-700">
+                <div className="col-span-7">Active Ingredient</div>
+                <div className="col-span-3 text-right">Per 7g</div>
                 <div className="col-span-2 text-right">%RDA</div>
               </div>
 
-              {/* 14 Nutrition Fact Rows */}
-              <div className="divide-y divide-zinc-300 text-xs sm:text-[13px]">
+              <div className="divide-y divide-zinc-200 text-xs">
                 {PEAKVITALS_NUTRITION_FACTS.map((row, idx) => {
-                  const isHighlight =
+                  const isKey =
                     row.nutrient.includes("Beta-Alanine") ||
                     row.nutrient.includes("Citrulline") ||
                     row.nutrient.includes("Arginine") ||
@@ -90,278 +122,234 @@ export function FuelNutritionSection() {
                     <div
                       key={idx}
                       className={`grid grid-cols-12 py-1.5 items-center ${
-                        isHighlight
-                          ? "font-black text-zinc-950 bg-lime-50/70 -mx-2 px-2 rounded"
-                          : "font-bold text-zinc-800"
+                        isKey ? "font-black text-zinc-950" : "font-semibold text-zinc-700"
                       }`}
                     >
                       <div className="col-span-7 truncate">{row.nutrient}</div>
                       <div className="col-span-3 text-right font-black text-zinc-950">
                         {row.amount}
                       </div>
-                      <div className="col-span-2 text-right text-[11px] font-bold text-zinc-600">
+                      <div className="col-span-2 text-right text-[10px] text-zinc-500">
                         {row.rda}
                       </div>
                     </div>
                   );
                 })}
               </div>
-
-              {/* Footnotes */}
-              <div className="mt-3 pt-2.5 border-t-2 border-zinc-950 text-[10px] leading-snug font-semibold text-zinc-700 space-y-0.5">
-                <p>
-                  *% Recommended Dietary Allowance values are based on a 2,730
-                  calorie diet.
-                </p>
-                <p>**Recommended Dietary Allowance not established.</p>
-              </div>
             </div>
 
-            {/* Complete Ingredients Box */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-2">
-              <h4 className="text-xs font-black uppercase tracking-wider text-[#A3E635]">
-                INGREDIENTS (AS PRINTED ON BOX):
-              </h4>
-              <p className="text-[11px] sm:text-xs text-zinc-300 leading-relaxed font-medium">
-                {PEAKVITALS_BOX_INFO.ingredientsList}
-              </p>
-            </div>
-
-            {/* Official Licensing, Batch & MRP Card */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-3">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block">
-                    Marketed By
-                  </span>
-                  <span className="text-xs sm:text-sm font-black text-white">
-                    {PEAKVITALS_BOX_INFO.marketedBy}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block">
-                    FSSAI Lic. No.
-                  </span>
-                  <span className="text-xs sm:text-sm font-mono font-black text-[#A3E635]">
-                    {PEAKVITALS_BOX_INFO.fssaiLicNo}
-                  </span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 text-center bg-zinc-950 p-2.5 rounded-xl border border-zinc-800/80 text-[11px]">
-                <div>
-                  <span className="text-zinc-500 block text-[9px] uppercase font-bold">
-                    Batch No.
-                  </span>
-                  <span className="font-mono font-black text-white">
-                    {PEAKVITALS_BOX_INFO.batchNo}
-                  </span>
-                </div>
-                <div className="border-x border-zinc-800">
-                  <span className="text-zinc-500 block text-[9px] uppercase font-bold">
-                    MRP (Incl. Taxes)
-                  </span>
-                  <span className="font-black text-[#A3E635]">₹1,999/-</span>
-                </div>
-                <div>
-                  <span className="text-zinc-500 block text-[9px] uppercase font-bold">
-                    U.S.P. Rate
-                  </span>
-                  <span className="font-bold text-zinc-200">
-                    {PEAKVITALS_BOX_INFO.usp}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5 pt-1">
+            {/* Right (6 Cols): Clean 4-Card Dosage Summary + Official Box Verification Strip */}
+            <div className="lg:col-span-6 space-y-4">
+              <div className="grid grid-cols-2 gap-3">
                 {[
-                  "ISO 9001 & GMP Certified",
-                  "FDA Registered",
-                  "Ingredients Imported From USA",
-                  "Lab Tested",
-                  "Best Before 18 Months",
-                ].map((badge, i) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-[10px] font-bold text-zinc-300"
-                  >
-                    <CheckCircle2 className="w-3 h-3 text-[#A3E635] shrink-0" />
-                    {badge}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN (7 Cols): Key Benefits + 3-Step Suggested Use + 5-Side Real Box Gallery */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* 1. Key Benefits Panel from Box */}
-            <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-3">
-                <h3 className="text-lg sm:text-xl font-black italic uppercase tracking-tight text-white">
-                  KEY <span className="text-[#A3E635]">BENEFITS</span> ON THE
-                  BODY
-                </h3>
-                <div className="flex flex-wrap gap-1.5">
-                  <span className="px-2.5 py-1 rounded-full bg-[#A3E635]/15 border border-[#A3E635]/40 text-[#A3E635] text-[10px] font-black uppercase">
-                    ⚡ Explosive Energy
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-[#EA580C]/15 border border-[#EA580C]/40 text-[#EA580C] text-[10px] font-black uppercase">
-                    💪 Max Pump
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-[10px] font-black uppercase">
-                    🏋️ Increased Strength
-                  </span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {PEAKVITALS_BOX_INFO.keyBenefits.map((b, idx) => (
+                  {
+                    dose: "2.0g",
+                    name: "Beta-Alanine",
+                    sub: "Delays Muscle Fatigue",
+                    accent: "text-[#A3E635]",
+                  },
+                  {
+                    dose: "2.0g",
+                    name: "Arginine AKG",
+                    sub: "Nitric Oxide & Vascularity",
+                    accent: "text-white",
+                  },
+                  {
+                    dose: "1.5g",
+                    name: "L-Citrulline Malate",
+                    sub: "Intense Muscle Pumps",
+                    accent: "text-[#A3E635]",
+                  },
+                  {
+                    dose: "195mg",
+                    name: "Natural Caffeine",
+                    sub: "+ 200mg Theanine (Zero Crash)",
+                    accent: "text-[#EA580C]",
+                  },
+                ].map((item, i) => (
                   <div
-                    key={idx}
-                    className={`p-3.5 rounded-xl bg-zinc-950/90 border border-zinc-800/90 hover:border-[#A3E635]/60 transition space-y-1 ${
-                      idx === 4 ? "sm:col-span-2" : ""
-                    }`}
+                    key={i}
+                    className="p-4 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-1"
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs sm:text-sm font-black text-white">
-                        {b.ingredient}
-                      </span>
-                      <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-zinc-900 text-[#A3E635] border border-zinc-800 shrink-0">
-                        {b.badge}
-                      </span>
-                    </div>
-                    <p className="text-[11px] sm:text-xs text-zinc-400 leading-relaxed">
-                      {b.desc}
-                    </p>
+                    <span className={`text-2xl sm:text-3xl font-black block ${item.accent}`}>
+                      {item.dose}
+                    </span>
+                    <span className="text-xs sm:text-sm font-black uppercase text-white block">
+                      {item.name}
+                    </span>
+                    <span className="text-[11px] text-zinc-400 block">{item.sub}</span>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* 2. Suggested Use (3 Steps from Box: 1 Scoop 7g + 400ml Cold Water + 15-30m Pre) */}
-            <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-zinc-800 pb-3">
-                <h3 className="text-lg sm:text-xl font-black italic uppercase tracking-tight text-white">
-                  SUGGESTED <span className="text-[#EA580C]">USE</span>{" "}
-                  <span className="text-xs font-bold not-italic text-zinc-400">
-                    (15–30 Mins Before Workout)
-                  </span>
-                </h3>
-                <span className="text-[11px] font-bold text-[#A3E635]">
-                  1 Scoop (7g) + 400ml Cold Water
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {PEAKVITALS_BOX_INFO.suggestedUseSteps.map((st, i) => {
-                  const icons = [Flame, Droplets, Timer];
-                  const Icon = icons[i] || Flame;
-                  return (
-                    <div
-                      key={i}
-                      className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 flex flex-col justify-between space-y-2"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-[#EA580C]">
-                          {st.step}
-                        </span>
-                        <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-[#A3E635]">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="text-xs sm:text-sm font-black uppercase text-white">
-                          {st.title}
-                        </h4>
-                        <p className="text-[11px] text-zinc-400 mt-0.5 leading-snug">
-                          {st.desc}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* 3. Real Physical Box 360° Label Photos Verification Gallery */}
-            <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-zinc-900/90 border border-zinc-800 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <Eye className="w-4 h-4 text-[#A3E635]" />
-                  <h3 className="text-sm sm:text-base font-black uppercase tracking-wide text-white">
-                    INSPECT REAL BOX LABEL (ALL 5 SIDES)
-                  </h3>
-                </div>
-                <span className="text-[10px] font-bold text-zinc-400">
-                  Click any side to verify physical tub details
-                </span>
-              </div>
-
-              {/* Side Selector Pills */}
-              <div className="flex flex-wrap gap-1.5">
-                {PEAKVITALS_BOX_INFO.boxSidePhotos.map((photo, idx) => (
-                  <button
-                    key={photo.id}
-                    onClick={() => setActivePhotoIdx(idx)}
-                    className={`px-3 py-1.5 rounded-xl text-[11px] font-black uppercase tracking-wider transition cursor-pointer border ${
-                      activePhotoIdx === idx
-                        ? "bg-[#A3E635] text-black border-[#A3E635] shadow-sm"
-                        : "bg-zinc-950 text-zinc-300 border-zinc-800 hover:border-zinc-700"
-                    }`}
-                  >
-                    {idx + 1}. {photo.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Active Real Box Photo Display */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center bg-zinc-950 p-3.5 rounded-2xl border border-zinc-800">
-                <div className="sm:col-span-5 relative h-56 sm:h-60 rounded-xl overflow-hidden bg-black border border-zinc-800 flex items-center justify-center">
-                  <img
-                    src={currentPhoto.image}
-                    alt={currentPhoto.label}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="sm:col-span-7 space-y-2.5">
-                  <span className="inline-block px-2.5 py-0.5 rounded bg-[#EA580C]/20 border border-[#EA580C]/40 text-[#EA580C] text-[10px] font-black uppercase">
-                    Side {activePhotoIdx + 1} of 5 • {currentPhoto.label}
-                  </span>
-                  <h4 className="text-sm sm:text-base font-black text-white">
-                    {currentPhoto.caption}
-                  </h4>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
-                    Official 360° studio 3D view of all 5 sides of the{" "}
-                    <strong className="text-white">
-                      Peakvitals Nutrition Pre-Workout (250g)
-                    </strong>{" "}
-                    jar — verify every active ingredient, FSSAI license number (
-                    <span className="text-[#A3E635] font-mono">12723999000427</span>
-                    ), and batch detail before ordering.
-                  </p>
-                  <div className="pt-1 flex items-center gap-2 text-[11px] font-bold text-emerald-400">
-                    <ShieldCheck className="w-4 h-4 shrink-0" />
-                    <span>
-                      What you see on the label is 100% what gets delivered.
+              {/* Clean Compact Box Details Card */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-3">
+                <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase text-zinc-400 block">
+                      Marketed By
+                    </span>
+                    <span className="text-xs sm:text-sm font-black text-white">
+                      {PEAKVITALS_BOX_INFO.marketedBy}
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] font-bold uppercase text-zinc-400 block">
+                      FSSAI Lic. No.
+                    </span>
+                    <span className="text-xs sm:text-sm font-mono font-black text-[#A3E635]">
+                      {PEAKVITALS_BOX_INFO.fssaiLicNo}
                     </span>
                   </div>
                 </div>
-              </div>
 
-              {/* Advisory Warning from Box */}
-              <div className="p-3 rounded-xl bg-zinc-950/70 border border-zinc-800/80 flex items-start gap-2.5 text-[10px] text-zinc-500 leading-relaxed">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
-                <p>
-                  <strong className="text-zinc-400 uppercase">
-                    Box Advisory Warning:
-                  </strong>{" "}
-                  {PEAKVITALS_BOX_INFO.warningText}
-                </p>
+                <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                  <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
+                    <span className="text-[9px] text-zinc-500 uppercase font-bold block">
+                      Batch No.
+                    </span>
+                    <span className="font-mono font-black text-white">
+                      {PEAKVITALS_BOX_INFO.batchNo}
+                    </span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
+                    <span className="text-[9px] text-zinc-500 uppercase font-bold block">
+                      Box MRP
+                    </span>
+                    <span className="font-black text-[#A3E635]">₹1,999/-</span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
+                    <span className="text-[9px] text-zinc-500 uppercase font-bold block">
+                      Mix With
+                    </span>
+                    <span className="font-black text-white">400ml Water</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-0.5">
+                  {[
+                    "USA Imported Ingredients",
+                    "ISO 9001 & GMP",
+                    "FDA Registered",
+                    "Lab Tested",
+                  ].map((b, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-[10px] font-bold text-zinc-300"
+                    >
+                      <CheckCircle2 className="w-3 h-3 text-[#A3E635]" />
+                      {b}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* TAB 2: 360° STUDIO BOX LABEL GALLERY (ALL 5 SIDES) */}
+        {activeTab === "box360" && (
+          <div className="p-5 sm:p-7 rounded-3xl bg-zinc-900/90 border border-zinc-800 space-y-5">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {PEAKVITALS_BOX_INFO.boxSidePhotos.map((photo, idx) => (
+                <button
+                  key={photo.id}
+                  onClick={() => setActivePhotoIdx(idx)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer border ${
+                    activePhotoIdx === idx
+                      ? "bg-[#A3E635] text-black border-[#A3E635]"
+                      : "bg-zinc-950 text-zinc-300 border-zinc-800 hover:border-zinc-700"
+                  }`}
+                >
+                  {idx + 1}. {photo.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-zinc-950 p-4 sm:p-6 rounded-2xl border border-zinc-800">
+              <div className="md:col-span-5 h-64 sm:h-72 rounded-xl bg-black border border-zinc-800 flex items-center justify-center p-2">
+                <img
+                  src={currentPhoto.image}
+                  alt={currentPhoto.label}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="md:col-span-7 space-y-3">
+                <span className="inline-block px-3 py-1 rounded-full bg-[#EA580C]/15 border border-[#EA580C]/40 text-[#EA580C] text-[10px] font-black uppercase tracking-wider">
+                  Side {activePhotoIdx + 1} of 5 • {currentPhoto.label}
+                </span>
+                <h3 className="text-lg sm:text-xl font-black text-white">
+                  {currentPhoto.caption}
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                  Official 360° studio view of the{" "}
+                  <strong className="text-white">Peakvitals Pre-Workout (250g)</strong>{" "}
+                  tub — verify every active ingredient, FSSAI license number (
+                  <span className="text-[#A3E635] font-mono">12723999000427</span>), and
+                  MRP before ordering.
+                </p>
+                <div className="pt-1 flex items-center gap-2 text-xs font-bold text-emerald-400">
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
+                  <span>100% Authentic Sealed Jar • Direct Brand Supply</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 3: HOW TO USE (3 STEPS) & KEY BENEFITS */}
+        {activeTab === "benefits" && (
+          <div className="space-y-6">
+            {/* 3-Step Suggested Use */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {PEAKVITALS_BOX_INFO.suggestedUseSteps.map((st, i) => {
+                const icons = [Flame, Droplets, Timer];
+                const Icon = icons[i] || Flame;
+                return (
+                  <div
+                    key={i}
+                    className="p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-2.5"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-black uppercase tracking-widest text-[#EA580C]">
+                        {st.step}
+                      </span>
+                      <div className="w-8 h-8 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-center text-[#A3E635]">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                    </div>
+                    <h4 className="text-sm font-black uppercase text-white">
+                      {st.title}
+                    </h4>
+                    <p className="text-xs text-zinc-400 leading-relaxed">{st.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Key Ingredient Benefits */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {PEAKVITALS_BOX_INFO.keyBenefits.map((b, idx) => (
+                <div
+                  key={idx}
+                  className={`p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800 space-y-1 ${
+                    idx === 4 ? "sm:col-span-2" : ""
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs sm:text-sm font-black text-white">
+                      {b.ingredient}
+                    </span>
+                    <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-zinc-950 text-[#A3E635] border border-zinc-800">
+                      {b.badge}
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-400 leading-relaxed">{b.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
