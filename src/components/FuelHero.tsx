@@ -42,7 +42,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
           </div>
 
           <p className="text-[11px] sm:text-xs font-medium max-w-xs leading-relaxed text-zinc-300">
-            Available in <strong className="text-[#A3E635]">Green Apple</strong> &amp; <strong className="text-[#FB923C]">Tangy Orange</strong> for skin-splitting pumps &amp; zero crash.
+            <strong className="text-[#A3E635]">Be The Boss Of Your Workout</strong> — Explosive energy, skin-splitting pumps &amp; zero crash.
           </p>
 
           {/* PRE-WORKOUT DABBA (PACKSHOT) - VISIBLE DIRECTLY ON FIRST SCREEN! */}
@@ -144,7 +144,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
             {/* Subtitle */}
             <div className="space-y-1">
               <p className="text-base lg:text-xl font-black uppercase tracking-wider text-zinc-100">
-                PEAKVITALS OFFICIAL BRAND STORE • GREEN APPLE &amp; TANGY ORANGE
+                PEAKVITALS PRE-WORKOUT • BE THE BOSS OF YOUR WORKOUT
               </p>
               <p className="text-sm font-medium max-w-lg leading-relaxed text-zinc-300">
                 Formulated with 13 clinical active ingredients per 7g scoop — 1.5g L-Citrulline Malate, 2g Arginine AKG, 2g Beta-Alanine, 195mg Natural Caffeine &amp; 200mg Theanine for instant pump, explosive energy, and zero crash.

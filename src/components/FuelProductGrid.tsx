@@ -187,14 +187,10 @@ export function FuelProductGrid({
                           className={`text-[8px] sm:text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-xs ${
                             !prod.inStock
                               ? "bg-red-600 text-white"
-                              : isGreenApple
-                              ? "bg-[#A3E635] text-black"
-                              : "bg-[#EA580C] text-white"
+                              : "bg-zinc-900 text-[#A3E635] border border-zinc-800"
                           }`}
                         >
-                          {!prod.inStock
-                            ? "OUT OF STOCK"
-                            : prod.flavor.replace(/flavour/i, "").trim() || "PEAKVITALS"}
+                          {!prod.inStock ? "OUT OF STOCK" : `${prod.servings} • ${prod.weight}`}
                         </span>
 
                         {/* Veg Green Dot */}
@@ -230,7 +226,7 @@ export function FuelProductGrid({
                         />
                       </div>
 
-                      {/* Product Name */}
+                      {/* Product Name (Main Heading) */}
                       <h3
                         className={`font-black text-xs sm:text-base uppercase leading-snug line-clamp-2 transition-colors ${
                           theme === "dark"
@@ -240,12 +236,18 @@ export function FuelProductGrid({
                       >
                         {prod.name}
                       </h3>
+
+                      {/* Flavour Label (Subtle Flavour Info, Not Main Heading) */}
                       <p
-                        className={`text-[10px] sm:text-xs mt-1 font-semibold truncate ${
-                          theme === "dark" ? "text-zinc-400" : "text-zinc-600"
+                        className={`text-[10px] sm:text-xs mt-1 font-bold truncate ${
+                          isGreenApple
+                            ? theme === "dark"
+                              ? "text-[#A3E635]"
+                              : "text-emerald-700"
+                            : "text-[#EA580C]"
                         }`}
                       >
-                        {prod.flavor} • {prod.servings} ({prod.weight})
+                        Flavour: {prod.flavor.replace(/flavour/i, "").trim()}
                       </p>
 
                       {/* Real Active Ingredients Summary */}

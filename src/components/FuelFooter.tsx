@@ -30,7 +30,7 @@ export function FuelFooter() {
 
             <p className="text-zinc-400 leading-relaxed text-xs max-w-sm">
               Official direct-to-athlete store for{" "}
-              <strong className="text-white">Peakvitals Nutrition Pre-Workout</strong>. Available in refreshing <strong className="text-[#A3E635]">Green Apple</strong> &amp; <strong className="text-[#EA580C]">Tangy Orange</strong> flavours with clinically dosed active grams.
+              <strong className="text-white">Peakvitals Nutrition Pre-Workout</strong> — formulated with 13 clinically dosed active ingredients per 7g scoop for explosive energy, max pump, and increased strength.
             </p>
 
             <div className="space-y-1.5 text-zinc-400 pt-1">
@@ -55,35 +55,35 @@ export function FuelFooter() {
             </div>
           </div>
 
-          {/* Col 2: Shop Flavours */}
+          {/* Col 2: Quick Links */}
           <div className="space-y-3">
             <h4 className="font-black uppercase tracking-wider text-white text-[11px]">
-              Available Flavours
+              Quick Links
             </h4>
             <ul className="space-y-2 text-zinc-400">
-              <li>
-                <button
-                  onClick={() => handleNavClick("green-apple")}
-                  className="hover:text-[#A3E635] transition cursor-pointer"
-                >
-                  Green Apple Flavour (250g)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick("orange")}
-                  className="hover:text-[#EA580C] transition cursor-pointer"
-                >
-                  Tangy Orange Flavour (250g)
-                </button>
-              </li>
               <li>
                 <button
                   onClick={() => handleNavClick("all")}
                   className="hover:text-[#A3E635] transition cursor-pointer"
                 >
-                  View All Pre-Workouts
+                  Peakvitals Pre-Workout (250g)
                 </button>
+              </li>
+              <li>
+                <a
+                  href="#nutrition-facts"
+                  className="hover:text-[#A3E635] transition cursor-pointer"
+                >
+                  Nutrition Facts (7g Scoop)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#faq-section"
+                  className="hover:text-[#A3E635] transition cursor-pointer"
+                >
+                  Frequently Asked Questions
+                </a>
               </li>
             </ul>
           </div>

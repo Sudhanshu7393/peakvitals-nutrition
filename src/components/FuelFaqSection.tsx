@@ -38,7 +38,8 @@ export function FuelFaqSection() {
 
   return (
     <section
-      className={`py-8 sm:py-16 border-b font-sans transition-colors duration-300 ${
+      id="faq-section"
+      className={`py-8 sm:py-16 border-b font-sans scroll-mt-24 transition-colors duration-300 ${
         theme === "dark" ? "bg-zinc-950 border-zinc-800 text-white" : "bg-zinc-100 border-zinc-200 text-zinc-900"
       }`}
     >

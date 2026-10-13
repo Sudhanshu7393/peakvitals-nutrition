@@ -156,7 +156,7 @@ export interface PeakvitalsProduct {
 export const PEAKVITALS_PREWORKOUTS: PeakvitalsProduct[] = [
   {
     id: "peakvitals-green-apple",
-    name: "PEAKVITALS PRE-WORKOUT - GREEN APPLE",
+    name: "PEAKVITALS PRE-WORKOUT",
     flavor: "Green Apple Flavour",
     servings: "35 Servings",
     weight: "250g",
@@ -166,7 +166,7 @@ export const PEAKVITALS_PREWORKOUTS: PeakvitalsProduct[] = [
     numericOriginalPrice: 1999,
     inStock: true,
     image: "/images/peakvitals_trans/green_apple_v2.png",
-    tagline: "Be The Boss of Your Workout - Crisp Green Apple Flavour",
+    tagline: "Be The Boss of Your Workout • High-Performance Pre-Workout",
     highlights: {
       caffeine: "195mg Natural Caffeine",
       citrulline: "1.5g L-Citrulline Malate",
@@ -176,7 +176,7 @@ export const PEAKVITALS_PREWORKOUTS: PeakvitalsProduct[] = [
   },
   {
     id: "peakvitals-tangy-orange",
-    name: "PEAKVITALS PRE-WORKOUT - TANGY ORANGE",
+    name: "PEAKVITALS PRE-WORKOUT",
     flavor: "Tangy Orange Flavour",
     servings: "35 Servings",
     weight: "250g",
@@ -186,7 +186,7 @@ export const PEAKVITALS_PREWORKOUTS: PeakvitalsProduct[] = [
     numericOriginalPrice: 1999,
     inStock: true,
     image: "/images/peakvitals_trans/tangy_orange_v2.png",
-    tagline: "Be The Boss of Your Workout - Tangy Orange Flavour",
+    tagline: "Be The Boss of Your Workout • High-Performance Pre-Workout",
     highlights: {
       caffeine: "195mg Natural Caffeine",
       citrulline: "1.5g L-Citrulline Malate",

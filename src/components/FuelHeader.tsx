@@ -58,26 +58,19 @@ export function FuelHeader() {
               onClick={() => handleNavClick("all")}
               className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
             >
-              <span>Shop All</span>
-              <ChevronDown className="w-3 h-3 text-zinc-500" />
-            </button>
-            <button
-              onClick={() => handleNavClick("green-apple")}
-              className="hover:text-[#A3E635] transition-colors cursor-pointer flex items-center gap-0.5"
-            >
-              <span>Green Apple</span>
-            </button>
-            <button
-              onClick={() => handleNavClick("orange")}
-              className="hover:text-[#EA580C] transition-colors cursor-pointer flex items-center gap-0.5"
-            >
-              <span>Tangy Orange</span>
+              <span>Pre-Workout</span>
             </button>
             <a
               href="#nutrition-facts"
               className="hover:text-[#A3E635] transition-colors"
             >
               Nutrition Facts
+            </a>
+            <a
+              href="#faq-section"
+              className="hover:text-[#A3E635] transition-colors"
+            >
+              FAQs
             </a>
             <button
               onClick={() => setIsTrackOrderModalOpen(true)}
@@ -178,29 +171,23 @@ export function FuelHeader() {
                 }}
                 className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
               >
-                <span>All Pre-Workouts</span>
+                <span>Pre-Workout (250g)</span>
                 <span className="text-[#A3E635] text-xs">₹1,999</span>
               </button>
-              <button
-                onClick={() => {
-                  handleNavClick("green-apple");
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
+              <a
+                href="#nutrition-facts"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#A3E635]"
               >
-                <span>Green Apple Flavour</span>
-                <span className="text-zinc-500 text-xs">250g</span>
-              </button>
-              <button
-                onClick={() => {
-                  handleNavClick("orange");
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full text-left py-2 hover:text-[#EA580C] flex justify-between"
+                Nutrition Facts
+              </a>
+              <a
+                href="#faq-section"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#A3E635]"
               >
-                <span>Tangy Orange Flavour</span>
-                <span className="text-zinc-500 text-xs">250g</span>
-              </button>
+                FAQs
+              </a>
 
               <div className="pt-4 border-t border-zinc-800 space-y-2 text-xs font-bold normal-case text-zinc-400">
                 <button
