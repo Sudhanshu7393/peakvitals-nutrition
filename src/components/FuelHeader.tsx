@@ -119,7 +119,7 @@ export function FuelHeader() {
             {/* WhatsApp Link */}
             <a
               href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,999 — Available in Green Apple & Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
+                "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (Special Offer: ₹1,199 | MRP: ₹1,999 — Available in Green Apple & Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -179,10 +179,13 @@ export function FuelHeader() {
                   handleNavClick("all");
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between"
+                className="w-full text-left py-2 hover:text-[#A3E635] flex justify-between items-center"
               >
                 <span>Pre-Workout (250g)</span>
-                <span className="text-[#A3E635] text-xs">₹1,999</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[#A3E635] text-xs font-black">₹1,199</span>
+                  <span className="text-zinc-500 line-through text-[10px]">₹1,999</span>
+                </div>
               </button>
               <a
                 href="#nutrition-facts"
@@ -230,7 +233,7 @@ export function FuelHeader() {
             <div className="pt-3 border-t border-zinc-800">
               <a
                 href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                  "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (₹1,999 — Green Apple / Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
+                  "🛒 *ORDER INQUIRY - PEAKVITALS NUTRITION*\n━━━━━━━━━━━━━━━━━━━━━\nHello Peakvitals Team! 👋\n\nI want to order *Peakvitals Nutrition Pre-Workout* (Special Offer: ₹1,199 | MRP: ₹1,999 — Green Apple / Tangy Orange).\n\nPlease confirm stock & share your UPI QR code!"
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

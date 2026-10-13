@@ -129,7 +129,7 @@ const jsonLdSchema = {
         "@type": "Offer",
         url: "https://peakvitals.vercel.app",
         priceCurrency: "INR",
-        price: "1999",
+        price: "1199",
         priceValidUntil: "2027-12-31",
         itemCondition: "https://schema.org/NewCondition",
         availability: "https://schema.org/InStock",

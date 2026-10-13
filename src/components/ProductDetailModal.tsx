@@ -185,18 +185,24 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
             <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-bold uppercase text-gray-500 block">
-                  Official Box MRP (Incl. of all taxes)
+                  Limited Offer Deal Price (Incl. of all taxes)
                 </span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-black text-gray-900">
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className="text-2xl font-black text-emerald-600">
                     ₹{calculatedPrice.toLocaleString("en-IN")}
                   </span>
+                  <span className="text-sm font-bold line-through text-gray-400">
+                    ₹1,999
+                  </span>
+                  <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
+                    40% OFF
+                  </span>
                   <span className="text-xs font-bold text-gray-600">
-                    • 250g (35 Servings / 7g Scoop)
+                    • 250g (35 Servings)
                   </span>
                 </div>
-                <span className="text-[10px] font-semibold text-gray-500">
-                  U.S.P.: {PEAKVITALS_BOX_INFO.usp} • MFD: {PEAKVITALS_BOX_INFO.mfd}
+                <span className="text-[10px] font-semibold text-gray-500 block mt-0.5">
+                  Official Box MRP: ₹1,999/- • U.S.P.: ₹4.79/g (MRP ₹7.99/g)
                 </span>
               </div>
               <div className="text-right">

@@ -82,12 +82,15 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
 
           {/* Pricing & CTA Button (Inline Row - No Scroll Needed) */}
           <div className="w-full max-w-sm flex items-center gap-2.5 pt-1">
-            <div className="flex-1 flex items-baseline justify-center gap-1.5 px-3 py-3 rounded-xl border bg-zinc-900/90 border-zinc-800 text-center">
+            <div className="flex-1 flex items-baseline justify-center gap-1.5 px-3 py-2.5 rounded-xl border bg-zinc-900/90 border-zinc-800 text-center flex-wrap">
               <span className="text-base font-black text-[#A3E635]">
                 {displayPrice}
               </span>
-              <span className="text-[10px] font-bold text-zinc-400">
-                / 250g Tub
+              <span className="text-[11px] font-bold line-through text-zinc-500">
+                ₹1,999
+              </span>
+              <span className="text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                40% OFF
               </span>
             </div>
 
@@ -184,12 +187,18 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <div className="flex items-baseline gap-2 px-4 py-3 rounded-xl border bg-zinc-900 border-zinc-800 transition">
-                <span className="text-lg font-black text-[#A3E635]">
+              <div className="flex items-baseline gap-2.5 px-4 py-3 rounded-xl border bg-zinc-900 border-zinc-800 transition">
+                <span className="text-xl font-black text-[#A3E635]">
                   {displayPrice}
                 </span>
-                <span className="text-xs font-bold text-zinc-300">
-                  • 250g (35 Servings)
+                <span className="text-xs font-bold line-through text-zinc-500">
+                  ₹1,999
+                </span>
+                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  40% OFF
+                </span>
+                <span className="text-xs font-bold text-zinc-400">
+                  • 250g Tub
                 </span>
               </div>
             </div>

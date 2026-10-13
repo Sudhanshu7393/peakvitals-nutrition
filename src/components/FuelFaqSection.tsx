@@ -24,7 +24,7 @@ export function FuelFaqSection() {
     },
     {
       q: "Which flavours are available and what is the official box MRP?",
-      a: "Peakvitals Pre-Workout (Net Weight: 250g / 35 Servings) is available in two refreshing 100% Vegetarian flavours: Green Apple Flavour and Tangy Orange Flavour. The official box MRP is ₹1,999/- (Incl. of all taxes, U.S.P. ₹7.99/gram) with an 18-month shelf life from manufacture.",
+      a: "Peakvitals Pre-Workout (Net Weight: 250g / 35 Servings) is available in two refreshing 100% Vegetarian flavours: Green Apple Flavour and Tangy Orange Flavour. The official box MRP is ₹1,999/-, currently available at a Special Direct Brand Offer Price of ₹1,199/- (40% OFF, Incl. of all taxes) with an 18-month shelf life from manufacture.",
     },
     {
       q: "Do you deliver all across India? How long does delivery take?",

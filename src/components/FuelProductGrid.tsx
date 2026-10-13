@@ -259,9 +259,9 @@ export function FuelProductGrid({
                         {prod.highlights?.citrulline || "1.5g Citrulline"} • {prod.highlights?.arginine || "2g Arginine AKG"} • {prod.highlights?.caffeine || "195mg Caffeine"}
                       </p>
 
-                      {/* Clean Official Price (No Fake Strike-through or Fake % Off) */}
-                      <div className="mt-2 sm:mt-3 flex items-baseline justify-between gap-2">
-                        <div className="flex items-baseline gap-1.5">
+                      {/* Official MRP Strike-Through & Deal Price */}
+                      <div className="mt-2 sm:mt-3 flex items-baseline justify-between gap-2 flex-wrap">
+                        <div className="flex items-baseline gap-1.5 flex-wrap">
                           <span
                             className={`text-base sm:text-xl font-black ${
                               theme === "dark" ? "text-[#A3E635]" : "text-emerald-600"
@@ -269,12 +269,11 @@ export function FuelProductGrid({
                           >
                             {prod.price}
                           </span>
-                          <span
-                            className={`text-[10px] sm:text-xs font-bold ${
-                              theme === "dark" ? "text-zinc-400" : "text-zinc-500"
-                            }`}
-                          >
-                            • {prod.weight} Tub
+                          <span className="text-[11px] sm:text-xs font-bold line-through text-zinc-500">
+                            {prod.originalPrice || "₹1,999"}
+                          </span>
+                          <span className="text-[9px] sm:text-[10px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-500 border border-emerald-500/30">
+                            {prod.discountBadge || "40% OFF"}
                           </span>
                         </div>
                         <span className="hidden sm:inline-block text-[10px] font-bold text-[#EA580C]">

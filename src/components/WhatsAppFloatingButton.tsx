@@ -18,10 +18,10 @@ export const WhatsAppFloatingButton: React.FC = () => {
       `📍 *Official Brand Dispatch Hub*\n` +
       `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
       `Hello Peakvitals Team! 👋\n\n` +
-      `I want to order *Peakvitals Nutrition Pre-Workout* (250g / 35 Servings):\n\n` +
+      `I want to order *Peakvitals Nutrition Pre-Workout* (250g / 35 Servings) at Special Offer Price ₹1,199 (MRP ₹1,999 - 40% OFF):\n\n` +
       `🔥 *Available Flavours:*\n` +
-      `1️⃣ Green Apple Flavour (250g) — ₹1,999\n` +
-      `2️⃣ Tangy Orange Flavour (250g) — ₹1,999\n\n` +
+      `1️⃣ Green Apple Flavour (250g) — ₹1,199 (MRP ₹1,999)\n` +
+      `2️⃣ Tangy Orange Flavour (250g) — ₹1,199 (MRP ₹1,999)\n\n` +
       `🚚 *Delivery:* All India Express Dispatch\n` +
       `📍 *My City / PIN Code:* [Enter City/PIN]\n\n` +
       `Please confirm stock & share your UPI QR code for order confirmation. Thank you!`;

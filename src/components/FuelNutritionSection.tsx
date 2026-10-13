@@ -206,23 +206,22 @@ export function FuelNutritionSection() {
                 <div className="grid grid-cols-3 gap-2 text-center text-xs">
                   <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
                     <span className="text-[9px] text-zinc-500 uppercase font-bold block">
-                      Batch No.
-                    </span>
-                    <span className="font-mono font-black text-white">
-                      {PEAKVITALS_BOX_INFO.batchNo}
-                    </span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
-                    <span className="text-[9px] text-zinc-500 uppercase font-bold block">
                       Box MRP
                     </span>
-                    <span className="font-black text-[#A3E635]">₹1,999/-</span>
+                    <span className="font-bold line-through text-zinc-400 text-xs">₹1,999</span>
+                    <span className="text-[8px] font-black uppercase text-emerald-400 block">40% OFF</span>
                   </div>
                   <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
                     <span className="text-[9px] text-zinc-500 uppercase font-bold block">
-                      Mix With
+                      Offer Price
                     </span>
-                    <span className="font-black text-white">400ml Water</span>
+                    <span className="font-black text-[#A3E635] text-sm">₹1,199/-</span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
+                    <span className="text-[9px] text-zinc-500 uppercase font-bold block">
+                      Batch / Use
+                    </span>
+                    <span className="font-mono font-bold text-white text-[11px]">{PEAKVITALS_BOX_INFO.batchNo}</span>
                   </div>
                 </div>
 
