@@ -16,6 +16,7 @@ import {
   FileText,
   Layers,
 } from "lucide-react";
+import { Jar360Viewer } from "@/components/Jar360Viewer";
 
 type ActiveTab = "nutrition" | "box360" | "benefits";
 
@@ -249,49 +250,10 @@ export function FuelNutritionSection() {
         {/* TAB 2: 360° STUDIO BOX LABEL GALLERY (ALL 5 SIDES) */}
         {activeTab === "box360" && (
           <div className="p-5 sm:p-7 rounded-3xl bg-zinc-900/90 border border-zinc-800 space-y-5">
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {PEAKVITALS_BOX_INFO.boxSidePhotos.map((photo, idx) => (
-                <button
-                  key={photo.id}
-                  onClick={() => setActivePhotoIdx(idx)}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer border ${
-                    activePhotoIdx === idx
-                      ? "bg-[#A3E635] text-black border-[#A3E635]"
-                      : "bg-zinc-950 text-zinc-300 border-zinc-800 hover:border-zinc-700"
-                  }`}
-                >
-                  {idx + 1}. {photo.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-zinc-950 p-4 sm:p-6 rounded-2xl border border-zinc-800">
-              <div className="md:col-span-5 h-64 sm:h-72 rounded-xl bg-black border border-zinc-800 flex items-center justify-center p-2">
-                <img
-                  src={currentPhoto.image}
-                  alt={currentPhoto.label}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="md:col-span-7 space-y-3">
-                <span className="inline-block px-3 py-1 rounded-full bg-[#EA580C]/15 border border-[#EA580C]/40 text-[#EA580C] text-[10px] font-black uppercase tracking-wider">
-                  Side {activePhotoIdx + 1} of 5 • {currentPhoto.label}
-                </span>
-                <h3 className="text-lg sm:text-xl font-black text-white">
-                  {currentPhoto.caption}
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                  Official 360° studio view of the{" "}
-                  <strong className="text-white">Peakvitals Pre-Workout (250g)</strong>{" "}
-                  tub — verify every active ingredient, FSSAI license number (
-                  <span className="text-[#A3E635] font-mono">12723999000427</span>), and
-                  MRP before ordering.
-                </p>
-                <div className="pt-1 flex items-center gap-2 text-xs font-bold text-emerald-400">
-                  <ShieldCheck className="w-4 h-4 shrink-0" />
-                  <span>100% Authentic Sealed Jar • Direct Brand Supply</span>
-                </div>
-              </div>
+            <Jar360Viewer showFloorRings={true} />
+            <div className="pt-2 flex items-center justify-center gap-2 text-xs font-bold text-emerald-400">
+              <ShieldCheck className="w-4 h-4 shrink-0" />
+              <span>100% Authentic Sealed Jar • Direct Brand Supply from Peakvitals Pvt. Ltd.</span>
             </div>
           </div>
         )}
