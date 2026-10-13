@@ -16,21 +16,42 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://peakvitals.vercel.app"),
-  title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
+  title: {
+    default: "PEAKVITALS NUTRITION | Official Pre-Workout Store (Be The Boss Of Your Workout)",
+    template: "%s | PEAKVITALS NUTRITION",
+  },
   description:
-    "Official Peakvitals Nutrition Pre-Workout Store. Available in Green Apple & Tangy Orange flavours. High-stimulant energy, explosive nitric oxide muscle pumps, All India Express Delivery & Direct WhatsApp Order.",
+    "Official Brand Store of Peakvitals Nutrition Pre-Workout (250g / 35 Servings). Formulated with 13 clinical active ingredients per 7g scoop — 2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline Malate, 195mg Natural Caffeine & 200mg Theanine. FSSAI Licensed (12723999000427) • All India Express Delivery.",
   keywords: [
     "Peakvitals",
     "Peakvitals Nutrition",
     "Peakvitals Pre-Workout",
-    "Green Apple Pre-Workout",
-    "Tangy Orange Pre-Workout",
-    "High Stim Pre-Workout India",
-    "Authentic Gym Supplements",
+    "Peakvitals Pvt Ltd",
+    "Best Pre-Workout in India",
+    "Be The Boss Of Your Workout",
+    "1.5g Citrulline Pre-Workout",
+    "2g Arginine AKG Pre-Workout",
+    "195mg Caffeine Pre-Workout",
+    "2g Beta-Alanine Pre-Workout",
+    "Vegetarian Gym Supplement India",
   ],
-  authors: [{ name: "Peakvitals Nutrition", url: "https://peakvitals.vercel.app" }],
-  creator: "Peakvitals Nutrition",
-  publisher: "Peakvitals Nutrition",
+  authors: [{ name: "Peakvitals Pvt. Ltd.", url: "https://peakvitals.vercel.app" }],
+  creator: "Peakvitals Pvt. Ltd.",
+  publisher: "Peakvitals Pvt. Ltd.",
+  alternates: {
+    canonical: "https://peakvitals.vercel.app",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -38,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "PEAKVITALS NUTRITION",
     title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
     description:
-      "100% Genuine Peakvitals Pre-Workout (Green Apple & Tangy Orange) • All India Express Delivery & Direct WhatsApp UPI QR Deal.",
+      "Be The Boss Of Your Workout • 13 Clinical Actives per 7g Scoop (2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline, 195mg Caffeine) • MRP ₹1,999 • All India Express Delivery.",
     images: [
       {
         url: "/og-image.jpg",
@@ -60,13 +81,65 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
     description:
-      "100% Genuine Peakvitals Pre-Workout (Green Apple & Tangy Orange) • Direct WhatsApp Order & UPI QR Deal.",
+      "Be The Boss Of Your Workout • 13 Clinical Actives per 7g Scoop • FSSAI: 12723999000427 • All India Express Delivery.",
     images: ["/og-image.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/logo-square.jpg",
   },
+};
+
+const jsonLdSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://peakvitals.vercel.app/#organization",
+      name: "Peakvitals Pvt. Ltd.",
+      alternateName: "Peakvitals Nutrition",
+      url: "https://peakvitals.vercel.app",
+      logo: "https://peakvitals.vercel.app/logo-square.jpg",
+      email: "Peakvitalsnutrition@gmail.com",
+      telephone: "+91-7651918284",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-7651918284",
+        contactType: "customer service",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "Product",
+      "@id": "https://peakvitals.vercel.app/#preworkout",
+      name: "Peakvitals Nutrition Pre-Workout (250g - 35 Servings)",
+      image: [
+        "https://peakvitals.vercel.app/images/peakvitals_trans/green_apple_v2.png",
+        "https://peakvitals.vercel.app/images/peakvitals_trans/tangy_orange_v2.png",
+      ],
+      description:
+        "Peakvitals Nutrition Pre-Workout contains 13 essential active ingredients per 7g scoop (2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline Malate, 195mg Natural Caffeine, 200mg Theanine, 200mg Tryptophan, 150mg N-Acetyl L-Tyrosine, 140mg Taurine, 110mg Betaine Anhydrous, 100mg Choline Bitartrate, 5mg Piperine, Vitamin B1 & B6) for explosive energy, max pump, and increased strength.",
+      sku: "PVPW-02-26",
+      brand: {
+        "@type": "Brand",
+        name: "Peakvitals Nutrition",
+      },
+      offers: {
+        "@type": "Offer",
+        url: "https://peakvitals.vercel.app",
+        priceCurrency: "INR",
+        price: "1999",
+        priceValidUntil: "2027-12-31",
+        itemCondition: "https://schema.org/NewCondition",
+        availability: "https://schema.org/InStock",
+        seller: {
+          "@type": "Organization",
+          name: "Peakvitals Pvt. Ltd.",
+        },
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -95,6 +168,10 @@ export default function RootLayout({
               })();
             `,
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#F8FAFC] text-zinc-900 selection:bg-lime-400 selection:text-black transition-colors duration-300">
