@@ -239,9 +239,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     try {
-      localStorage.removeItem("sk_nutrition_cart");
-      localStorage.removeItem("sk_nutrition_pin");
-      localStorage.removeItem("sk_nutrition_user");
+      localStorage.removeItem("peakvitals_cart_v1");
+      localStorage.removeItem("peakvitals_pin_v1");
+      localStorage.removeItem("peakvitals_user_v1");
     } catch {
       // Ignore
     }
@@ -296,7 +296,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const applyCoupon = (code: string) => {
     const normalized = code.trim().toUpperCase();
-    if (normalized === "PEAKVITALS5" || normalized === "NUTRABAY5" || normalized === "SK5") {
+    if (normalized === "PEAKVITALS5" || normalized === "NUTRABAY5") {
       setAppliedCoupon("PEAKVITALS5");
       return true;
     }

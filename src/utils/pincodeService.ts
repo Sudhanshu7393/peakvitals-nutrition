@@ -28,7 +28,7 @@ const cache = new Map<string, PincodeInfo>();
 
 // Curated 3-digit Indian Sorting Hub fallback mapping
 const POSTAL_3DIGIT_MAP: Record<string, { district: string; state: string; isLocal: boolean }> = {
-  "232": { district: "Chandauli (Mughalsarai)", state: "Uttar Pradesh", isLocal: true },
+  "232": { district: "Chandauli", state: "Uttar Pradesh", isLocal: true },
   "221": { district: "Varanasi", state: "Uttar Pradesh", isLocal: true },
   "231": { district: "Mirzapur", state: "Uttar Pradesh", isLocal: false },
   "233": { district: "Ghazipur", state: "Uttar Pradesh", isLocal: false },

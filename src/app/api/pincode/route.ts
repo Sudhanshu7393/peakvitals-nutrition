@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Comprehensive 3-digit Indian Sorting Hub mapping for 100% accurate offline district resolution
 const POSTAL_3DIGIT_MAP: Record<string, { district: string; state: string; isLocal: boolean }> = {
-  // Eastern UP (Local zones for SK Nutrition Mughalsarai)
-  "232": { district: "Chandauli (Mughalsarai)", state: "Uttar Pradesh", isLocal: true },
+  // Eastern UP (Local zones for Peakvitals Express Hub)
+  "232": { district: "Chandauli", state: "Uttar Pradesh", isLocal: true },
   "221": { district: "Varanasi", state: "Uttar Pradesh", isLocal: true },
   "231": { district: "Mirzapur", state: "Uttar Pradesh", isLocal: false },
   "233": { district: "Ghazipur", state: "Uttar Pradesh", isLocal: false },

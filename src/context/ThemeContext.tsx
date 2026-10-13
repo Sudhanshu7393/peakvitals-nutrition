@@ -17,7 +17,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     try {
-      localStorage.removeItem("sk_theme_v2");
+      localStorage.removeItem("peakvitals_theme_v2");
     } catch {}
     if (typeof document !== "undefined") {
       const root = document.documentElement;

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sk-nutrition-black.vercel.app"),
+  metadataBase: new URL("https://peakvitals-nutrition.vercel.app"),
   title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
   description:
     "Official Peakvitals Nutrition Pre-Workout Store. Available in Green Apple & Tangy Orange flavours. High-stimulant energy, explosive nitric oxide muscle pumps, All India Express Delivery & Direct WhatsApp Order.",
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
     "High Stim Pre-Workout India",
     "Authentic Gym Supplements",
   ],
-  authors: [{ name: "Peakvitals Nutrition", url: "https://sk-nutrition-black.vercel.app" }],
+  authors: [{ name: "Peakvitals Nutrition", url: "https://peakvitals-nutrition.vercel.app" }],
   creator: "Peakvitals Nutrition",
   publisher: "Peakvitals Nutrition",
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://sk-nutrition-black.vercel.app",
+    url: "https://peakvitals-nutrition.vercel.app",
     siteName: "PEAKVITALS NUTRITION",
     title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
     description:
@@ -87,7 +87,7 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  localStorage.removeItem('sk_theme_v2');
+                  localStorage.removeItem('peakvitals_theme_v2');
                   document.documentElement.setAttribute('data-theme', 'light');
                   document.documentElement.classList.add('light');
                   document.documentElement.classList.remove('dark');
