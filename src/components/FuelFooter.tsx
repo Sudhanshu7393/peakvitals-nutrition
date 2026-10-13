@@ -80,8 +80,11 @@ export function FuelFooter() {
               Disclaimer
             </button>
             <span className="text-zinc-700">•</span>
-            <a href="/admin" className="text-zinc-500 hover:text-[#A3E635]">
-              Admin
+            <a
+              href="/admin"
+              className="px-2 py-0.5 rounded bg-zinc-900 border border-[#A3E635]/40 text-[#A3E635] font-black uppercase text-[10px]"
+            >
+              🔒 Admin Panel
             </a>
           </div>
 
@@ -255,9 +258,9 @@ export function FuelFooter() {
               </span>
               <a
                 href="/admin"
-                className="ml-2 text-[10px] font-bold text-zinc-600 hover:text-[#A3E635] transition"
+                className="ml-2 px-2.5 py-1 rounded-lg bg-zinc-900 border border-[#A3E635]/40 text-[#A3E635] hover:bg-zinc-800 text-[10px] font-black uppercase tracking-wider transition"
               >
-                • Admin
+                🔒 Admin Panel
               </a>
             </div>
           </div>

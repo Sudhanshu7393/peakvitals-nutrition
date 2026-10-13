@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, ShoppingBag, Menu, X, ChevronDown, MessageCircle, Truck } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, MessageCircle, Truck, Lock } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { SITE_CONFIG } from "@/data/config";
 import { PeakvitalsLogo } from "@/components/PeakvitalsLogo";
@@ -80,8 +80,8 @@ export function FuelHeader() {
             </button>
           </nav>
 
-          {/* Right: Search, WhatsApp & Cart */}
-          <div className="flex items-center gap-2.5 sm:gap-4">
+          {/* Right: Search, WhatsApp, Admin & Cart */}
+          <div className="flex items-center gap-2 sm:gap-3.5">
             {/* Search Toggle / Input */}
             <div className="relative">
               {isSearchOpen ? (
@@ -92,8 +92,8 @@ export function FuelHeader() {
                     autoFocus
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Green Apple, Orange..."
-                    className="w-28 sm:w-44 bg-transparent border-none text-xs outline-none pl-2 pr-1"
+                    placeholder="Search..."
+                    className="w-24 sm:w-40 bg-transparent border-none text-xs outline-none pl-2 pr-1"
                   />
                   <button
                     onClick={() => {
@@ -128,6 +128,16 @@ export function FuelHeader() {
             >
               <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-500/20" />
               <span>7651918284</span>
+            </a>
+
+            {/* Visible Admin Button (Desktop & Mobile) */}
+            <a
+              href="/admin"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-[#A3E635]/40 text-[#A3E635] text-[10px] sm:text-[11px] font-black uppercase tracking-wider transition shadow-xs"
+              title="Open Store Admin Panel"
+            >
+              <Lock className="w-3 h-3 shrink-0" />
+              <span>Admin</span>
             </a>
 
             {/* Cart with Lime Green Badge */}
@@ -199,6 +209,14 @@ export function FuelHeader() {
                 >
                   🚚 Track My Order (PV-ID)
                 </button>
+                <a
+                  href="/admin"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2.5 px-3 rounded-xl bg-zinc-900 border border-[#A3E635]/40 text-[#A3E635] font-black uppercase tracking-wider text-xs"
+                >
+                  <Lock className="w-3.5 h-3.5" />
+                  <span>Store Admin Panel</span>
+                </a>
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
                   onClick={() => setIsMobileMenuOpen(false)}
