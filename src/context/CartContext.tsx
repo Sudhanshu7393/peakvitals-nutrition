@@ -1,8 +1,10 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { Product, CartItem, CustomerOrder } from "@/types";
 import { SITE_CONFIG } from "@/data/config";
+import { PeakvitalsProduct } from "@/data/peakvitalsProducts";
+import defaultStoreData from "@/data/store-data.json";
 import { lookupIndianPincode, reverseGeocodeCoords, PincodeInfo } from "@/utils/pincodeService";
 
 interface UserProfile {
@@ -10,7 +12,25 @@ interface UserProfile {
   phone: string;
 }
 
+export interface LiveStoreConfig {
+  phone: string;
+  whatsappNumber: string;
+  email: string;
+  hours: string;
+  heroPriceDisplay: string;
+  batchNo: string;
+  mfd: string;
+  usp: string;
+  fssaiLicNo: string;
+  marketedBy: string;
+}
+
 interface CartContextType {
+  // Dynamic Admin-Managed Store Catalog & Config
+  storeProducts: PeakvitalsProduct[];
+  storeConfig: LiveStoreConfig;
+  refreshStoreData: () => Promise<void>;
+  // Cart State
   cart: CartItem[];
   addToCart: (product: Product, flavor: string, weight: string, price: number, quantity?: number) => void;
   removeFromCart: (cartItemId: string) => void;
@@ -36,14 +56,14 @@ interface CartContextType {
   removeCoupon: () => void;
   // Shared Pincode & Real Location
   pincode: string;
-  pincodeInfo: import("@/utils/pincodeService").PincodeInfo | null;
+  pincodeInfo: PincodeInfo | null;
   selectedPostOffice: string;
   setSelectedPostOffice: (po: string) => void;
   isPincodeLoading: boolean;
   isDetectingLocation: boolean;
   setPincode: (pin: string) => void;
-  updatePincode: (pin: string) => Promise<import("@/utils/pincodeService").PincodeInfo>;
-  detectCurrentLocation: () => Promise<import("@/utils/pincodeService").PincodeInfo | null>;
+  updatePincode: (pin: string) => Promise<PincodeInfo>;
+  detectCurrentLocation: () => Promise<PincodeInfo | null>;
   // Search & Filter
   searchQuery: string;
   setSearchQuery: (q: string) => void;
@@ -61,7 +81,16 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+export const LOCAL_STORE_CACHE_KEY = "peakvitals_admin_store_v1";
+
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [storeProducts, setStoreProducts] = useState<PeakvitalsProduct[]>(
+    defaultStoreData.products as PeakvitalsProduct[]
+  );
+  const [storeConfig, setStoreConfig] = useState<LiveStoreConfig>(
+    defaultStoreData.storeConfig as LiveStoreConfig
+  );
+
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
@@ -78,6 +107,43 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isTrackOrderModalOpen, setIsTrackOrderModalOpen] = useState(false);
+
+  const refreshStoreData = useCallback(async () => {
+    try {
+      let cachedData: typeof defaultStoreData | null = null;
+      if (typeof window !== "undefined") {
+        const rawLocal = localStorage.getItem(LOCAL_STORE_CACHE_KEY);
+        if (rawLocal) {
+          cachedData = JSON.parse(rawLocal);
+        }
+      }
+
+      const res = await fetch("/api/store", { cache: "no-store" });
+      if (res.ok) {
+        const serverData = await res.json();
+        // Pick whichever has the newer updatedAt timestamp
+        const serverTime = new Date(serverData?.updatedAt || 0).getTime();
+        const localTime = new Date(cachedData?.updatedAt || 0).getTime();
+        const chosen = localTime > serverTime && cachedData ? cachedData : serverData;
+
+        if (chosen?.products) {
+          setStoreProducts(chosen.products);
+        }
+        if (chosen?.storeConfig) {
+          setStoreConfig(chosen.storeConfig);
+        }
+      } else if (cachedData) {
+        if (cachedData.products) setStoreProducts(cachedData.products);
+        if (cachedData.storeConfig) setStoreConfig(cachedData.storeConfig);
+      }
+    } catch {
+      // Fallback to default bundled data
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshStoreData();
+  }, [refreshStoreData]);
 
   // Auto-fetch pincode details only if a 6-digit pincode is entered
   useEffect(() => {
@@ -171,7 +237,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  // Fresh reset on every site visit - no pre-filled or cached state
   useEffect(() => {
     try {
       localStorage.removeItem("sk_nutrition_cart");
@@ -245,7 +310,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   
-  // 5% coupon discount
   const couponDiscount = appliedCoupon && subtotal > 0 ? Math.round(subtotal * 0.05) : 0;
   const discount = couponDiscount;
   
@@ -291,12 +355,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       message += `\n📱 Please share your official UPI QR code here so I can pay and confirm dispatch. Thank you!`;
     }
 
-    return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/${storeConfig.whatsappNumber || SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
   };
 
   return (
     <CartContext.Provider
       value={{
+        storeProducts,
+        storeConfig,
+        refreshStoreData,
         cart,
         addToCart,
         removeFromCart,

@@ -16,18 +16,27 @@ export function FuelProductGrid({
   onSelectProduct,
   onAddToCart,
 }: FuelProductGridProps) {
-  const { searchQuery, setSearchQuery, selectedCategoryTab, setSelectedCategoryTab } = useCart();
+  const {
+    storeProducts,
+    searchQuery,
+    setSearchQuery,
+    selectedCategoryTab,
+    setSelectedCategoryTab,
+  } = useCart();
   const { theme } = useTheme();
   const [addedId, setAddedId] = useState<string | null>(null);
 
   const handleAdd = (e: React.MouseEvent, prod: PeakvitalsProduct) => {
     e.stopPropagation();
+    if (!prod.inStock) return;
     onAddToCart(prod);
     setAddedId(prod.id);
     setTimeout(() => setAddedId(null), 1500);
   };
 
-  const filtered = PEAKVITALS_PREWORKOUTS.filter((p) => {
+  const productList = storeProducts && storeProducts.length > 0 ? storeProducts : PEAKVITALS_PREWORKOUTS;
+
+  const filtered = productList.filter((p) => {
     // Search query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
@@ -39,8 +48,8 @@ export function FuelProductGrid({
     }
 
     // Category tab
-    if ((selectedCategoryTab === "green-apple" || selectedCategoryTab === "high-stim") && !p.id.includes("green")) return false;
-    if ((selectedCategoryTab === "orange" || selectedCategoryTab === "endurance" || selectedCategoryTab === "pump") && !p.id.includes("orange")) return false;
+    if ((selectedCategoryTab === "green-apple" || selectedCategoryTab === "high-stim") && !p.id.includes("green") && !p.flavor.toLowerCase().includes("green")) return false;
+    if ((selectedCategoryTab === "orange" || selectedCategoryTab === "endurance" || selectedCategoryTab === "pump") && !p.id.includes("orange") && !p.flavor.toLowerCase().includes("orange")) return false;
     if (selectedCategoryTab === "combo" && !p.id.includes("pack") && !p.id.includes("stack")) return false;
 
     return true;
@@ -176,12 +185,16 @@ export function FuelProductGrid({
                       <div className="flex items-center justify-between min-h-[20px]">
                         <span
                           className={`text-[8px] sm:text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-xs ${
-                            isGreenApple
+                            !prod.inStock
+                              ? "bg-red-600 text-white"
+                              : isGreenApple
                               ? "bg-[#A3E635] text-black"
                               : "bg-[#EA580C] text-white"
                           }`}
                         >
-                          {isGreenApple ? "GREEN APPLE" : "TANGY ORANGE"}
+                          {!prod.inStock
+                            ? "OUT OF STOCK"
+                            : prod.flavor.replace(/flavour/i, "").trim() || "PEAKVITALS"}
                         </span>
 
                         {/* Veg Green Dot */}
@@ -209,12 +222,11 @@ export function FuelProductGrid({
                         {/* 3D Contact Floor Shadow */}
                         <div className="absolute bottom-2 sm:bottom-3 w-3/4 h-2.5 sm:h-3.5 rounded-full blur-sm bg-black/80 pointer-events-none" />
 
-                        {/* Realistic Transparent Packshot */}
-                        <Image
+                        {/* Realistic Packshot (Supports local, uploaded base64 & external URLs) */}
+                        <img
                           src={prod.image}
                           alt={prod.name}
-                          fill
-                          className="object-contain p-2 sm:p-3 group-hover:scale-105 transition-all duration-300 filter drop-shadow-[0_15px_20px_rgba(0,0,0,0.95)]"
+                          className="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-all duration-300 filter drop-shadow-[0_15px_20px_rgba(0,0,0,0.95)] relative z-10"
                         />
                       </div>
 
@@ -233,7 +245,7 @@ export function FuelProductGrid({
                           theme === "dark" ? "text-zinc-400" : "text-zinc-600"
                         }`}
                       >
-                        {prod.flavor} • {prod.servings} ({prod.weight} / 7g Scoop)
+                        {prod.flavor} • {prod.servings} ({prod.weight})
                       </p>
 
                       {/* Real Active Ingredients Summary */}
@@ -242,7 +254,7 @@ export function FuelProductGrid({
                           theme === "dark" ? "text-zinc-500" : "text-zinc-500"
                         }`}
                       >
-                        1.5g Citrulline • 2g Arginine AKG • 195mg Caffeine • 2g Beta-Alanine + 9 Actives
+                        {prod.highlights?.citrulline || "1.5g Citrulline"} • {prod.highlights?.arginine || "2g Arginine AKG"} • {prod.highlights?.caffeine || "195mg Caffeine"}
                       </p>
 
                       {/* Clean Official Price (No Fake Strike-through or Fake % Off) */}
@@ -264,7 +276,7 @@ export function FuelProductGrid({
                           </span>
                         </div>
                         <span className="hidden sm:inline-block text-[10px] font-bold text-[#EA580C]">
-                          Click to View 5 Box Sides →
+                          Click to View Details →
                         </span>
                       </div>
                     </div>
@@ -273,15 +285,20 @@ export function FuelProductGrid({
                     <div className="mt-3 sm:mt-4 pt-1">
                       <button
                         onClick={(e) => handleAdd(e, prod)}
-                        className={`w-full py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 shadow-xs ${
-                          isAdded
+                        disabled={!prod.inStock}
+                        className={`w-full py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-xs ${
+                          !prod.inStock
+                            ? "bg-zinc-300 text-zinc-500 cursor-not-allowed"
+                            : isAdded
                             ? theme === "dark"
-                              ? "bg-white text-black"
-                              : "bg-zinc-900 text-white"
-                            : "bg-[#A3E635] hover:bg-[#86efac] text-black shadow-[#A3E635]/20 hover:shadow-[#A3E635]/40"
+                              ? "bg-white text-black cursor-pointer"
+                              : "bg-zinc-900 text-white cursor-pointer"
+                            : "bg-[#A3E635] hover:bg-[#86efac] text-black shadow-[#A3E635]/20 hover:shadow-[#A3E635]/40 cursor-pointer active:scale-95"
                         }`}
                       >
-                        {isAdded ? (
+                        {!prod.inStock ? (
+                          <span>OUT OF STOCK</span>
+                        ) : isAdded ? (
                           <>
                             <Check className="w-3.5 h-3.5 stroke-[3]" />
                             <span>ADDED</span>

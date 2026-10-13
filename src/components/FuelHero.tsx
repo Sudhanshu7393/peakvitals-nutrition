@@ -4,11 +4,16 @@ import React from "react";
 import Image from "next/image";
 import { ArrowRight, Leaf, FlaskConical, ShieldAlert, Award, Zap } from "lucide-react";
 
+import { useCart } from "@/context/CartContext";
+
 interface FuelHeroProps {
   onShopNow: () => void;
 }
 
 export function FuelHero({ onShopNow }: FuelHeroProps) {
+  const { storeConfig, storeProducts } = useCart();
+  const displayPrice = storeProducts?.[0]?.price || storeConfig?.heroPriceDisplay || "₹1,999";
+
   return (
     <section className="relative overflow-hidden py-6 sm:py-12 lg:py-20 border-b border-zinc-800 bg-[#07080A] text-white font-sans">
       {/* Subtle gym background radial glow */}
@@ -79,7 +84,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
           <div className="w-full max-w-sm flex items-center gap-2.5 pt-1">
             <div className="flex-1 flex items-baseline justify-center gap-1.5 px-3 py-3 rounded-xl border bg-zinc-900/90 border-zinc-800 text-center">
               <span className="text-base font-black text-[#A3E635]">
-                ₹1,999
+                {displayPrice}
               </span>
               <span className="text-[10px] font-bold text-zinc-400">
                 / 250g Tub
@@ -181,7 +186,7 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
 
               <div className="flex items-baseline gap-2 px-4 py-3 rounded-xl border bg-zinc-900 border-zinc-800 transition">
                 <span className="text-lg font-black text-[#A3E635]">
-                  ₹1,999
+                  {displayPrice}
                 </span>
                 <span className="text-xs font-bold text-zinc-300">
                   • 250g (35 Servings)

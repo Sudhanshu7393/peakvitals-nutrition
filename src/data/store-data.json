@@ -1,0 +1,57 @@
+{
+  "updatedAt": "2026-10-13T09:20:00.000Z",
+  "storeConfig": {
+    "phone": "+91 76519 18284",
+    "whatsappNumber": "917651918284",
+    "email": "Peakvitalsnutrition@gmail.com",
+    "hours": "Mon - Sun: 9:00 AM - 10:00 PM",
+    "heroPriceDisplay": "₹1,999",
+    "batchNo": "PVPW/02/26",
+    "mfd": "FEB/2026",
+    "usp": "₹7.99 / gram",
+    "fssaiLicNo": "12723999000427",
+    "marketedBy": "Peakvitals Pvt. Ltd."
+  },
+  "products": [
+    {
+      "id": "peakvitals-green-apple",
+      "name": "PEAKVITALS PRE-WORKOUT - GREEN APPLE",
+      "flavor": "Green Apple Flavour",
+      "servings": "35 Servings",
+      "weight": "250g",
+      "price": "₹1,999",
+      "numericPrice": 1999,
+      "originalPrice": "₹1,999",
+      "numericOriginalPrice": 1999,
+      "inStock": true,
+      "image": "/images/peakvitals_trans/green_apple_v2.png",
+      "tagline": "Be The Boss of Your Workout - Crisp Green Apple Flavour",
+      "highlights": {
+        "caffeine": "195mg Natural Caffeine",
+        "citrulline": "1.5g L-Citrulline Malate",
+        "arginine": "2g Arginine AKG",
+        "betaAlanine": "2g Beta-Alanine"
+      }
+    },
+    {
+      "id": "peakvitals-tangy-orange",
+      "name": "PEAKVITALS PRE-WORKOUT - TANGY ORANGE",
+      "flavor": "Tangy Orange Flavour",
+      "servings": "35 Servings",
+      "weight": "250g",
+      "price": "₹1,999",
+      "numericPrice": 1999,
+      "originalPrice": "₹1,999",
+      "numericOriginalPrice": 1999,
+      "inStock": true,
+      "image": "/images/peakvitals_trans/tangy_orange_v2.png",
+      "tagline": "Be The Boss of Your Workout - Tangy Orange Flavour",
+      "highlights": {
+        "caffeine": "195mg Natural Caffeine",
+        "citrulline": "1.5g L-Citrulline Malate",
+        "arginine": "2g Arginine AKG",
+        "betaAlanine": "2g Beta-Alanine"
+      }
+    }
+  ]
+}

@@ -195,9 +195,18 @@ export function FuelFooter() {
             </span>
           </div>
 
-          <p className="text-[10px] text-zinc-400">
-            Be The Boss Of Your Workout.
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-[10px] text-zinc-400">
+              Be The Boss Of Your Workout.
+            </p>
+            <a
+              href="/admin"
+              className="text-[10px] font-bold text-zinc-600 hover:text-[#A3E635] transition"
+              title="Store Admin Panel"
+            >
+              • Admin Panel
+            </a>
+          </div>
         </div>
       </div>
     </footer>
