@@ -13,7 +13,6 @@ import { FuelFooter } from "@/components/FuelFooter";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CheckoutModal } from "@/components/CheckoutModal";
 import { OrderSuccessModal } from "@/components/OrderSuccessModal";
-import { TrackOrderModal } from "@/components/TrackOrderModal";
 import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
 
@@ -88,7 +87,6 @@ export default function HomePage() {
       <CartDrawer />
       <CheckoutModal />
       <OrderSuccessModal />
-      <TrackOrderModal />
       <ProductDetailModal
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}

@@ -8,7 +8,7 @@ import { PeakvitalsLogo } from "@/components/PeakvitalsLogo";
 import { LegalTermsModal, PolicyTab } from "@/components/LegalTermsModal";
 
 export function FuelFooter() {
-  const { setSelectedCategoryTab, setIsTrackOrderModalOpen } = useCart();
+  const { setSelectedCategoryTab } = useCart();
   const [policyOpen, setPolicyOpen] = useState(false);
   const [activePolicy, setActivePolicy] = useState<PolicyTab>("terms");
 
@@ -47,15 +47,15 @@ export function FuelFooter() {
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 text-emerald-400"
             >
               <MessageCircle className="w-3.5 h-3.5 shrink-0" />
-              <span>7651918284</span>
+              <span>WhatsApp Us</span>
             </a>
-            <button
-              onClick={() => setIsTrackOrderModalOpen(true)}
-              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 text-zinc-200 cursor-pointer"
+            <a
+              href={`tel:${SITE_CONFIG.phone}`}
+              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 text-zinc-200"
             >
-              <Truck className="w-3.5 h-3.5 text-[#A3E635] shrink-0" />
-              <span>Track Order</span>
-            </button>
+              <Phone className="w-3.5 h-3.5 text-[#A3E635] shrink-0" />
+              <span>{SITE_CONFIG.phone}</span>
+            </a>
           </div>
 
           {/* Row 3: Compact Inline Policies & Links */}
@@ -160,15 +160,6 @@ export function FuelFooter() {
                   >
                     FAQs
                   </a>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setIsTrackOrderModalOpen(true)}
-                    className="hover:text-[#A3E635] transition cursor-pointer flex items-center gap-1.5"
-                  >
-                    <Truck className="w-3.5 h-3.5 text-[#A3E635]" />
-                    <span>Track My Order</span>
-                  </button>
                 </li>
               </ul>
             </div>

@@ -13,7 +13,6 @@ export function FuelHeader() {
     searchQuery,
     setSearchQuery,
     setSelectedCategoryTab,
-    setIsTrackOrderModalOpen,
   } = useCart();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -72,12 +71,6 @@ export function FuelHeader() {
             >
               FAQs
             </a>
-            <button
-              onClick={() => setIsTrackOrderModalOpen(true)}
-              className="hover:text-[#A3E635] transition-colors cursor-pointer"
-            >
-              Track Order
-            </button>
           </nav>
 
           {/* Right: Search, WhatsApp, Admin & Cart */}
@@ -203,15 +196,6 @@ export function FuelHeader() {
               </a>
 
               <div className="pt-4 border-t border-zinc-800 space-y-2 text-xs font-bold normal-case text-zinc-400">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsTrackOrderModalOpen(true);
-                  }}
-                  className="w-full text-left py-2 text-white hover:text-[#A3E635]"
-                >
-                  🚚 Track My Order (PV-ID)
-                </button>
                 <a
                   href="/admin"
                   onClick={() => setIsMobileMenuOpen(false)}
