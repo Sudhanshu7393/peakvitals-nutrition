@@ -1,6 +1,6 @@
 {
-  "name": "sk-nutrition-app",
-  "version": "0.1.0",
+  "name": "peakvitals-nutrition-store",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
