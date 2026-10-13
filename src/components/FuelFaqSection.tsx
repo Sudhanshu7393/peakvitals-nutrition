@@ -11,8 +11,8 @@ export function FuelFaqSection() {
 
   const faqs = [
     {
-      q: "Are Peakvitals Pre-Workout supplements 100% genuine & certified?",
-      a: "Yes, 100%. Peakvitals Pre-Workout is marketed by Peakvitals Pvt. Ltd. (FSSAI Lic. No.: 12723999000427) and manufactured in an ISO 9001, GMP Certified & FDA Registered facility using Lab-Tested Ingredients Imported from the USA (Current Batch: PVPW/02/26).",
+      q: "Are Peakvitals Pre-Workout supplements 100% genuine & authentic?",
+      a: "Yes, 100%. Peakvitals Pre-Workout is marketed directly by Peakvitals Pvt. Ltd. Every tub is sourced fresh from our official manufacturing batch (Current Batch: PVPW/02/26) using lab-tested, high-grade active ingredients imported from the USA.",
     },
     {
       q: "What are the complete 13 active ingredients per 7g serving?",

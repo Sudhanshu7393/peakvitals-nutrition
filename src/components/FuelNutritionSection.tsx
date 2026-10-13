@@ -27,7 +27,6 @@ export function FuelNutritionSection() {
   const originalPrice = mainProduct?.originalPrice || "₹1,999";
   const discountBadge = mainProduct?.discountBadge || "40% OFF";
   const batchDisplay = storeConfig?.batchNo || PEAKVITALS_BOX_INFO.batchNo;
-  const fssaiDisplay = storeConfig?.fssaiLicNo || PEAKVITALS_BOX_INFO.fssaiLicNo;
   const marketedDisplay = storeConfig?.marketedBy || PEAKVITALS_BOX_INFO.marketedBy;
 
   return (
@@ -39,11 +38,11 @@ export function FuelNutritionSection() {
       <div className="absolute top-0 left-1/3 w-[420px] h-[420px] bg-[#A3E635]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">
-        {/* Clean Minimal Heading + 3 Sleek Tabs */}
+        {/* Clean Minimal Heading */}
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[#A3E635] text-[10px] sm:text-xs font-black uppercase tracking-widest">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>100% Transparent Formula • FSSAI: 12723999000427</span>
+            <span>100% Transparent Formula • 13 Clinical Actives</span>
           </div>
 
           <h2 className="text-2xl sm:text-4xl font-black italic uppercase tracking-tight leading-none">
@@ -189,10 +188,10 @@ export function FuelNutritionSection() {
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] font-bold uppercase text-zinc-400 block">
-                      FSSAI Lic. No.
+                      Dietary Standard
                     </span>
-                    <span className="text-xs sm:text-sm font-mono font-black text-[#A3E635]">
-                      {fssaiDisplay}
+                    <span className="text-xs sm:text-sm font-black text-[#A3E635]">
+                      100% Vegetarian
                     </span>
                   </div>
                 </div>
@@ -221,10 +220,10 @@ export function FuelNutritionSection() {
 
                 <div className="flex flex-wrap gap-1.5 pt-0.5">
                   {[
-                    "USA Imported Ingredients",
-                    "ISO 9001 & GMP",
-                    "FDA Registered",
-                    "Lab Tested",
+                    "USA Imported Actives",
+                    "Lab Tested Quality",
+                    "Zero Sugar Formula",
+                    "35 Full Servings",
                   ].map((b, i) => (
                     <span
                       key={i}

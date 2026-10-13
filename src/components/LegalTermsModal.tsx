@@ -25,7 +25,7 @@ export function LegalTermsModal({
     { id: "privacy", label: "Privacy Policy", icon: Lock },
     { id: "shipping", label: "Shipping Policy", icon: Truck },
     { id: "returns", label: "Return & Refund", icon: RotateCcw },
-    { id: "disclaimer", label: "FSSAI Disclaimer", icon: AlertTriangle },
+    { id: "disclaimer", label: "Product Advisory", icon: AlertTriangle },
   ];
 
   return (
@@ -40,7 +40,7 @@ export function LegalTermsModal({
                 Peakvitals Pvt. Ltd. • Official Store Policies &amp; Terms
               </h3>
               <p className="text-[11px] text-zinc-400">
-                FSSAI Lic. No.: <span className="text-[#A3E635] font-mono">12723999000427</span> • ISO 9001 &amp; GMP Certified
+                100% Genuine Direct Supply • Dietary Supplement (100% Veg)
               </p>
             </div>
           </div>
@@ -175,7 +175,7 @@ export function LegalTermsModal({
           {activeTab === "disclaimer" && (
             <div className="space-y-3">
               <h4 className="text-base font-black uppercase text-[#A3E635]">
-                5. FSSAI &amp; Health Supplement Advisory Disclaimer
+                5. Dietary Supplement Advisory &amp; Safe Usage
               </h4>
               <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
                 <p className="font-bold text-white">
@@ -190,7 +190,7 @@ export function LegalTermsModal({
                   <strong>Marketed By:</strong> Peakvitals Pvt. Ltd.
                 </li>
                 <li>
-                  <strong>FSSAI License No.:</strong> 12723999000427
+                  <strong>Dietary Standard:</strong> 100% Vegetarian Dietary Supplement
                 </li>
                 <li>
                   <strong>Recommended Usage:</strong> Mix 1 scoop (7g approx) in 400ml cold water and consume 15–30 minutes before workout. Do not exceed recommended daily serving size.

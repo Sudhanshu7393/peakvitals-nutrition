@@ -142,24 +142,24 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
               </div>
             </div>
 
-            {/* Official Licensing & Batch Box */}
-            <div className="p-3.5 rounded-2xl bg-emerald-50/80 border border-emerald-200 space-y-1.5">
+            {/* Official Packaging & Batch Box */}
+            <div className="p-3.5 rounded-2xl bg-zinc-100 border border-zinc-200 space-y-1.5 text-zinc-900">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <h4 className="text-xs font-black text-emerald-950 uppercase tracking-wide">
+                <h4 className="text-xs font-black text-zinc-950 uppercase tracking-wide">
                   100% Genuine • {PEAKVITALS_BOX_INFO.marketedBy}
                 </h4>
               </div>
-              <div className="grid grid-cols-2 gap-1.5 text-[10px] font-bold text-emerald-900 pt-0.5">
-                <div className="bg-white/90 px-2 py-1 rounded border border-emerald-200">
-                  FSSAI: <span className="font-mono">{PEAKVITALS_BOX_INFO.fssaiLicNo}</span>
+              <div className="grid grid-cols-2 gap-1.5 text-[10px] font-bold pt-0.5">
+                <div className="bg-white px-2 py-1 rounded border border-zinc-200">
+                  Standard: <span className="font-semibold text-emerald-700">100% Veg</span>
                 </div>
-                <div className="bg-white/90 px-2 py-1 rounded border border-emerald-200">
+                <div className="bg-white px-2 py-1 rounded border border-zinc-200">
                   Batch: <span className="font-mono">{PEAKVITALS_BOX_INFO.batchNo}</span>
                 </div>
               </div>
-              <p className="text-[10px] text-gray-600 leading-snug">
-                ISO 9001 &amp; GMP Certified • FDA Registered • USA Imported Ingredients
+              <p className="text-[10px] text-zinc-600 leading-snug">
+                USA Imported Active Ingredients • 35 Full Servings • 13 Clinical Actives
               </p>
             </div>
           </div>

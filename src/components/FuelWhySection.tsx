@@ -26,8 +26,8 @@ export function FuelWhySection() {
     },
     {
       icon: ShieldCheck,
-      title: "USA IMPORTED & CERTIFIED",
-      desc: "Marketed by Peakvitals Pvt. Ltd. • FSSAI Lic. No. 12723999000427 • ISO 9001, GMP & FDA Registered facility.",
+      title: "100% GENUINE DIRECT SUPPLY",
+      desc: "Marketed directly by Peakvitals Pvt. Ltd. Fresh factory batch, zero counterfeit risk & express dispatch.",
     },
   ];
 

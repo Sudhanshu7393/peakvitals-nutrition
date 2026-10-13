@@ -15,13 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://peakvitals.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://peakvitals.vercel.app"),
   title: {
     default: "PEAKVITALS NUTRITION | Official Pre-Workout Store (Be The Boss Of Your Workout)",
     template: "%s | PEAKVITALS NUTRITION",
   },
   description:
-    "Official Brand Store of Peakvitals Nutrition Pre-Workout (250g / 35 Servings). Formulated with 13 clinical active ingredients per 7g scoop — 2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline Malate, 195mg Natural Caffeine & 200mg Theanine. FSSAI Licensed (12723999000427) • All India Express Delivery.",
+    "Official Brand Store of Peakvitals Nutrition Pre-Workout (250g / 35 Servings). Formulated with 13 clinical active ingredients per 7g scoop — 2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline Malate, 195mg Natural Caffeine & 200mg Theanine • 100% Vegetarian Dietary Supplement • All India Express Delivery.",
   keywords: [
     "Peakvitals",
     "Peakvitals Nutrition",
@@ -35,12 +35,9 @@ export const metadata: Metadata = {
     "2g Beta-Alanine Pre-Workout",
     "Vegetarian Gym Supplement India",
   ],
-  authors: [{ name: "Peakvitals Pvt. Ltd.", url: "https://peakvitals.vercel.app" }],
+  authors: [{ name: "Peakvitals Pvt. Ltd." }],
   creator: "Peakvitals Pvt. Ltd.",
   publisher: "Peakvitals Pvt. Ltd.",
-  alternates: {
-    canonical: "https://peakvitals.vercel.app",
-  },
   robots: {
     index: true,
     follow: true,
@@ -55,11 +52,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://peakvitals.vercel.app",
     siteName: "PEAKVITALS NUTRITION",
     title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
     description:
-      "Be The Boss Of Your Workout • 13 Clinical Actives per 7g Scoop (2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline, 195mg Caffeine) • MRP ₹1,999 • All India Express Delivery.",
+      "Be The Boss Of Your Workout • 13 Clinical Actives per 7g Scoop (2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline, 195mg Caffeine) • Offer Price ₹1,199 • All India Express Delivery.",
     images: [
       {
         url: "/og-image.jpg",
@@ -81,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
     description:
-      "Be The Boss Of Your Workout • 13 Clinical Actives per 7g Scoop • FSSAI: 12723999000427 • All India Express Delivery.",
+      "Be The Boss Of Your Workout • 13 Clinical Actives per 7g Scoop • Offer Price ₹1,199 • All India Express Delivery.",
     images: ["/og-image.jpg"],
   },
   icons: {

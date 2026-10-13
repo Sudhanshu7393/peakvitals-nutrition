@@ -108,10 +108,10 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
           {/* 4 Micro Trust Badges */}
           <div className="grid grid-cols-2 gap-1.5 w-full max-w-sm pt-0.5">
             {[
-              { icon: Leaf, label: "USA Imported Ingredients" },
+              { icon: Leaf, label: "USA Imported Actives" },
               { icon: FlaskConical, label: "Lab Tested • 13 Actives" },
-              { icon: ShieldAlert, label: "ISO 9001 & GMP Certified" },
-              { icon: Award, label: "FSSAI: 12723999000427" },
+              { icon: Zap, label: "Instant Pump & Energy" },
+              { icon: Award, label: "100% Genuine Brand" },
             ].map((b, idx) => {
               const Icon = b.icon;
               return (
@@ -161,8 +161,8 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
               {[
                 { icon: Leaf, label: "USA Imported Actives" },
                 { icon: FlaskConical, label: "Lab Tested • 13 Actives" },
-                { icon: ShieldAlert, label: "ISO 9001 & GMP" },
-                { icon: Award, label: "FSSAI Certified" },
+                { icon: Zap, label: "Zero Sugar • No Crash" },
+                { icon: Award, label: "100% Genuine Brand" },
               ].map((badge, idx) => {
                 const Icon = badge.icon;
                 return (

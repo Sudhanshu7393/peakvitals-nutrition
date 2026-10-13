@@ -976,7 +976,7 @@ export default function AdminDashboardPage() {
 
               <div>
                 <label className="block text-[11px] font-black uppercase tracking-wider text-zinc-400 mb-1">
-                  FSSAI License Number
+                  FSSAI License Number (Optional)
                 </label>
                 <input
                   type="text"
@@ -984,7 +984,8 @@ export default function AdminDashboardPage() {
                   onChange={(e) =>
                     setStoreConfig({ ...storeConfig, fssaiLicNo: e.target.value })
                   }
-                  className="w-full px-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm font-mono font-bold text-[#A3E635]"
+                  placeholder="Optional (leave blank if not applicable)"
+                  className="w-full px-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm font-mono font-bold text-white"
                 />
               </div>
 

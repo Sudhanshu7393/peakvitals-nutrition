@@ -34,14 +34,11 @@ export const PEAKVITALS_BOX_INFO = {
   mfd: "FEB/2026",
   shelfLife: "Best Before 18 Months from the Date of Manufacture",
   marketedBy: "Peakvitals Pvt. Ltd.",
-  manufacturedBy: "Bioxent Health and Nutrition Pvt. Ltd. (An ISO 9001 & GMP Certified Company)",
-  fssaiLicNo: "12723999000427",
+  manufacturedBy: "Bioxent Health and Nutrition Pvt. Ltd.",
+  fssaiLicNo: "",
   certifications: [
-    "FSSAI Lic. No.: 12723999000427",
-    "ISO 9001 & GMP Certified",
-    "FDA Registered Facility",
     "Ingredients Imported From USA",
-    "Lab Tested Quality",
+    "Lab Tested Active Ingredients",
     "100% Vegetarian Dietary Supplement",
   ],
   ingredientsList:
@@ -111,8 +108,8 @@ export const PEAKVITALS_BOX_INFO = {
     },
     {
       id: "ingredients",
-      label: "FSSAI & Certifications",
-      caption: "Marketed By Peakvitals Pvt. Ltd. • FSSAI Lic. No. 12723999000427 • Imported USA Ingredients",
+      label: "Ingredients & Standard",
+      caption: "Marketed By Peakvitals Pvt. Ltd. • Imported USA Ingredients • 100% Veg",
       image: "/images/box_sides/side3_ingredients_fssai.png",
     },
     {
@@ -231,7 +228,7 @@ export function peakvitalsToProduct(p: PeakvitalsProduct): Product {
       "195mg Natural Caffeine + 200mg Theanine + 150mg N-Acetyl L-Tyrosine for Focus & Energy",
       "2g Beta-Alanine + 140mg Taurine for Peak Endurance & Time To Exhaustion (TTE)",
       "200mg Tryptophan + 100mg Choline Bitartrate + 5mg Piperine + Vit B1 & B6",
-      "FSSAI Lic. No.: 12723999000427 • ISO 9001 & GMP • USA Imported Ingredients",
+      "100% Genuine Direct Brand Supply • 100% Vegetarian Dietary Supplement",
     ],
     howToUse:
       PEAKVITALS_BOX_INFO.suggestedUseSummary,

@@ -30,11 +30,11 @@ export function FuelFooter() {
         {/* 1. COMPACT MOBILE FOOTER (< md) — FITS IN A SMALL STRIP!  */}
         {/* ========================================================= */}
         <div className="md:hidden px-4 py-5 space-y-3.5">
-          {/* Row 1: Brand Logo + FSSAI Pill */}
+          {/* Row 1: Brand Logo + Veg Pill */}
           <div className="flex items-center justify-between gap-2">
             <PeakvitalsLogo forceDark size="sm" />
-            <span className="px-2 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-[10px] font-mono font-bold text-[#A3E635]">
-              FSSAI: 12723999000427
+            <span className="px-2 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-[10px] font-bold text-emerald-400">
+              🟢 100% Vegetarian
             </span>
           </div>
 
@@ -214,17 +214,17 @@ export function FuelFooter() {
               </ul>
             </div>
 
-            {/* Col 4: Licensing */}
+            {/* Col 4: Brand Information */}
             <div className="space-y-2.5">
               <h4 className="font-black uppercase tracking-wider text-white text-[11px]">
-                Official Licensing
+                Brand Information
               </h4>
               <ul className="space-y-1.5 text-zinc-400 text-[11px]">
                 <li className="font-bold text-zinc-200">
                   Marketed By: Peakvitals Pvt. Ltd.
                 </li>
-                <li className="font-mono font-bold text-[#A3E635]">
-                  FSSAI: 12723999000427
+                <li className="font-bold text-[#A3E635]">
+                  Dietary Supplement (100% Veg)
                 </li>
                 <li className="flex items-center gap-1.5 text-zinc-400">
                   <Clock className="w-3.5 h-3.5 text-[#EA580C] shrink-0" />
@@ -235,7 +235,7 @@ export function FuelFooter() {
                     onClick={() => openPolicy("disclaimer")}
                     className="text-zinc-400 hover:text-[#A3E635] underline cursor-pointer"
                   >
-                    View FSSAI Disclaimer
+                    Product &amp; Health Advisory
                   </button>
                 </li>
               </ul>
@@ -247,11 +247,8 @@ export function FuelFooter() {
             <p>© {new Date().getFullYear()} PEAKVITALS PVT. LTD. All Rights Reserved. Not for medicinal use.</p>
 
             <div className="flex items-center gap-2 text-zinc-400 font-bold">
-              <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-[#A3E635]">
-                🛡️ FSSAI: 12723999000427
-              </span>
               <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-300">
-                ✅ ISO 9001 &amp; GMP
+                ⚡ 13 Clinical Actives
               </span>
               <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-emerald-400">
                 🟢 100% Veg
