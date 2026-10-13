@@ -3,8 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowRight, Leaf, FlaskConical, ShieldAlert, Award, Zap } from "lucide-react";
-import { Jar360Viewer } from "@/components/Jar360Viewer";
-
 import { useCart } from "@/context/CartContext";
 
 interface FuelHeroProps {
@@ -46,9 +44,28 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
             <strong className="text-[#A3E635]">Be The Boss Of Your Workout</strong> — Explosive energy, skin-splitting pumps &amp; zero crash.
           </p>
 
-          {/* PRE-WORKOUT DABBA (360° INTERACTIVE ROTATION VIEWER ON MOBILE) */}
-          <div className="w-full max-w-[320px] my-1">
-            <Jar360Viewer showFloorRings={true} />
+          {/* PRE-WORKOUT DABBA (PACKSHOT) - VISIBLE DIRECTLY ON FIRST SCREEN! */}
+          <div className="relative w-full max-w-[270px] h-52 sm:h-64 my-1 flex items-center justify-center">
+            {/* Soft Ambient Spotlight */}
+            <div className="absolute inset-0 bg-radial from-[#A3E635]/20 via-[#EA580C]/10 to-transparent rounded-full blur-2xl pointer-events-none" />
+
+            {/* Illuminated Floor Ring on Mobile */}
+            <div className="absolute bottom-3 w-44 sm:w-56 h-4 border border-[#A3E635]/40 rounded-full shadow-[0_0_18px_rgba(163,230,53,0.45)] pointer-events-none" />
+            <div className="absolute bottom-3 w-40 sm:w-52 h-3 bg-black/90 rounded-full blur-xs pointer-events-none" />
+
+            {/* Packshot Image */}
+            <Image
+              src="/images/peakvitals_trans/green_apple_v2.png"
+              alt="Peakvitals Pre-Workout"
+              fill
+              priority
+              className="object-contain z-10 filter drop-shadow-[0_18px_22px_rgba(0,0,0,0.95)]"
+            />
+
+            {/* Official Flavours Badge */}
+            <div className="absolute top-1 right-2 z-20 px-2.5 py-0.5 rounded-full bg-[#A3E635] text-black font-black text-[9px] uppercase tracking-wider shadow-md">
+              35 Servings • 250g
+            </div>
           </div>
 
           {/* Active Dosage Stats Pill */}
@@ -186,14 +203,28 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
             </div>
           </div>
 
-          {/* Right Column: Interactive 360° Rotating Jar with Real Box Sides & Details */}
-          <div className="lg:col-span-5 relative flex flex-col items-center justify-center">
-            <div className="relative w-full max-w-md">
-              <Jar360Viewer showFloorRings={true} />
+          {/* Right Column: Studio Packshot with 3D Glowing Pedestal */}
+          <div className="lg:col-span-5 relative flex items-center justify-center">
+            <div className="relative w-full max-w-md h-[460px] flex items-center justify-center">
+              {/* 3D Glowing Ambient Halo */}
+              <div className="absolute inset-0 bg-radial from-[#A3E635]/20 via-[#EA580C]/10 to-transparent rounded-full blur-2xl pointer-events-none" />
+
+              {/* 3D Illuminated Floating Floor Pedestal */}
+              <div className="absolute bottom-6 w-80 h-16 bg-gradient-to-r from-[#A3E635]/25 via-[#EA580C]/35 to-[#A3E635]/25 rounded-full blur-xl pointer-events-none animate-pulse" />
+              <div className="absolute bottom-10 w-72 h-7 border border-[#A3E635]/50 rounded-full shadow-[0_0_25px_#A3E635] pointer-events-none" />
+              <div className="absolute bottom-12 w-56 h-3 rounded-full blur-xs pointer-events-none bg-black/90" />
+
+              <Image
+                src="/images/peakvitals_trans/green_apple_v2.png"
+                alt="Peakvitals Pre-Workout"
+                fill
+                priority
+                className="object-contain hover:scale-105 transition-transform duration-500 z-10 filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.95)]"
+              />
 
               {/* Floating Active Dose Stats Pill */}
-              <div className="mt-3 backdrop-blur-md border rounded-2xl p-3 shadow-2xl card-3d-glow whitespace-nowrap bg-zinc-950/95 border-zinc-700">
-                <div className="flex items-center gap-3 text-center justify-center">
+              <div className="absolute bottom-2 left-4 z-20 backdrop-blur-md border rounded-2xl p-3 shadow-2xl card-3d-glow whitespace-nowrap bg-zinc-950/95 border-zinc-700">
+                <div className="flex items-center gap-3 text-center">
                   <div>
                     <span className="block text-sm font-black text-[#A3E635]">1.5G</span>
                     <span className="text-[9px] uppercase tracking-wider text-zinc-400">
@@ -224,6 +255,11 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
                     </span>
                   </div>
                 </div>
+              </div>
+
+              {/* Top Servings Badge */}
+              <div className="absolute top-2 right-4 z-20 px-3 py-1 rounded-full bg-[#A3E635] text-black font-black text-[10px] uppercase tracking-wider shadow-lg">
+                35 Servings • 250g
               </div>
             </div>
           </div>

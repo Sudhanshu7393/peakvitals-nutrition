@@ -11,19 +11,15 @@ import {
   Droplets,
   Timer,
   CheckCircle2,
-  Eye,
   Sparkles,
   FileText,
   Layers,
 } from "lucide-react";
-import { Jar360Viewer } from "@/components/Jar360Viewer";
 
-type ActiveTab = "nutrition" | "box360" | "benefits";
+type ActiveTab = "nutrition" | "benefits";
 
 export function FuelNutritionSection() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("nutrition");
-  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
-  const currentPhoto = PEAKVITALS_BOX_INFO.boxSidePhotos[activePhotoIdx];
 
   return (
     <section
@@ -57,18 +53,6 @@ export function FuelNutritionSection() {
             >
               <FileText className="w-3.5 h-3.5" />
               <span>Nutrition Facts</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("box360")}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer ${
-                activeTab === "box360"
-                  ? "bg-[#A3E635] text-black shadow-sm"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              <Eye className="w-3.5 h-3.5" />
-              <span>360° Box Label (5 Sides)</span>
             </button>
 
             <button
@@ -247,16 +231,6 @@ export function FuelNutritionSection() {
           </div>
         )}
 
-        {/* TAB 2: 360° STUDIO BOX LABEL GALLERY (ALL 5 SIDES) */}
-        {activeTab === "box360" && (
-          <div className="p-5 sm:p-7 rounded-3xl bg-zinc-900/90 border border-zinc-800 space-y-5">
-            <Jar360Viewer showFloorRings={true} />
-            <div className="pt-2 flex items-center justify-center gap-2 text-xs font-bold text-emerald-400">
-              <ShieldCheck className="w-4 h-4 shrink-0" />
-              <span>100% Authentic Sealed Jar • Direct Brand Supply from Peakvitals Pvt. Ltd.</span>
-            </div>
-          </div>
-        )}
 
         {/* TAB 3: HOW TO USE (3 STEPS) & KEY BENEFITS */}
         {activeTab === "benefits" && (
