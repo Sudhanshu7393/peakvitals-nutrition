@@ -22,7 +22,32 @@ import {
   AlertCircle,
   Eye,
   EyeOff,
+  X,
+  Sparkles,
+  Wand2,
 } from "lucide-react";
+
+// Automatically pick appropriate high-res studio jar image according to flavor name/keyword
+export function getAutoFlavorImage(flavorStr: string): string {
+  const f = (flavorStr || "").toLowerCase();
+  if (f.includes("orange") || f.includes("citrus") || f.includes("tangerine") || f.includes("mango")) {
+    return "/images/peakvitals_trans/tangy_orange_v2.png";
+  }
+  if (f.includes("berry") || f.includes("blue") || f.includes("razz") || f.includes("raspberry")) {
+    return "/images/peakvitals_trans/blue_raspberry.png";
+  }
+  if (f.includes("water") || f.includes("melon") || f.includes("punch") || f.includes("fruit")) {
+    return "/images/peakvitals_trans/watermelon.png";
+  }
+  if (f.includes("pack") || f.includes("twin") || f.includes("combo") || f.includes("2")) {
+    return "/images/peakvitals_trans/twin_pack.png";
+  }
+  if (f.includes("triple") || f.includes("stack") || f.includes("3")) {
+    return "/images/peakvitals_trans/triple_stack.png";
+  }
+  // Default crisp green jar
+  return "/images/peakvitals_trans/green_apple_v2.png";
+}
 
 const SESSION_AUTH_KEY = "peakvitals_admin_authed";
 const GITHUB_TOKEN_STORAGE_KEY = "peakvitals_admin_gh_token";
@@ -53,6 +78,87 @@ export default function AdminDashboardPage() {
     type: "success" | "warning" | "error";
     text: string;
   } | null>(null);
+
+  // New Product Modal State (Ask details first & auto-generate image)
+  const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false);
+  const [newProdFlavor, setNewProdFlavor] = useState("");
+  const [newProdName, setNewProdName] = useState("PEAKVITALS PRE-WORKOUT");
+  const [newProdPrice, setNewProdPrice] = useState(1199);
+  const [newProdMrp, setNewProdMrp] = useState(1999);
+  const [newProdWeight, setNewProdWeight] = useState("250g");
+  const [newProdServings, setNewProdServings] = useState("35 Servings");
+  const [newProdTagline, setNewProdTagline] = useState("Be The Boss of Your Workout • High-Performance Pre-Workout");
+  const [newProdAutoImage, setNewProdAutoImage] = useState("/images/peakvitals_trans/green_apple_v2.png");
+  const [newProdCustomImage, setNewProdCustomImage] = useState("");
+
+  // Whenever flavor name changes in modal, auto generate/select appropriate jar image
+  const handleFlavorChangeInModal = (val: string) => {
+    setNewProdFlavor(val);
+    if (!newProdCustomImage) {
+      const generated = getAutoFlavorImage(val);
+      setNewProdAutoImage(generated);
+    }
+  };
+
+  // Open the detailed Add Product Modal
+  const handleOpenAddProductModal = () => {
+    setNewProdFlavor("");
+    setNewProdName("PEAKVITALS PRE-WORKOUT");
+    setNewProdPrice(1199);
+    setNewProdMrp(1999);
+    setNewProdWeight("250g");
+    setNewProdServings("35 Servings");
+    setNewProdTagline("Be The Boss of Your Workout • High-Performance Pre-Workout");
+    setNewProdAutoImage("/images/peakvitals_trans/green_apple_v2.png");
+    setNewProdCustomImage("");
+    setIsNewProductModalOpen(true);
+  };
+
+  // Confirm and create new product from modal details
+  const handleConfirmAddNewProduct = () => {
+    if (!newProdFlavor.trim()) {
+      alert("Please enter a Flavour Name (e.g. Tangy Orange, Blue Raspberry, Watermelon, Green Apple)");
+      return;
+    }
+
+    const calculatedDiscount = newProdMrp > newProdPrice
+      ? `${Math.round(((newProdMrp - newProdPrice) / newProdMrp) * 100)}% OFF`
+      : "OFFER DEAL";
+
+    const chosenImage = newProdCustomImage || newProdAutoImage || getAutoFlavorImage(newProdFlavor);
+    const newId = `peakvitals-${newProdFlavor.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${Date.now().toString().slice(-4)}`;
+
+    const newProd: PeakvitalsProduct = {
+      id: newId,
+      name: newProdName.trim() || "PEAKVITALS PRE-WORKOUT",
+      flavor: newProdFlavor.trim().toLowerCase().includes("flavour")
+        ? newProdFlavor.trim()
+        : `${newProdFlavor.trim()} Flavour`,
+      servings: newProdServings.trim() || "35 Servings",
+      weight: newProdWeight.trim() || "250g",
+      price: `₹${newProdPrice.toLocaleString("en-IN")}`,
+      numericPrice: newProdPrice,
+      originalPrice: `₹${newProdMrp.toLocaleString("en-IN")}`,
+      numericOriginalPrice: newProdMrp,
+      discountBadge: calculatedDiscount,
+      inStock: true,
+      image: chosenImage,
+      tagline: newProdTagline.trim() || "Be The Boss of Your Workout • High-Performance Pre-Workout",
+      highlights: {
+        caffeine: "195mg Natural Caffeine",
+        citrulline: "1.5g L-Citrulline Malate",
+        arginine: "2g Arginine AKG",
+        betaAlanine: "2g Beta-Alanine",
+      },
+    };
+
+    setProducts((prev) => [...prev, newProd]);
+    setIsNewProductModalOpen(false);
+    setSaveStatus({
+      type: "success",
+      text: `"${newProd.flavor}" created with auto-matched 3D jar! Click "Save & Publish" at the top to make it live.`,
+    });
+  };
 
   // Load initial store data & check session
   useEffect(() => {
@@ -220,36 +326,7 @@ export default function AdminDashboardPage() {
     reader.readAsDataURL(file);
   };
 
-  // Add a new product
-  const handleAddNewProduct = () => {
-    const newId = `peakvitals-product-${Date.now().toString().slice(-5)}`;
-    const newProd: PeakvitalsProduct = {
-      id: newId,
-      name: "PEAKVITALS PRE-WORKOUT - NEW FLAVOUR",
-      flavor: "New Flavour",
-      servings: "35 Servings",
-      weight: "250g",
-      price: "₹1,199",
-      numericPrice: 1199,
-      originalPrice: "₹1,999",
-      numericOriginalPrice: 1999,
-      discountBadge: "40% OFF",
-      inStock: true,
-      image: "/images/peakvitals_trans/green_apple_v2.png",
-      tagline: "Be The Boss of Your Workout - Official Peakvitals Supply",
-      highlights: {
-        caffeine: "195mg Natural Caffeine",
-        citrulline: "1.5g L-Citrulline Malate",
-        arginine: "2g Arginine AKG",
-        betaAlanine: "2g Beta-Alanine",
-      },
-    };
-    setProducts((prev) => [...prev, newProd]);
-    setSaveStatus({
-      type: "warning",
-      text: "New product card added below! Edit its details and click 'Save & Publish Changes'.",
-    });
-  };
+
 
   const handleDeleteProduct = (index: number) => {
     if (products.length <= 1) {
@@ -539,8 +616,8 @@ export default function AdminDashboardPage() {
 
           {activeTab === "products" && (
             <button
-              onClick={handleAddNewProduct}
-              className="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-[#A3E635]/50 text-[#A3E635] font-black text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition"
+              onClick={handleOpenAddProductModal}
+              className="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-[#A3E635]/50 text-[#A3E635] font-black text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition shadow-sm hover:shadow-[#A3E635]/20"
             >
               <Plus className="w-4 h-4" />
               <span>Add New Product / Flavour</span>
@@ -963,6 +1040,233 @@ export default function AdminDashboardPage() {
           </div>
         )}
       </div>
+
+      {/* =================================================================== */}
+      {/* 4. INTERACTIVE ADD NEW PRODUCT MODAL (DETAILS + AUTO-IMAGE GEN) */}
+      {/* =================================================================== */}
+      {isNewProductModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-zinc-900 border border-zinc-700 rounded-3xl shadow-2xl p-5 sm:p-7 text-white space-y-5">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-[#A3E635]/20 border border-[#A3E635]/40 flex items-center justify-center text-[#A3E635]">
+                  <Plus className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="font-black text-base sm:text-lg uppercase tracking-tight text-white leading-tight">
+                    Add New Product / Flavour
+                  </h3>
+                  <p className="text-[11px] text-zinc-400">
+                    Enter product details. 3D Packshot image will auto-generate based on flavour!
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsNewProductModalOpen(false)}
+                className="p-1.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Auto Image Preview Box */}
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center bg-zinc-950 p-4 rounded-2xl border border-zinc-800">
+              <div className="sm:col-span-4 h-40 rounded-xl bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 flex items-center justify-center p-2 relative overflow-hidden group">
+                <img
+                  src={newProdCustomImage || newProdAutoImage}
+                  alt="Auto Preview"
+                  className="w-full h-full object-contain filter drop-shadow-[0_12px_18px_rgba(0,0,0,0.9)]"
+                />
+                <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-black/75 border border-zinc-700 text-[8px] font-mono text-[#A3E635] uppercase">
+                  {newProdCustomImage ? "Custom Upload" : "AI Auto-Matched"}
+                </span>
+              </div>
+
+              <div className="sm:col-span-8 space-y-2">
+                <div className="flex items-center gap-1.5 text-[#A3E635] text-xs font-black uppercase tracking-wider">
+                  <Wand2 className="w-3.5 h-3.5" />
+                  <span>Auto-Matched 3D Jar Packshot</span>
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Jaise hi aap Flavour name type karenge (e.g. <em>Tangy Orange</em>, <em>Blue Raspberry</em>, <em>Watermelon</em>, <em>Green Apple</em>), ye studio jar auto-update ho jayega!
+                </p>
+
+                {/* Quick Flavour Presets */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {[
+                    { label: "🍏 Green Apple", val: "Green Apple Flavour" },
+                    { label: "🍊 Tangy Orange", val: "Tangy Orange Flavour" },
+                    { label: "🫐 Blue Raspberry", val: "Blue Raspberry Flavour" },
+                    { label: "🍉 Watermelon", val: "Watermelon Flavour" },
+                  ].map((preset) => (
+                    <button
+                      key={preset.val}
+                      type="button"
+                      onClick={() => handleFlavorChangeInModal(preset.val)}
+                      className="px-2.5 py-1 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-[10px] font-bold text-zinc-300 hover:text-white cursor-pointer transition"
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
+
+                  <label className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-600 text-zinc-200 text-[10px] font-black uppercase flex items-center gap-1 cursor-pointer">
+                    <Upload className="w-3 h-3" />
+                    <span>Upload Own Photo</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                          if (typeof ev.target?.result === "string") {
+                            setNewProdCustomImage(ev.target.result);
+                          }
+                        };
+                        reader.readAsDataURL(file);
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Input Form Fields */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {/* Product Title */}
+              <div className="sm:col-span-2">
+                <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">
+                  Product Title
+                </label>
+                <input
+                  type="text"
+                  value={newProdName}
+                  onChange={(e) => setNewProdName(e.target.value)}
+                  placeholder="PEAKVITALS PRE-WORKOUT"
+                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs sm:text-sm font-bold text-white focus:border-[#A3E635] outline-none"
+                />
+              </div>
+
+              {/* Flavour Name (Mandatory) */}
+              <div className="sm:col-span-2">
+                <label className="block text-[10px] font-black uppercase tracking-wider text-[#A3E635] mb-1 flex items-center justify-between">
+                  <span>Flavour Name * (Image will adapt to this)</span>
+                  <span className="text-[9px] text-zinc-400 font-normal">Type flavor name</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  autoFocus
+                  value={newProdFlavor}
+                  onChange={(e) => handleFlavorChangeInModal(e.target.value)}
+                  placeholder="e.g. Tangy Orange, Blue Raspberry, Watermelon, Green Apple..."
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-[#A3E635]/60 text-sm font-black text-white focus:border-[#A3E635] outline-none shadow-sm"
+                />
+              </div>
+
+              {/* Offer Price */}
+              <div>
+                <label className="block text-[10px] font-black uppercase tracking-wider text-[#A3E635] mb-1">
+                  Offer Price / Selling (in ₹)
+                </label>
+                <input
+                  type="number"
+                  value={newProdPrice}
+                  onChange={(e) => setNewProdPrice(Number(e.target.value))}
+                  placeholder="1199"
+                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-[#A3E635]/50 text-sm font-black text-[#A3E635] focus:border-[#A3E635] outline-none"
+                />
+              </div>
+
+              {/* Box MRP */}
+              <div>
+                <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1 flex items-center justify-between">
+                  <span>Box MRP (Cut Price in ₹)</span>
+                  <span className="text-emerald-400 font-bold text-[9px]">
+                    {newProdMrp > newProdPrice
+                      ? `${Math.round(((newProdMrp - newProdPrice) / newProdMrp) * 100)}% OFF`
+                      : "40% OFF"}
+                  </span>
+                </label>
+                <input
+                  type="number"
+                  value={newProdMrp}
+                  onChange={(e) => setNewProdMrp(Number(e.target.value))}
+                  placeholder="1999"
+                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-bold text-zinc-300 focus:border-[#A3E635] outline-none"
+                />
+              </div>
+
+              {/* Net Weight */}
+              <div>
+                <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">
+                  Net Weight
+                </label>
+                <input
+                  type="text"
+                  value={newProdWeight}
+                  onChange={(e) => setNewProdWeight(e.target.value)}
+                  placeholder="250g"
+                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-bold text-white focus:border-[#A3E635] outline-none"
+                />
+              </div>
+
+              {/* Servings */}
+              <div>
+                <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">
+                  Servings
+                </label>
+                <input
+                  type="text"
+                  value={newProdServings}
+                  onChange={(e) => setNewProdServings(e.target.value)}
+                  placeholder="35 Servings"
+                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-bold text-white focus:border-[#A3E635] outline-none"
+                />
+              </div>
+
+              {/* Tagline */}
+              <div className="sm:col-span-2">
+                <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">
+                  Subtitle / Tagline
+                </label>
+                <input
+                  type="text"
+                  value={newProdTagline}
+                  onChange={(e) => setNewProdTagline(e.target.value)}
+                  placeholder="Be The Boss of Your Workout • High-Performance Pre-Workout"
+                  className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs text-zinc-300 focus:border-[#A3E635] outline-none"
+                />
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-800">
+              <button
+                type="button"
+                onClick={() => setIsNewProductModalOpen(false)}
+                className="px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-bold text-zinc-300 cursor-pointer transition"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={handleConfirmAddNewProduct}
+                className="px-6 py-2.5 rounded-xl bg-[#A3E635] hover:bg-[#86efac] text-black font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg cursor-pointer transition active:scale-95"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Create Product &amp; Add to Catalog</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
