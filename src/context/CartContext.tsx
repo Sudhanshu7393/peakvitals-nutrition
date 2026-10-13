@@ -114,14 +114,25 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (typeof window !== "undefined") {
         const rawLocal = localStorage.getItem(LOCAL_STORE_CACHE_KEY);
         if (rawLocal) {
-          cachedData = JSON.parse(rawLocal);
+          try {
+            cachedData = JSON.parse(rawLocal);
+          } catch {
+            // Ignore parse error
+          }
         }
+      }
+
+      // Immediately apply local cache if available (eliminates lag after saving in admin)
+      if (cachedData?.products) {
+        setStoreProducts(cachedData.products);
+      }
+      if (cachedData?.storeConfig) {
+        setStoreConfig(cachedData.storeConfig);
       }
 
       const res = await fetch("/api/store", { cache: "no-store" });
       if (res.ok) {
         const serverData = await res.json();
-        // Pick whichever has the newer updatedAt timestamp
         const serverTime = new Date(serverData?.updatedAt || 0).getTime();
         const localTime = new Date(cachedData?.updatedAt || 0).getTime();
         const chosen = localTime > serverTime && cachedData ? cachedData : serverData;
@@ -132,9 +143,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (chosen?.storeConfig) {
           setStoreConfig(chosen.storeConfig);
         }
-      } else if (cachedData) {
-        if (cachedData.products) setStoreProducts(cachedData.products);
-        if (cachedData.storeConfig) setStoreConfig(cachedData.storeConfig);
       }
     } catch {
       // Fallback to default bundled data
@@ -143,6 +151,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     refreshStoreData();
+
+    // Listen for storage events (when admin saves in another tab or same window)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === LOCAL_STORE_CACHE_KEY) {
+        refreshStoreData();
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, [refreshStoreData]);
 
   // Auto-fetch pincode details only if a 6-digit pincode is entered

@@ -15,11 +15,20 @@ import {
   FileText,
   Layers,
 } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 type ActiveTab = "nutrition" | "benefits";
 
 export function FuelNutritionSection() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("nutrition");
+  const { storeProducts, storeConfig } = useCart();
+  const mainProduct = storeProducts?.[0];
+  const offerPrice = mainProduct?.price || storeConfig?.heroPriceDisplay || "₹1,199";
+  const originalPrice = mainProduct?.originalPrice || "₹1,999";
+  const discountBadge = mainProduct?.discountBadge || "40% OFF";
+  const batchDisplay = storeConfig?.batchNo || PEAKVITALS_BOX_INFO.batchNo;
+  const fssaiDisplay = storeConfig?.fssaiLicNo || PEAKVITALS_BOX_INFO.fssaiLicNo;
+  const marketedDisplay = storeConfig?.marketedBy || PEAKVITALS_BOX_INFO.marketedBy;
 
   return (
     <section
@@ -175,7 +184,7 @@ export function FuelNutritionSection() {
                       Marketed By
                     </span>
                     <span className="text-xs sm:text-sm font-black text-white">
-                      {PEAKVITALS_BOX_INFO.marketedBy}
+                      {marketedDisplay}
                     </span>
                   </div>
                   <div className="text-right">
@@ -183,7 +192,7 @@ export function FuelNutritionSection() {
                       FSSAI Lic. No.
                     </span>
                     <span className="text-xs sm:text-sm font-mono font-black text-[#A3E635]">
-                      {PEAKVITALS_BOX_INFO.fssaiLicNo}
+                      {fssaiDisplay}
                     </span>
                   </div>
                 </div>
@@ -193,20 +202,20 @@ export function FuelNutritionSection() {
                     <span className="text-[9px] text-zinc-500 uppercase font-bold block">
                       Box MRP
                     </span>
-                    <span className="font-bold line-through text-zinc-400 text-xs">₹1,999</span>
-                    <span className="text-[8px] font-black uppercase text-emerald-400 block">40% OFF</span>
+                    <span className="font-bold line-through text-zinc-400 text-xs">{originalPrice}</span>
+                    <span className="text-[8px] font-black uppercase text-emerald-400 block">{discountBadge}</span>
                   </div>
                   <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
                     <span className="text-[9px] text-zinc-500 uppercase font-bold block">
                       Offer Price
                     </span>
-                    <span className="font-black text-[#A3E635] text-sm">₹1,199/-</span>
+                    <span className="font-black text-[#A3E635] text-sm">{offerPrice}/-</span>
                   </div>
                   <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800/80">
                     <span className="text-[9px] text-zinc-500 uppercase font-bold block">
                       Batch / Use
                     </span>
-                    <span className="font-mono font-bold text-white text-[11px]">{PEAKVITALS_BOX_INFO.batchNo}</span>
+                    <span className="font-mono font-bold text-white text-[11px]">{batchDisplay}</span>
                   </div>
                 </div>
 

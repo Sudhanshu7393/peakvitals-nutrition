@@ -138,13 +138,27 @@ export default function AdminDashboardPage() {
       prev.map((item, idx) => {
         if (idx !== index) return item;
         const updated = { ...item, ...patch };
+
         if (patch.numericPrice !== undefined) {
           const num = Number(patch.numericPrice) || 0;
           updated.numericPrice = num;
           updated.price = `₹${num.toLocaleString("en-IN")}`;
-          updated.numericOriginalPrice = num;
-          updated.originalPrice = `₹${num.toLocaleString("en-IN")}`;
         }
+
+        if (patch.numericOriginalPrice !== undefined) {
+          const orig = Number(patch.numericOriginalPrice) || 0;
+          updated.numericOriginalPrice = orig;
+          updated.originalPrice = `₹${orig.toLocaleString("en-IN")}`;
+        }
+
+        // Auto calculate discount badge if both prices are valid
+        const curPrice = updated.numericPrice || 0;
+        const curOrig = updated.numericOriginalPrice || 1999;
+        if (curOrig > curPrice && curPrice > 0) {
+          const pct = Math.round(((curOrig - curPrice) / curOrig) * 100);
+          updated.discountBadge = `${pct}% OFF`;
+        }
+
         return updated;
       })
     );
@@ -673,7 +687,7 @@ export default function AdminDashboardPage() {
 
                     <div>
                       <label className="block text-[10px] font-black uppercase tracking-wider text-[#A3E635] mb-1">
-                        Box Price / MRP (in ₹)
+                        Offer Price / Selling (in ₹)
                       </label>
                       <input
                         type="number"
@@ -682,6 +696,23 @@ export default function AdminDashboardPage() {
                           updateProduct(idx, { numericPrice: Number(e.target.value) })
                         }
                         className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-[#A3E635]/50 text-sm font-black text-[#A3E635] focus:border-[#A3E635] outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1 flex items-center justify-between">
+                        <span>Original Box MRP (Cut Price)</span>
+                        <span className="text-emerald-400 font-bold text-[9px] uppercase">
+                          {prod.discountBadge || "40% OFF"}
+                        </span>
+                      </label>
+                      <input
+                        type="number"
+                        value={prod.numericOriginalPrice || 1999}
+                        onChange={(e) =>
+                          updateProduct(idx, { numericOriginalPrice: Number(e.target.value) })
+                        }
+                        className="w-full px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-bold text-zinc-300 focus:border-[#A3E635] outline-none"
                       />
                     </div>
 

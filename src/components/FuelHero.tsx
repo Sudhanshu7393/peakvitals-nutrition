@@ -11,7 +11,10 @@ interface FuelHeroProps {
 
 export function FuelHero({ onShopNow }: FuelHeroProps) {
   const { storeConfig, storeProducts } = useCart();
-  const displayPrice = storeProducts?.[0]?.price || storeConfig?.heroPriceDisplay || "₹1,999";
+  const mainProduct = storeProducts?.[0];
+  const displayPrice = mainProduct?.price || storeConfig?.heroPriceDisplay || "₹1,199";
+  const displayOriginalPrice = mainProduct?.originalPrice || "₹1,999";
+  const displayDiscountBadge = mainProduct?.discountBadge || "40% OFF";
 
   return (
     <section className="relative overflow-hidden py-6 sm:py-12 lg:py-20 border-b border-zinc-800 bg-[#07080A] text-white font-sans">
@@ -86,10 +89,10 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
                 {displayPrice}
               </span>
               <span className="text-[11px] font-bold line-through text-zinc-500">
-                ₹1,999
+                {displayOriginalPrice}
               </span>
               <span className="text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                40% OFF
+                {displayDiscountBadge}
               </span>
             </div>
 
@@ -191,10 +194,10 @@ export function FuelHero({ onShopNow }: FuelHeroProps) {
                   {displayPrice}
                 </span>
                 <span className="text-xs font-bold line-through text-zinc-500">
-                  ₹1,999
+                  {displayOriginalPrice}
                 </span>
                 <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  40% OFF
+                  {displayDiscountBadge}
                 </span>
                 <span className="text-xs font-bold text-zinc-400">
                   • 250g Tub
