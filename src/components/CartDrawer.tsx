@@ -38,30 +38,38 @@ export const CartDrawer: React.FC = () => {
   if (!isCartOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden font-sans">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
+      {/* Backdrop click to dismiss */}
       <div
         onClick={() => setIsCartOpen(false)}
-        className="absolute inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+        className="absolute inset-0 cursor-pointer"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white border-l border-gray-200 text-gray-900 flex flex-col shadow-2xl">
-          {/* Header */}
-          <div className="p-4 sm:p-5 border-b border-gray-200 flex items-center justify-between bg-gray-50/80">
-            <div className="flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5 text-orange-500" />
-              <h2 className="font-extrabold text-base text-gray-900">
+      {/* Center Modal Dialog Container */}
+      <div className="relative w-full max-w-lg max-h-[90vh] bg-white border border-gray-200 rounded-3xl shadow-2xl text-gray-900 flex flex-col overflow-hidden z-10 animate-in zoom-in-95 duration-200">
+        {/* Header */}
+        <div className="p-4 sm:p-5 border-b border-gray-200 flex items-center justify-between bg-gray-50/90">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+              <ShoppingBag className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="font-extrabold text-base text-gray-900 leading-tight">
                 Shopping Bag ({cart.length})
               </h2>
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block">
+                Peakvitals Direct Store
+              </span>
             </div>
-            <button
-              onClick={() => setIsCartOpen(false)}
-              className="p-1.5 rounded-full bg-white hover:bg-gray-100 border border-gray-200 text-gray-500 hover:text-gray-900 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
           </div>
+          <button
+            onClick={() => setIsCartOpen(false)}
+            className="p-1.5 sm:p-2 rounded-full bg-white hover:bg-gray-100 border border-gray-200 text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
+            aria-label="Close Shopping Bag"
+          >
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
+        </div>
 
           {/* Cart Items List */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3">
@@ -212,6 +220,5 @@ export const CartDrawer: React.FC = () => {
           )}
         </div>
       </div>
-    </div>
   );
 };
