@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://peakvitals-nutrition.vercel.app"),
+  metadataBase: new URL("https://peakvitals.vercel.app"),
   title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
   description:
     "Official Peakvitals Nutrition Pre-Workout Store. Available in Green Apple & Tangy Orange flavours. High-stimulant energy, explosive nitric oxide muscle pumps, All India Express Delivery & Direct WhatsApp Order.",
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
     "High Stim Pre-Workout India",
     "Authentic Gym Supplements",
   ],
-  authors: [{ name: "Peakvitals Nutrition", url: "https://peakvitals-nutrition.vercel.app" }],
+  authors: [{ name: "Peakvitals Nutrition", url: "https://peakvitals.vercel.app" }],
   creator: "Peakvitals Nutrition",
   publisher: "Peakvitals Nutrition",
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://peakvitals-nutrition.vercel.app",
+    url: "https://peakvitals.vercel.app",
     siteName: "PEAKVITALS NUTRITION",
     title: "PEAKVITALS NUTRITION | Official Pre-Workout Brand Store",
     description:
