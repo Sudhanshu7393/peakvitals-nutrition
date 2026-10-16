@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://peakvitals.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://peakvitalsnutrition.in"),
   title: {
     default: "PEAKVITALS NUTRITION | Official Pre-Workout Store (Be The Boss Of Your Workout)",
     template: "%s | PEAKVITALS NUTRITION",
@@ -91,11 +91,11 @@ const jsonLdSchema = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://peakvitals.vercel.app/#organization",
+      "@id": "https://peakvitalsnutrition.in/#organization",
       name: "Peakvitals Pvt. Ltd.",
       alternateName: "Peakvitals Nutrition",
-      url: "https://peakvitals.vercel.app",
-      logo: "https://peakvitals.vercel.app/logo-square.jpg",
+      url: "https://peakvitalsnutrition.in",
+      logo: "https://peakvitalsnutrition.in/logo-square.jpg",
       email: "Peakvitalsnutrition@gmail.com",
       telephone: "+91-7651918284",
       contactPoint: {
@@ -108,11 +108,11 @@ const jsonLdSchema = {
     },
     {
       "@type": "Product",
-      "@id": "https://peakvitals.vercel.app/#preworkout",
+      "@id": "https://peakvitalsnutrition.in/#preworkout",
       name: "Peakvitals Nutrition Pre-Workout (250g - 35 Servings)",
       image: [
-        "https://peakvitals.vercel.app/images/peakvitals_trans/green_apple_v2.png",
-        "https://peakvitals.vercel.app/images/peakvitals_trans/tangy_orange_v2.png",
+        "https://peakvitalsnutrition.in/images/peakvitals_trans/green_apple_v2.png",
+        "https://peakvitalsnutrition.in/images/peakvitals_trans/tangy_orange_v2.png",
       ],
       description:
         "Peakvitals Nutrition Pre-Workout contains 13 essential active ingredients per 7g scoop (2g Beta-Alanine, 2g Arginine AKG, 1.5g L-Citrulline Malate, 195mg Natural Caffeine, 200mg Theanine, 200mg Tryptophan, 150mg N-Acetyl L-Tyrosine, 140mg Taurine, 110mg Betaine Anhydrous, 100mg Choline Bitartrate, 5mg Piperine, Vitamin B1 & B6) for explosive energy, max pump, and increased strength.",
@@ -123,7 +123,7 @@ const jsonLdSchema = {
       },
       offers: {
         "@type": "Offer",
-        url: "https://peakvitals.vercel.app",
+        url: "https://peakvitalsnutrition.in",
         priceCurrency: "INR",
         price: "1199",
         priceValidUntil: "2027-12-31",
